@@ -6,6 +6,7 @@ namespace QuizFactory.Data.Migrations
     using System.Linq;
 
     using QuizFactory.Data;
+    using QuizFactory.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<QuizFactoryDbContext>
     {
@@ -17,6 +18,25 @@ namespace QuizFactory.Data.Migrations
 
         protected override void Seed(QuizFactoryDbContext context)
         {
+            var seedData = new SeedData();
+            if (!context.QuizDefinitions.Any())
+            {
+                foreach (var item in seedData.Quizzes)
+                {
+                    context.QuizDefinitions.Add(item);
+                }
+            }
+
+            if (!context.Categories.Any())
+            {
+                foreach (var item in seedData.Categories)
+                {
+                    context.Categories.Add(item);
+                }
+            }
+
+            context.SaveChanges();
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
