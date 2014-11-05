@@ -40,10 +40,8 @@ namespace QuizFactory.Data.Migrations
                var seedUsers = new SeedUsers();
                seedUsers.Generate(context);
             }
-
-
+            
             context.SaveChanges();
-
         }
     }
 }

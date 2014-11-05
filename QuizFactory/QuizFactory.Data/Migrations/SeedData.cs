@@ -24,7 +24,7 @@ namespace QuizFactory.Migrations
             this.Categories.Add(new Category() { Name = "Music" });
             this.Categories.Add(new Category() { Name = "Movies" });
 
-            ApplicationUser user = new ApplicationUser() { UserName = "gosho@abv.bg" };
+            ApplicationUser user = new ApplicationUser() { UserName = "pesho@abv.bg" };
 
             this.Quizzes = new List<QuizDefinition>();
 
@@ -34,7 +34,7 @@ namespace QuizFactory.Migrations
                 Title = "Christmas quiz",
                 QuestionsDefinitions = this.GetQuestions1(),
                 Author = user,
-                CreatedOn = DateTime.Now.AddDays(Rand.Next(-5, 5))
+                IsPublic = true
             });
 
             this.Quizzes.Add(new QuizDefinition()
@@ -43,7 +43,7 @@ namespace QuizFactory.Migrations
                 Title = "Got Bengal?",
                 QuestionsDefinitions = this.GetQuestions2(),
                 Author = user,
-                CreatedOn = DateTime.Now.AddDays(Rand.Next(-5, 5))
+                IsPublic = true
             });
 
             this.Quizzes.Add(new QuizDefinition()
@@ -52,7 +52,7 @@ namespace QuizFactory.Migrations
                 Title = "Numbers - part 1",
                 QuestionsDefinitions = this.GetQuestions3(),
                 Author = user,
-                CreatedOn = DateTime.Now.AddDays(Rand.Next(-5, 5))
+                IsPublic = true
             });
 
             this.Quizzes.Add(new QuizDefinition()
@@ -61,7 +61,7 @@ namespace QuizFactory.Migrations
                 Title = "Numbers - part 2",
                 QuestionsDefinitions = this.GetQuestions4(),
                 Author = user,
-                CreatedOn = DateTime.Now.AddDays(Rand.Next(-5, 5))
+                IsPublic = true
             });
 
             this.Quizzes.Add(new QuizDefinition()
@@ -70,7 +70,7 @@ namespace QuizFactory.Migrations
                 Title = "Numbers - part 3",
                 QuestionsDefinitions = this.GetQuestions5(),
                 Author = user,
-                CreatedOn = DateTime.Now.AddDays(Rand.Next(-5, 5))
+                IsPublic = true
             });
         }
 

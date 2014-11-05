@@ -24,6 +24,7 @@ namespace QuizFactory.Models
 
         public ApplicationUser Author { get; set; }
 
+        [Column(TypeName="datetime")]
         public DateTime CreatedOn { get; set; }
 
         [Column(TypeName = "smallmoney")]
@@ -36,7 +37,8 @@ namespace QuizFactory.Models
 
         public bool IsActive { get; set; }
 
-        public DateTime UpdatedOn { get; set; }
+        [Column(TypeName="datetime")]
+        public DateTime? UpdatedOn { get; set; }
 
         public virtual Category Category { get; set; }
 
