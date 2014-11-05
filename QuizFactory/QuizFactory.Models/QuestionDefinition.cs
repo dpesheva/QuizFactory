@@ -14,7 +14,6 @@ namespace QuizFactory.Models
             this.UsersAnswers = new HashSet<UsersAnswer>();
         }
 
-        [Column("QuestionDefinitionId")]
         public int Id { get; set; }
 
         [Required]

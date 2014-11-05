@@ -34,7 +34,7 @@ namespace QuizFactory.Migrations
                 Title = "Christmas quiz",
                 QuestionsDefinitions = this.GetQuestions1(),
                 Author = user,
-                CreationDate = DateTime.Now.AddDays(Rand.Next(-5, 5))
+                CreatedOn = DateTime.Now.AddDays(Rand.Next(-5, 5))
             });
 
             this.Quizzes.Add(new QuizDefinition()
@@ -43,7 +43,7 @@ namespace QuizFactory.Migrations
                 Title = "Got Bengal?",
                 QuestionsDefinitions = this.GetQuestions2(),
                 Author = user,
-                CreationDate = DateTime.Now.AddDays(Rand.Next(-5, 5))
+                CreatedOn = DateTime.Now.AddDays(Rand.Next(-5, 5))
             });
 
             this.Quizzes.Add(new QuizDefinition()
@@ -52,7 +52,7 @@ namespace QuizFactory.Migrations
                 Title = "Numbers - part 1",
                 QuestionsDefinitions = this.GetQuestions3(),
                 Author = user,
-                CreationDate = DateTime.Now.AddDays(Rand.Next(-5, 5))
+                CreatedOn = DateTime.Now.AddDays(Rand.Next(-5, 5))
             });
 
             this.Quizzes.Add(new QuizDefinition()
@@ -61,7 +61,7 @@ namespace QuizFactory.Migrations
                 Title = "Numbers - part 2",
                 QuestionsDefinitions = this.GetQuestions4(),
                 Author = user,
-                CreationDate = DateTime.Now.AddDays(Rand.Next(-5, 5))
+                CreatedOn = DateTime.Now.AddDays(Rand.Next(-5, 5))
             });
 
             this.Quizzes.Add(new QuizDefinition()
@@ -70,7 +70,7 @@ namespace QuizFactory.Migrations
                 Title = "Numbers - part 3",
                 QuestionsDefinitions = this.GetQuestions5(),
                 Author = user,
-                CreationDate = DateTime.Now.AddDays(Rand.Next(-5, 5))
+                CreatedOn = DateTime.Now.AddDays(Rand.Next(-5, 5))
             });
         }
 

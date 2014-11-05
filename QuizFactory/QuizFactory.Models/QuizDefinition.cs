@@ -10,8 +10,10 @@ namespace QuizFactory.Models
     {
         public QuizDefinition()
         {
-            QuestionsDefinitions = new HashSet<QuestionDefinition>();
-            TakenQuizzes = new HashSet<TakenQuiz>();
+            this.QuestionsDefinitions = new HashSet<QuestionDefinition>();
+            this.TakenQuizzes = new HashSet<TakenQuiz>();
+            this.IsActive = true;
+            this.CreatedOn = DateTime.Now;
         }
 
         public int Id { get; set; }
@@ -22,17 +24,19 @@ namespace QuizFactory.Models
 
         public ApplicationUser Author { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime CreationDate { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         [Column(TypeName = "smallmoney")]
         public decimal? Rating { get; set; }
 
+        [Required]
         public int CategoryId { get; set; }
 
         public bool IsPublic { get; set; }
 
         public bool IsActive { get; set; }
+
+        public DateTime UpdatedOn { get; set; }
 
         public virtual Category Category { get; set; }
 

@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData.cs" />
+    <Compile Include="Migrations\SeedUsers.cs" />
     <Compile Include="QuizFactoryDbContext.cs" />
     <Compile Include="QuizFactoryData.cs" />
     <Compile Include="IQuizFactoryData.cs" />
