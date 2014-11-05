@@ -21,6 +21,8 @@ namespace QuizFactory.Models
 
         public bool IsCorrect { get; set; }
 
+        public int Position { get; set; }
+
         public virtual QuestionDefinition QuestionDefinition { get; set; }
 
         public virtual ICollection<UsersAnswer> UsersAnswers { get; set; }

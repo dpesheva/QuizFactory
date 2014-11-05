@@ -85,16 +85,19 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "India",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Cuba",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "China",
                             IsCorrect = false
                         }
@@ -107,16 +110,19 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "India",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Cuba",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Australia",
                             IsCorrect = true
                         }
@@ -129,16 +135,19 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Third Night",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "First Night",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Twelfth Night",
                             IsCorrect = true
                         }
@@ -151,16 +160,19 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Atlantic Ocean",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Arctic Ocean",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Indian Ocean",
                             IsCorrect = false
                         }
@@ -173,16 +185,19 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "I Saw Three Ships",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "A Christmas Dinner",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "The Beauties of the Police",
                             IsCorrect = false
                         }
@@ -195,16 +210,19 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Peanut",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Almond",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Hazelnut",
                             IsCorrect = false
                         }
@@ -217,16 +235,19 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "The Merry Widow",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "The Snowman",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Other",
                             IsCorrect = false
                         }
@@ -248,21 +269,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Bengal tiger",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Clouded leopard",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Ocelot",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "Asian leopard cat",
                             IsCorrect = true
                         }
@@ -275,21 +300,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Abyssinian",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Persian",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Egyptian Mau",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "American Shorthair",
                             IsCorrect = false
                         }
@@ -302,21 +331,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "New York",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Arizona",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "England",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "Canada",
                             IsCorrect = false
                         }
@@ -329,21 +362,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Raccoon",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Himalayan",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Cloudy",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "Marbled",
                             IsCorrect = true
                         }
@@ -356,21 +393,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Spots",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Curls",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Glitter",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "Diamonds",
                             IsCorrect = false
                         }
@@ -383,21 +424,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Body Length",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Claws",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Muscularity",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "Head shape",
                             IsCorrect = false
                         }
@@ -410,21 +455,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "A spotted belly",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Stripes near the rear legs",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "A dark brown belly",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "'100% pure Bengal' tag",
                             IsCorrect = false
                         }
@@ -437,21 +486,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Playing with water",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Drooling",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Following the owner",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "Trainability",
                             IsCorrect = false
                         }
@@ -464,21 +517,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "A loud yowl when they want attention",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Chattering",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Barking at strangers",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "A deep yowl before vomiting",
                             IsCorrect = false
                         }
@@ -491,21 +548,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Ocicats are mean",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "The Ocicat is a wildcat",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "The Ocicat was created from domestic cat breeds",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "Ocicats have existed since the time of the Pharoahs",
                             IsCorrect = false
                         }
@@ -527,21 +588,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "27",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "19",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "25",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "26",
                             IsCorrect = true
                         }
@@ -554,21 +619,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "18",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "19",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "10",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "16",
                             IsCorrect = false
                         }
@@ -581,21 +650,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "12",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "11",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "9",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "101",
                             IsCorrect = false
                         }
@@ -608,21 +681,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "7",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "9",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "32",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "14",
                             IsCorrect = true
                         }
@@ -635,21 +712,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "20",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "26",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "21",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "30",
                             IsCorrect = false
                         }
@@ -662,21 +743,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "5",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "1",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "2",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "4",
                             IsCorrect = false
                         }
@@ -689,21 +774,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "30",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "100",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "1",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "50",
                             IsCorrect = false
                         }
@@ -716,21 +805,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "30",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "20",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "90",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "50",
                             IsCorrect = false
                         }
@@ -743,21 +836,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "30",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "50",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "25",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "90",
                             IsCorrect = false
                         }
@@ -779,21 +876,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "27",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "30",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "25",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "28",
                             IsCorrect = true
                         }
@@ -806,21 +907,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "0",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "8",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "101",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "3",
                             IsCorrect = false
                         }
@@ -833,21 +938,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "Five",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "Four",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "Six",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "Ten",
                             IsCorrect = false
                         }
@@ -860,16 +969,19 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "0",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "2",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "1",
                             IsCorrect = true
                         }
@@ -882,21 +994,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "11",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "13",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "17",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "21",
                             IsCorrect = false
                         }
@@ -909,21 +1025,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "45",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "30",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "23",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "20",
                             IsCorrect = false
                         }
@@ -936,21 +1056,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "10",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "100",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "1",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "50",
                             IsCorrect = false
                         }
@@ -963,21 +1087,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "27",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "100",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "43",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "50",
                             IsCorrect = false
                         }
@@ -990,21 +1118,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "7",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "4",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "2",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "5",
                             IsCorrect = true
                         }
@@ -1017,21 +1149,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "27",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "24",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "29",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "30",
                             IsCorrect = false
                         }
@@ -1053,21 +1189,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "9",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "30",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "15",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "13",
                             IsCorrect = true
                         }
@@ -1080,21 +1220,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "22",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "18",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "11",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "54",
                             IsCorrect = false
                         }
@@ -1107,21 +1251,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "13",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "15",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "21",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "20",
                             IsCorrect = false
                         }
@@ -1134,21 +1282,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "8",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "2",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "7",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "6",
                             IsCorrect = true
                         }
@@ -1161,21 +1313,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "8",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "10",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "7",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "9",
                             IsCorrect = false
                         }
@@ -1188,21 +1344,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "18",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "21",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "24",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "20",
                             IsCorrect = false
                         }
@@ -1215,21 +1375,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "9",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "8",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "1",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "10",
                             IsCorrect = false
                         }
@@ -1242,21 +1406,25 @@ namespace QuizFactory.Migrations
                     {
                         new AnswerDefinition()
                         {
+                            Position = 1,
                             Text = "16",
                             IsCorrect = true
                         },
                         new AnswerDefinition()
                         {
+                            Position = 2,
                             Text = "18",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 3,
                             Text = "20",
                             IsCorrect = false
                         },
                         new AnswerDefinition()
                         {
+                            Position = 4,
                             Text = "14",
                             IsCorrect = false
                         }

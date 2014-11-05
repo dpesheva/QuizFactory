@@ -14,7 +14,6 @@ namespace QuizFactory.Models
             TakenQuizzes = new HashSet<TakenQuiz>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required]
@@ -32,6 +31,8 @@ namespace QuizFactory.Models
         public int CategoryId { get; set; }
 
         public bool IsPublic { get; set; }
+
+        public bool IsActive { get; set; }
 
         public virtual Category Category { get; set; }
 

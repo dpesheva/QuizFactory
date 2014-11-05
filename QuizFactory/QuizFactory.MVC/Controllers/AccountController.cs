@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using QuizFactory.Models;
-using QuizFactory.Mvc.Models;
+using QuizFactory.Mvc.ViewModels;
 
 namespace QuizFactory.Mvc.Controllers
 {

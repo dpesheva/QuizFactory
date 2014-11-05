@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace QuizFactory.Mvc.Models
+namespace QuizFactory.Mvc.ViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {

@@ -8,7 +8,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using System;
 using QuizFactory.Models;
-using QuizFactory.Mvc.Models;
+using QuizFactory.Mvc.ViewModels;
 using QuizFactory.Data;
 
 namespace QuizFactory.Mvc
