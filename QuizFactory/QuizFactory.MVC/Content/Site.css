@@ -98,3 +98,46 @@ textarea {
 .search-form {
     margin: 4px 0;
 }
+
+.content-title {
+    margin: 0;
+}
+
+.quiz-box {
+    border-radius: 5px;
+    background-color: white;
+    padding: 5px 10px;
+    margin:0 10px;
+    box-shadow:0 5px 5px lightgray;
+}
+.header-boxes{
+    margin: 20px 0;
+}
+.header-boxes :first-child {
+    transform: rotate(4deg);
+}
+
+.header-boxes :nth-child(2) {
+    transform: rotate(-4deg);
+}
+
+.header-boxes :last-child {
+    transform: rotate(-2deg);
+}
+
+/* Colorts */
+.blue {
+    color: #3F6CEB;
+}
+
+.red {
+    color: #CB0102;
+}
+
+.yellow {
+    color: #EFBF2D;
+}
+
+.green {
+    color: #A7D736;
+}

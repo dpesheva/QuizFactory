@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>   
+<body>
     <div class="clearfix">
         <a href='@Url.Action("Index", "Home", new { @class = "navbar-brand" })' class="left">
             <img src='@Url.Content("~/Content/Images/logo.png")' />
@@ -26,7 +26,10 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>
                 <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
-                <li>@Html.ActionLink("Create Quiz", "Create", "QuizDefinitions", new { area = "Users" }, new { })</li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Create Quiz", "Create", "QuizDefinitions", new { area = "Users" }, new { })</li>
+                }              
             </ul>
             <div class="right search-form">
                 <input type="text" class="search-box" />
@@ -34,12 +37,15 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Quiz Factory - ASP.NET WVC Application</p>
-        </footer>
+    <div class="container">
+        <div class="body-content col-sm-9">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Quiz Factory - ASP.NET WVC Application</p>
+            </footer>
+        </div>
+        <aside class="categories col-sm-3">Categories</aside>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

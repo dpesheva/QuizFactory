@@ -1,7 +1,49 @@
-﻿@{
+﻿@model IEnumerable<QuizFactory.Mvc.ViewModels.QuizViewModel>
+@{
     ViewBag.Title = "Home Page";
+
+    var topMostPopular = new List<QuizFactory.Mvc.ViewModels.QuizViewModel>(ViewBag.TopMostPopular);
 }
 
 <div class="row">
+    <div class="container header-boxes">
+        @foreach (var item in topMostPopular)
+        {
+            @Html.Partial("_QuizBoxPartial", item)
+        }
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#recentContent" data-toggle="tab">
+                <h4 class="content-title blue">Most Recent</h4>
+            </a>
+        </li>
+        <li class="">
+            <a href="#popularContent" data-toggle="tab">
+                <h4 class="content-title red">Most Popular</h4>
+            </a>
+        </li>
+        <li class="">
+            <a href="#byNameContent" data-toggle="tab">
+                <h4 class="content-title yellow">By Name</h4>
+            </a>
+        </li>
+        <li class="">
+            <a href="#byRatingContent" data-toggle="tab">
+                <h4 class="content-title green">By Rating</h4>
+            </a>
+        </li>
+    </ul>
+    <div id="tabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="recentContent">
+        </div>
+        <div class="tab-pane fade active in" id="popularContent">
+        </div>
+        <div class="tab-pane fade active in" id="byNameContent">
+        </div>
+        <div class="tab-pane fade active in" id="byRatingContent">
+        </div>
+    </div>
    
+
 </div>

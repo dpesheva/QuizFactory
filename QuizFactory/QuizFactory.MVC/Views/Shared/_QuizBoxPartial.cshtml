@@ -1,0 +1,11 @@
+﻿@model QuizFactory.Mvc.ViewModels.QuizViewModel
+
+<div class="col-sm-4">
+    <div class="quiz-box">
+        <h4>@Html.ActionLink(@Model.Title, "StartQuiz", "Play")</h4>
+        <p class="green">Questions: <strong class="red">@Model.NumberQuestions</strong></p>
+        <small class="yellow">Created on: @Model.CreatedOn</small>
+        <p><small class="yellow">by @Model.Author</small></p>
+        <p>Rating: @Model.Rating</p>
+    </div>
+</div>

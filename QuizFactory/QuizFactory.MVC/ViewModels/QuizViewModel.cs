@@ -23,6 +23,7 @@ namespace QuizFactory.Mvc.ViewModels
                     IsPublic = quiz.IsPublic,
                     CreatedOn = quiz.CreatedOn,
                     Author = quiz.Author.UserName,
+                    NumberQuestions = quiz.QuestionsDefinitions.Count.ToString(),
                     Questions = quiz.QuestionsDefinitions.Select(q => new QuestionViewModel
                     {
                         Id = q.Id,
@@ -59,6 +60,9 @@ namespace QuizFactory.Mvc.ViewModels
         public bool IsPublic { get; set; }
 
         public string Category { get; set; }
+
+         [Display(Name = "Number of questions")]
+        public string NumberQuestions { get; set; }
 
         public ICollection<QuestionViewModel> Questions { get; set; }
     }
