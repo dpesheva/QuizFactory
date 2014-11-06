@@ -199,6 +199,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -254,6 +256,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HelperExtentions\HelperExtentions.csproj">
+      <Project>{28000772-3379-403f-a3e9-4f7fd204e6a8}</Project>
+      <Name>HelperExtentions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QuizFactory.Data\QuizFactory.Data.csproj">
       <Project>{c8ba5e54-fd59-41e5-9a2a-fbe1407f7e33}</Project>
       <Name>QuizFactory.Data</Name>

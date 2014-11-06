@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<QuizFactory.Mvc.ViewModels.QuizViewModel>
+@using HelperExtentions
+
 @{
     ViewBag.Title = "Home Page";
 
@@ -14,9 +16,16 @@
     </div>
     <ul class="nav nav-tabs">
         <li class="active">
-            <a href="#recentContent" data-toggle="tab">
-                <h4 class="content-title blue">Most Recent</h4>
-            </a>
+            @Ajax.RawActionLink("<h4 class='content-title blue'>Most Recent</h4>", "RecentContent", "Home", new { },
+        new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "recentContent"
+            }, 
+            new { @class = "content-title blue" })
+            @*<a href="#recentContent" data-toggle="tab">
+                    <h4 class="content-title blue">Most Recent</h4>
+                </a>*@
         </li>
         <li class="">
             <a href="#popularContent" data-toggle="tab">
@@ -36,6 +45,10 @@
     </ul>
     <div id="tabContent" class="tab-content">
         <div class="tab-pane fade active in" id="recentContent">
+            @*@foreach (var item in Model)
+                {
+                    @Html.Partial("_QuizBoxPartial", item)
+                }*@
         </div>
         <div class="tab-pane fade active in" id="popularContent">
         </div>
@@ -44,6 +57,6 @@
         <div class="tab-pane fade active in" id="byRatingContent">
         </div>
     </div>
-   
+
 
 </div>

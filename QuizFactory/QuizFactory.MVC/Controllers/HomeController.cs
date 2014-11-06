@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,6 +21,17 @@ namespace QuizFactory.Mvc.Controllers
 
 
             return View();
+        }
+
+        public ActionResult RecentContent()
+        {
+             if (!Request.IsAjaxRequest())
+            {
+                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                return this.Content("This action can be invoke only by AJAX call");
+            }
+
+            return View(this.db.QuizzesDefinitions.All().ToList());
         }
 
         public ActionResult About()
