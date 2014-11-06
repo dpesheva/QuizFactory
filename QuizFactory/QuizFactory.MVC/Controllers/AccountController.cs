@@ -16,7 +16,7 @@ using QuizFactory.Mvc.ViewModels;
 namespace QuizFactory.Mvc.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationUserManager _userManager;
 
