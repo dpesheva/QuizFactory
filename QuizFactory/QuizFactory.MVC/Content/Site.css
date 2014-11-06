@@ -1,6 +1,5 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    background-color: rgb(247,247,247);
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -14,4 +13,88 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.navbar-nav > li > a:hover {
+    background-color: rgb(247,247,247);
+}
+
+.main-menu {
+    color: white;
+    text-shadow: 0 2px 2px gray;
+    border: solid 1px #8FB613;
+    border-radius: 5px;
+    background: rgb(167,217,57);
+    background: -moz-linear-gradient(top, rgba(167,217,57,1) 0%, rgba(156,201,50,1) 64%, rgba(156,201,50,1) 81%, rgba(167,217,57,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(167,217,57,1)), color-stop(64%,rgba(156,201,50,1)), color-stop(81%,rgba(156,201,50,1)), color-stop(100%,rgba(167,217,57,1)));
+    background: -webkit-linear-gradient(top, rgba(167,217,57,1) 0%,rgba(156,201,50,1) 64%,rgba(156,201,50,1) 81%,rgba(167,217,57,1) 100%);
+    background: -o-linear-gradient(top, rgba(167,217,57,1) 0%,rgba(156,201,50,1) 64%,rgba(156,201,50,1) 81%,rgba(167,217,57,1) 100%);
+    background: -ms-linear-gradient(top, rgba(167,217,57,1) 0%,rgba(156,201,50,1) 64%,rgba(156,201,50,1) 81%,rgba(167,217,57,1) 100%);
+    background: linear-gradient(to bottom, rgba(167,217,57,1) 0%,rgba(156,201,50,1) 64%,rgba(156,201,50,1) 81%,rgba(167,217,57,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7d939', endColorstr='#a7d939',GradientType=0 );
+    /*background: rgb(169,215,23);
+    background: -moz-linear-gradient(top, rgba(169,215,23,1) 0%, rgba(157,200,21,1) 71%, rgba(157,200,21,1) 81%, rgba(163,207,22,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,215,23,1)), color-stop(71%,rgba(157,200,21,1)), color-stop(81%,rgba(157,200,21,1)), color-stop(100%,rgba(163,207,22,1)));
+    background: -webkit-linear-gradient(top, rgba(169,215,23,1) 0%,rgba(157,200,21,1) 71%,rgba(157,200,21,1) 81%,rgba(163,207,22,1) 100%);
+    background: -o-linear-gradient(top, rgba(169,215,23,1) 0%,rgba(157,200,21,1) 71%,rgba(157,200,21,1) 81%,rgba(163,207,22,1) 100%);
+    background: -ms-linear-gradient(top, rgba(169,215,23,1) 0%,rgba(157,200,21,1) 71%,rgba(157,200,21,1) 81%,rgba(163,207,22,1) 100%);
+    background: linear-gradient(to bottom, rgba(169,215,23,1) 0%,rgba(157,200,21,1) 71%,rgba(157,200,21,1) 81%,rgba(163,207,22,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9d717', endColorstr='#a3cf16',GradientType=0 );*/
+    /*background: rgb(167,215,54);
+    background: -moz-linear-gradient(top, rgba(167,215,54,1) 2%, rgba(163,208,22,1) 22%, rgba(159,204,51,1) 74%, rgba(164,216,43,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(2%,rgba(167,215,54,1)), color-stop(22%,rgba(163,208,22,1)), color-stop(74%,rgba(159,204,51,1)), color-stop(100%,rgba(164,216,43,1)));
+    background: -webkit-linear-gradient(top, rgba(167,215,54,1) 2%,rgba(163,208,22,1) 22%,rgba(159,204,51,1) 74%,rgba(164,216,43,1) 100%);
+    background: -o-linear-gradient(top, rgba(167,215,54,1) 2%,rgba(163,208,22,1) 22%,rgba(159,204,51,1) 74%,rgba(164,216,43,1) 100%);
+    background: -ms-linear-gradient(top, rgba(167,215,54,1) 2%,rgba(163,208,22,1) 22%,rgba(159,204,51,1) 74%,rgba(164,216,43,1) 100%);
+    background: linear-gradient(to bottom, rgba(167,215,54,1) 2%,rgba(163,208,22,1) 22%,rgba(159,204,51,1) 74%,rgba(164,216,43,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7d736', endColorstr='#a4d82b',GradientType=0 );*/
+    width: 65%;
+    margin-top: 50px;
+    float: right !important;
+    margin-left: 25%;
+    position: absolute;
+    padding: 0 10px;
+    box-shadow: 0 3px 6px lightgray;
+}
+
+    .main-menu li a {
+        padding: 5px 20px;
+    }
+
+        .main-menu li a:hover {
+            background-color: #3F6CEB !important;
+        }
+
+    .main-menu a {
+        color: white;
+    }
+
+.icon-bar {
+    background-color: #3F6CEB;
+}
+
+.search-box {
+    border-radius: 5px;
+    height: 1.3em;
+    margin: 0;
+    border: none;
+    padding: 0 5px;
+}
+
+.serch-button {
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+
+.search-form {
+    margin: 4px 0;
 }
