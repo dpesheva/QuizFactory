@@ -23,17 +23,35 @@ namespace QuizFactory.Mvc.Controllers
             return View();
         }
 
+        //public ActionResult RecentContent()
+        //{
+        //    if (!Request.IsAjaxRequest())
+        //    {
+        //        Response.StatusCode = (int)HttpStatusCode.Forbidden;
+        //        return null; // TODO return error
+        //    }
+
+        //    List<QuizViewModel> quizzes = this.db.QuizzesDefinitions.All().Select(QuizViewModel.FromQuizDefinition).ToList();
+        //    ViewBag.TabContent = quizzes;
+            
+        //    return null;// TODO return smthng
+        //}
+
         public ActionResult RecentContent()
         {
-             if (!Request.IsAjaxRequest())
+            if (!Request.IsAjaxRequest())
             {
                 Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return this.Content("This action can be invoke only by AJAX call");
+                return null; // TODO return error
             }
 
-            return View(this.db.QuizzesDefinitions.All().ToList());
+            List<QuizViewModel> quizzes = this.db.QuizzesDefinitions.All().Select(QuizViewModel.FromQuizDefinition).ToList();
+            ViewBag.TabContent = quizzes;
+
+            return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
 
+       
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -240,6 +240,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_QuizBoxPartial.cshtml" />
     <Content Include="Views\Shared\_OpenQuestionPartial.cshtml" />
+    <Content Include="Views\Shared\_ListQuizBoxesPartial.cshtml" />
+    <Content Include="Views\Home\RecentContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

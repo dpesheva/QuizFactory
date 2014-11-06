@@ -3,60 +3,81 @@
 
 @{
     ViewBag.Title = "Home Page";
-
     var topMostPopular = new List<QuizFactory.Mvc.ViewModels.QuizViewModel>(ViewBag.TopMostPopular);
 }
 
 <div class="row">
     <div class="container header-boxes">
-        @foreach (var item in topMostPopular)
-        {
-            @Html.Partial("_QuizBoxPartial", item)
-        }
+        @Html.Partial("_ListQuizBoxesPartial", topMostPopular)
     </div>
     <ul class="nav nav-tabs">
-        <li class="active">
+        <li class="active" id="first-tab">
             @Ajax.RawActionLink("<h4 class='content-title blue'>Most Recent</h4>", "RecentContent", "Home", new { },
-        new AjaxOptions
-            {
-                InsertionMode = InsertionMode.Replace,
-                UpdateTargetId = "recentContent"
-            }, 
-            new { @class = "content-title blue" })
-            @*<a href="#recentContent" data-toggle="tab">
-                    <h4 class="content-title blue">Most Recent</h4>
-                </a>*@
+    new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "content"
+        },
+        new { })
         </li>
-        <li class="">
-            <a href="#popularContent" data-toggle="tab">
-                <h4 class="content-title red">Most Popular</h4>
-            </a>
+
+        <li class="" id="second-tab">
+            @Ajax.RawActionLink("<h4 class='content-title red'>Most Popular</h4>", "RecentContent", "Home", new { },
+    new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "content"
+        },
+        new { })
         </li>
-        <li class="">
-            <a href="#byNameContent" data-toggle="tab">
-                <h4 class="content-title yellow">By Name</h4>
-            </a>
+        <li class="" id="third-tab">
+            @Ajax.RawActionLink("<h4 class='content-title yellow'>By Name</h4>", "RecentContent", "Home", new { },
+    new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "content"
+        },
+        new { })
         </li>
-        <li class="">
-            <a href="#byRatingContent" data-toggle="tab">
-                <h4 class="content-title green">By Rating</h4>
-            </a>
+        <li class="" id="fourth-tab">
+            @Ajax.RawActionLink("<h4 class='content-title green'>By Rating</h4>", "RecentContent", "Home", new { },
+    new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "content"
+        },
+        new { })
         </li>
     </ul>
     <div id="tabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="recentContent">
-            @*@foreach (var item in Model)
-                {
-                    @Html.Partial("_QuizBoxPartial", item)
-                }*@
-        </div>
-        <div class="tab-pane fade active in" id="popularContent">
-        </div>
-        <div class="tab-pane fade active in" id="byNameContent">
-        </div>
-        <div class="tab-pane fade active in" id="byRatingContent">
-        </div>
+        <div class=" container" id="content">
+            BLQBLQ
+        </div>     
     </div>
-
-
 </div>
+
+<script>
+    $('#first-tab').click(function (e) {
+        e.preventDefault()
+        $('.active').removeClass('active')
+        $(this).addClass('active')
+    })
+
+    $('#second-tab').click(function (e) {
+        e.preventDefault()
+        $('.active').removeClass('active')
+        $(this).toggleClass("active")
+    })
+
+    $('#third-tab').click(function (e) {
+        e.preventDefault()
+        $('.active').removeClass('active')
+        $(this).toggleClass("active")
+    })
+
+    $('#fourth-tab').click(function (e) {
+        e.preventDefault()
+        $('.active').removeClass('active')
+        $(this).toggleClass("active")
+    })
+</script>

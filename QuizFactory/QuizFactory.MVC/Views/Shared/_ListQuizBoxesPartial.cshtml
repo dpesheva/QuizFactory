@@ -1,0 +1,7 @@
+﻿@model IEnumerable<QuizFactory.Mvc.ViewModels.QuizViewModel>
+
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_QuizBoxPartial", item)
+}
