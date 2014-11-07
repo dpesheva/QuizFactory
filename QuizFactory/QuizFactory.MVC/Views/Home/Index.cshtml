@@ -1,83 +1,80 @@
 ﻿@model IEnumerable<QuizFactory.Mvc.ViewModels.QuizViewModel>
 @using HelperExtentions
-
 @{
-    ViewBag.Title = "Home Page";
-    var topMostPopular = new List<QuizFactory.Mvc.ViewModels.QuizViewModel>(ViewBag.TopMostPopular);
+    ViewBag.Title = "Quiz Factory";
 }
+
 
 <div class="row">
     <div class="container header-boxes">
-        @Html.Partial("_ListQuizBoxesPartial", topMostPopular)
+        @Html.Action("TopMostPopular")
     </div>
+    <h3>All @ViewBag.Category Quizzes</h3>
     <ul class="nav nav-tabs">
-        <li class="active" id="first-tab">
+        <li class="active tab">
             @Ajax.RawActionLink("<h4 class='content-title blue'>Most Recent</h4>", "RecentContent", "Home", new { },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "content"
+            UpdateTargetId = "content",
+            LoadingElementId = "loading"
         },
-        new { })
+                 new { id = "first-tab" })
         </li>
-
-        <li class="" id="second-tab">
-            @Ajax.RawActionLink("<h4 class='content-title red'>Most Popular</h4>", "RecentContent", "Home", new { },
+        <li class="tab">
+            @Ajax.RawActionLink("<h4 class='content-title red'>Most Popular</h4>", "PopularContent", "Home", new { },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "content"
+            UpdateTargetId = "content",
+            LoadingElementId = "loading"
         },
         new { })
         </li>
-        <li class="" id="third-tab">
-            @Ajax.RawActionLink("<h4 class='content-title yellow'>By Name</h4>", "RecentContent", "Home", new { },
+        <li class="tab">
+            @Ajax.RawActionLink("<h4 class='content-title yellow'>By Name</h4>", "ByNameContent", "Home", new { },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "content"
+            UpdateTargetId = "content",
+            LoadingElementId = "loading"
         },
         new { })
         </li>
-        <li class="" id="fourth-tab">
-            @Ajax.RawActionLink("<h4 class='content-title green'>By Rating</h4>", "RecentContent", "Home", new { },
+        <li class="tab">
+            @Ajax.RawActionLink("<h4 class='content-title green'>By Rating</h4>", "ByRatingContent", "Home", new { },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "content"
+            UpdateTargetId = "content",
+            LoadingElementId = "loading"
         },
         new { })
         </li>
     </ul>
     <div id="tabContent" class="tab-content">
-        <div class=" container" id="content">
-            BLQBLQ
-        </div>     
+        <span id="loading" class="blue">Loading...</span>
+        <div class="container" id="content"></div>
     </div>
 </div>
 
-<script>
-    $('#first-tab').click(function (e) {
-        e.preventDefault()
-        $('.active').removeClass('active')
-        $(this).addClass('active')
-    })
+@section categories{
+    @Html.Action("Categories", "Home")
+}
 
-    $('#second-tab').click(function (e) {
-        e.preventDefault()
-        $('.active').removeClass('active')
-        $(this).toggleClass("active")
-    })
+@section scripts{
+    <script>
+        $('.tab').click(function (e) {
+            $('.active').removeClass('active')
+            $(this).toggleClass("active")
+        })
 
-    $('#third-tab').click(function (e) {
-        e.preventDefault()
-        $('.active').removeClass('active')
-        $(this).toggleClass("active")
-    })
+        $(document).ready(function () {
+            var container = $('#content');
+            if (container.html() === '' || container.html() === ' ') {
+                $('#first-tab')[0].click();
+            }
+        })
 
-    $('#fourth-tab').click(function (e) {
-        e.preventDefault()
-        $('.active').removeClass('active')
-        $(this).toggleClass("active")
-    })
-</script>
+    </script>
+}

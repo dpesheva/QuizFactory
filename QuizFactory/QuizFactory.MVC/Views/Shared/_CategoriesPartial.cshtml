@@ -1,0 +1,14 @@
+﻿@model IEnumerable<QuizFactory.Models.Category>
+
+<div class="categories">
+    <h3 class="green">Categories</h3>
+    @foreach (var item in Model)
+    {
+        <p>
+            <a>
+                @Html.DisplayFor(modelItem => item.Name)
+            </a>
+        </p>
+    }
+
+</div>

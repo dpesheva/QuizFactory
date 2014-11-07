@@ -15,6 +15,18 @@ textarea {
     max-width: 280px;
 }
 
+.categories {
+    /*border: solid 1px #8FB613;*/
+    margin: 20px 0 0 20px;
+    padding: 10px 0 10px 20px;
+    background-color: white;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: solid 1px #d9d9d9;
+    box-shadow: inset -40px -4px 54px -8px rgb(247,247,247);
+    /*box-shadow: -11px 1px 54px -8px rgba(0,0,0,1);*/
+}
+
 .left {
     float: left;
 }
@@ -104,25 +116,43 @@ textarea {
 }
 
 .quiz-box {
+    border-top: solid 1px lightgray;
     border-radius: 5px;
     background-color: white;
     padding: 5px 10px;
-    margin:0 10px;
-    box-shadow:0 5px 5px lightgray;
+    margin: 15px 5px;
+    box-shadow: 0 5px 5px lightgray;
+    width: 80%;
+    height: 80%;
 }
-.header-boxes{
+
+.header-boxes {
     margin: 20px 0;
 }
-.header-boxes :first-child {
-    transform: rotate(4deg);
-}
 
-.header-boxes :nth-child(2) {
-    transform: rotate(-4deg);
-}
+    .header-boxes .quiz-box {
+        border-top: none;
+    }
 
-.header-boxes :last-child {
-    transform: rotate(-2deg);
+    .header-boxes :first-child {
+        transform: rotate(4deg);
+    }
+
+    .header-boxes :nth-child(2) {
+        transform: rotate(-4deg);
+    }
+
+    .header-boxes :last-child {
+        transform: rotate(-2deg);
+    }
+
+#tabContent {
+    background-color: white;
+    box-shadow: 0 5px 5px lightgray;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: solid 1px lightgray;
+    border-top: none;
 }
 
 /* Colorts */

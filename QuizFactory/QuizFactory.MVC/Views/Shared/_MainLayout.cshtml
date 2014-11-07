@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <div class="clearfix">
@@ -24,12 +23,23 @@
         </div>
         <div class="navbar-collapse collapse  main-menu">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>
-                <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
+                <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>               
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li>@Html.ActionLink("Create Quiz", "Create", "QuizDefinitions", new { area = "Users" }, new { })</li>
-                }              
+                }
+                @if (User.IsInRole("admin"))
+                {
+                    <li>
+                        Admin @* TODO add dropdawn*@
+                        <ul>
+                            <li>@Html.ActionLink("Quizzes", "Index", "QuizzesAdministration")</li>
+                            <li>@Html.ActionLink("Categories", "Index", "CategoriesAdministration")</li>
+                            <li>@Html.ActionLink("Users", "Index", "UsersAdministration")</li>
+                        </ul>
+                    </li>
+                }
+                <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
             </ul>
             <div class="right search-form">
                 <input type="text" class="search-box" />
@@ -40,14 +50,18 @@
     <div class="container">
         <div class="body-content col-sm-9">
             @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Quiz Factory - ASP.NET WVC Application</p>
-            </footer>
-        </div>
-        <aside class="categories col-sm-3">Categories</aside>
-    </div>
 
+        </div>
+        <aside class="col-sm-3">
+            @RenderSection("categories", required: false)           
+        </aside>
+    </div>
+    <hr />
+    <footer>
+        <p class="text-center yellow">&copy; @DateTime.Now.Year - Quiz Factory - ASP.NET MVC Application</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
