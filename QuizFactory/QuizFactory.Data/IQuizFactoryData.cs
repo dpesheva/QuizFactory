@@ -21,7 +21,7 @@
 
         IRepository<Category> Categories { get; }
 
-        //IRepository<User> Users { get; }
+        IRepository<ApplicationUser> Users { get; }
 
         void SaveChanges();
     }

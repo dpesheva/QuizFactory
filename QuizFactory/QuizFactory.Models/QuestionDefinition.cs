@@ -18,7 +18,9 @@ namespace QuizFactory.Models
 
         [Required]
         public string QuestionText { get; set; }
-        
+
+        public bool IsDeleted { get; set; }
+
         public virtual QuizDefinition QuizDefinition { get; set; }
 
         public virtual ICollection<AnswerDefinition> AnswersDefinitions { get; set; }

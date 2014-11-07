@@ -30,10 +30,11 @@
                 }
                 @if (User.IsInRole("admin"))
                 {
-                    <li>
-                        Admin @* TODO add dropdawn*@
-                        <ul>
-                            <li>@Html.ActionLink("Quizzes", "Index", "QuizzesAdministration")</li>
+                    <li class="dropdown">
+                        <a class=" dropdown-toggle" data-toggle="dropdown" href="#">
+                        Admin</a> @* TODO add dropdawn*@
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem">@Html.ActionLink("Quizzes", "Index", "QuizzesAdministration")</li>
                             <li>@Html.ActionLink("Categories", "Index", "CategoriesAdministration")</li>
                             <li>@Html.ActionLink("Users", "Index", "UsersAdministration")</li>
                         </ul>

@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using QuizFactory.Data;
-using QuizFactory.Models;
-
-namespace QuizFactory.Mvc.Areas.Admin
+﻿namespace QuizFactory.Mvc.Areas.Admin
 {
-    public class CategoriesController : Controller
-    {
-        private QuizFactoryDbContext db = new QuizFactoryDbContext();
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web;
+    using System.Web.Mvc;
+    using QuizFactory.Data;
+    using QuizFactory.Models;
+    using QuizFactory.Mvc.Controllers;
 
+    public class CategoriesController : BaseController
+    {
         // GET: Admin/Categories
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            return View(this.db.Categories.All().ToList());
         }
 
         // GET: Admin/Categories/Details/5
@@ -79,11 +78,11 @@ namespace QuizFactory.Mvc.Areas.Admin
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Category category)
+        public ActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Categories.Update(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -111,18 +110,19 @@ namespace QuizFactory.Mvc.Areas.Admin
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
+            db.Categories.Delete(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        // TODO ??
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

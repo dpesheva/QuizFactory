@@ -77,13 +77,13 @@
             }
         }
 
-        //public IRepository<ApplicationUser> Users
-        //{
-        //    get
-        //    {
-        //        return this.GetRepository<ApplicationUser>();
-        //    }
-        //}
+        public IRepository<ApplicationUser> Users
+        {
+            get
+            {
+                return this.GetRepository<ApplicationUser>();
+            }
+        }
 
         public void SaveChanges()
         {

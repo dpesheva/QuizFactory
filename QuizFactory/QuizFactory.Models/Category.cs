@@ -13,5 +13,7 @@ namespace QuizFactory.Models
         [Required]
         [StringLength(30)]
         public string Name { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

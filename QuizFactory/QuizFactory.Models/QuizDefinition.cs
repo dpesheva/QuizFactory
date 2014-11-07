@@ -12,7 +12,6 @@ namespace QuizFactory.Models
         {
             this.QuestionsDefinitions = new HashSet<QuestionDefinition>();
             this.TakenQuizzes = new HashSet<TakenQuiz>();
-            this.IsActive = true;
             this.CreatedOn = DateTime.Now;
         }
 
@@ -35,7 +34,7 @@ namespace QuizFactory.Models
 
         public bool IsPublic { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
 
         [Column(TypeName="datetime")]
         public DateTime? UpdatedOn { get; set; }

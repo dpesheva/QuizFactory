@@ -4,11 +4,9 @@
     <h3 class="green">Categories</h3>
     @foreach (var item in Model)
     {
-        <p>
-            <a>
+            <a class="category">
                 @Html.DisplayFor(modelItem => item.Name)
             </a>
-        </p>
     }
 
 </div>
