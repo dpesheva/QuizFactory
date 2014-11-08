@@ -7,12 +7,12 @@
 
 <div class="row">
     <div class="container header-boxes">
-        @Html.Action("TopMostPopular")
+        @Html.Action("GetRandomQuizzes")
     </div>
     <h3>All @ViewBag.Category Quizzes</h3>
     <ul class="nav nav-tabs">
         <li class="active tab">
-            @Ajax.RawActionLink("<h4 class='content-title blue'>Most Recent</h4>", "RecentContent", "Home", new { },
+            @Ajax.RawActionLink("<h4 class='content-title blue'>Most Recent</h4>", "RecentContent", "Home", new { catId = ViewBag.CategoryId },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
@@ -22,7 +22,7 @@
                  new { id = "first-tab" })
         </li>
         <li class="tab">
-            @Ajax.RawActionLink("<h4 class='content-title red'>Most Popular</h4>", "PopularContent", "Home", new { },
+            @Ajax.RawActionLink("<h4 class='content-title red'>Most Popular</h4>", "PopularContent", "Home", new { catId = ViewBag.CategoryId },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
@@ -32,7 +32,7 @@
         new { })
         </li>
         <li class="tab">
-            @Ajax.RawActionLink("<h4 class='content-title yellow'>By Name</h4>", "ByNameContent", "Home", new { },
+            @Ajax.RawActionLink("<h4 class='content-title yellow'>By Name</h4>", "ByNameContent", "Home", new { catId = ViewBag.CategoryId },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
@@ -42,7 +42,7 @@
         new { })
         </li>
         <li class="tab">
-            @Ajax.RawActionLink("<h4 class='content-title green'>By Rating</h4>", "ByRatingContent", "Home", new { },
+            @Ajax.RawActionLink("<h4 class='content-title green'>By Rating</h4>", "ByRatingContent", "Home", new { catId = ViewBag.CategoryId },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,

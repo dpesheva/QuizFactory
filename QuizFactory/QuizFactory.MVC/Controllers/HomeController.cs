@@ -1,46 +1,45 @@
 ﻿namespace QuizFactory.Mvc.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Linq.Expressions;
     using System.Net;
-    using System.Web;
     using System.Web.Mvc;
+
     using AutoMapper.QueryableExtensions;
-    using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Models;
+    using QuizFactory.Mvc.ViewModels;
 
     public class HomeController : BaseController
     {
-        Random Random = new Random();
+        private Random Random = new Random();
 
-        public ActionResult Index()
+        public ActionResult Index(int? catId)
         {
-            return View();
+            this.ViewBag.CategoryId = catId;
+
+            return this.View();
         }
 
         public ActionResult Categories()
         {
-            var categories = this.db.Categories.All().ToList();
+            var categories = this.db.Categories.All().Where(c => c.IsDeleted == false).ToList();
             return this.PartialView("_CategoriesPartial", categories);
         }
 
-
-        public ActionResult TopMostPopular()
+        public ActionResult GetRandomQuizzes()
         {
             if (this.db.QuizzesDefinitions.All().Any())
             {
-                int rnd = Random.Next();
+                int rnd = this.Random.Next();
 
                 var ramdomQuizzes = this.db.QuizzesDefinitions
-                    .All()
-                    .Where(q => q.IsPublic == true)
-                    .OrderBy(e => rnd)
-                    .Take(3)
-                    .Project()
-                    .To<QuizMainInfoViewModel>()
-                    .ToList();
+                                        .All()
+                                        .Where(q => q.IsPublic == true && q.IsDeleted == false)
+                                        .OrderBy(e => rnd)
+                                        .Take(3)
+                                        .Project()
+                                        .To<QuizMainInfoViewModel>()
+                                        .ToList();
 
                 return this.PartialView("_ListQuizBoxesPartial", ramdomQuizzes);
             }
@@ -48,78 +47,76 @@
             return null; // TODO return DataErrorInfoModelValidatorProvider msg
         }
 
-        public ActionResult RecentContent()
+        public ActionResult RecentContent(int? catId)
         {
-            if (!Request.IsAjaxRequest())
+            if (!this.Request.IsAjaxRequest())
             {
-                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                this.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                 return null; // TODO return error
             }
 
             var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.CreatedOn);
-            var quizzes = RojectQuery(quizzesQuery);
+            var quizzes = this.RojectQuery(quizzesQuery, catId);
 
             return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
 
-        public ActionResult PopularContent()
+        public ActionResult PopularContent(int? catId)
         {
-            if (!Request.IsAjaxRequest())
+            if (!this.Request.IsAjaxRequest())
             {
-                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                this.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                 return null; // TODO return error
             }
 
             var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.TakenQuizzes.Count);
-            var quizzes = RojectQuery(quizzesQuery);
+            var quizzes = this.RojectQuery(quizzesQuery, catId);
 
             return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
 
-        public ActionResult ByNameContent()
+        public ActionResult ByNameContent(int? catId)
         {
-            if (!Request.IsAjaxRequest())
+            if (!this.Request.IsAjaxRequest())
             {
-                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                this.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                 return null; // TODO return error
             }
 
             var quizzesQuery = this.db.QuizzesDefinitions.All().OrderBy(q => q.Title);
-            var quizzes = RojectQuery(quizzesQuery);
+            var quizzes = this.RojectQuery(quizzesQuery, catId);
 
             return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
 
-        public ActionResult ByRatingContent()
+        public ActionResult ByRatingContent(int? catId)
         {
-            if (!Request.IsAjaxRequest())
+            if (!this.Request.IsAjaxRequest())
             {
-                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                this.Response.StatusCode = (int)HttpStatusCode.Forbidden;
                 return null; // TODO return error
             }
 
             var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.Rating);
-            var quizzes = RojectQuery(quizzesQuery);
+            var quizzes = this.RojectQuery(quizzesQuery, catId);
 
             return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
 
-        public ActionResult About()
+        private object RojectQuery(IOrderedQueryable<QuizDefinition> quizzesQuery, int? catId)
         {
-            ViewBag.Message = "Your application description page.";
+            if (catId == null)
+            {
+                return quizzesQuery.Where(q => q.IsPublic == true && q.IsDeleted == false)
+                                   .Project()
+                                   .To<QuizMainInfoViewModel>()
+                                   .ToList();
+            }
 
-            return View();
+            return quizzesQuery.Where(q => q.IsPublic == true && q.Category.Id == catId && q.IsDeleted == false)
+                               .Project()
+                               .To<QuizMainInfoViewModel>()
+                               .ToList();
         }
-
-        private object RojectQuery(IOrderedQueryable<QuizDefinition> quizzesQuery)
-        {
-            return quizzesQuery.Where(q => q.IsPublic == true)
-                 .Project()
-                 .To<QuizMainInfoViewModel>()
-                 .ToList();
-        }
-
-
-
     }
 }

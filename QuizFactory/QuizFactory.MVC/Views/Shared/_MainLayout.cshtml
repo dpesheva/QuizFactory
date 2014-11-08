@@ -39,9 +39,9 @@
                             Admin
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem">@Html.ActionLink("Quizzes", "Index", "QuizzesAdministration")</li>
-                            <li>@Html.ActionLink("Categories", "Index", "CategoriesAdministration")</li>
-                            <li>@Html.ActionLink("Users", "Index", "UsersAdministration")</li>
+                            <li>@Html.ActionLink("Quizzes", "Index", "Quizzes", new { area = "Admin" }, new { })</li>
+                            <li>@Html.ActionLink("Categories", "Index", "Categories", new { area = "Admin" }, new { })</li>
+                            <li>@Html.ActionLink("Users", "Index", "Users", new { area = "Admin" }, new { })</li>
                         </ul>
                     </li>
                 }

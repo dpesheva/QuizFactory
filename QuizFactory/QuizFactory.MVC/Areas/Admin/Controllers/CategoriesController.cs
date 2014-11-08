@@ -1,23 +1,18 @@
-﻿namespace QuizFactory.Mvc.Areas.Admin
+﻿namespace QuizFactory.Mvc.Areas.Admin.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Data.Entity;
     using System.Linq;
     using System.Net;
-    using System.Web;
     using System.Web.Mvc;
-    using QuizFactory.Data;
-    using QuizFactory.Models;
-    using QuizFactory.Mvc.Controllers;
 
-    public class CategoriesController : BaseController
+    using QuizFactory.Models;
+
+    public class CategoriesController : AdminController
     {
         // GET: Admin/Categories
         public ActionResult Index()
         {
-            return View(this.db.Categories.All().ToList());
+            return this.View(this.db.Categories.All().Where(c => c.IsDeleted == false).ToList());
         }
 
         // GET: Admin/Categories/Details/5
@@ -27,35 +22,38 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = this.db.Categories.Find(id);
             if (category == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(category);
+            return this.View(category);
         }
 
         // GET: Admin/Categories/Create
         public ActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
         // POST: Admin/Categories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] Category category)
         {
-            if (ModelState.IsValid)
+            if (this.db.Categories.SearchFor(c => c.Name == category.Name).FirstOrDefault() != null)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.ModelState.AddModelError("Name", "There is a category with the same name!");
             }
 
-            return View(category);
+            if (this.ModelState.IsValid)
+            {
+                this.db.Categories.Add(category);
+                this.db.SaveChanges();
+                return this.RedirectToAction("Index");
+            }
+
+            return this.View(category);
         }
 
         // GET: Admin/Categories/Edit/5
@@ -65,28 +63,31 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = this.db.Categories.Find(id);
             if (category == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(category);
+            return this.View(category);
         }
 
         // POST: Admin/Categories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Category category)
         {
-            if (ModelState.IsValid)
+            if (this.db.Categories.SearchFor(c => c.Name == category.Name && c.Id != category.Id).FirstOrDefault() != null)
             {
-                db.Categories.Update(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.ModelState.AddModelError("Name", "There is a category with the same name!");
             }
-            return View(category);
+
+            if (this.ModelState.IsValid)
+            {
+                this.db.Categories.Update(category);
+                this.db.SaveChanges();
+                return this.RedirectToAction("Index");
+            }
+            return this.View(category);
         }
 
         // GET: Admin/Categories/Delete/5
@@ -96,12 +97,12 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = this.db.Categories.Find(id);
             if (category == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(category);
+            return this.View(category);
         }
 
         // POST: Admin/Categories/Delete/5
@@ -109,11 +110,14 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Delete(category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Category category = this.db.Categories.Find(id);
+            category.IsDeleted = true;
+
+            this.db.Categories.Update(category);
+            this.db.SaveChanges();
+            return this.RedirectToAction("Index");
         }
+
 
         // TODO ??
         //protected override void Dispose(bool disposing)

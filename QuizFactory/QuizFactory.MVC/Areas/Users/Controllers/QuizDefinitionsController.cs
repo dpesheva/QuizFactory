@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using QuizFactory.Data;
-using QuizFactory.Models;
-
-namespace QuizFactory.Mvc.Areas.Users
+﻿namespace QuizFactory.Mvc.Areas.Users.Controllers
 {
-    public class QuizDefinitionsController : Controller
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+    using QuizFactory.Data;
+    using QuizFactory.Models;
+
+    public class QuizDefinitionsController : UsersController
     {
         private QuizFactoryDbContext db = new QuizFactoryDbContext();
 
         // GET: Users/QuizDefinitions
         public ActionResult Index()
         {
-            var quizDefinitions = db.QuizDefinitions.Include(q => q.Category);
-            return View(quizDefinitions.ToList());
+            var quizDefinitions = this.db.QuizDefinitions.Include(q => q.Category);
+            return this.View(quizDefinitions.ToList());
         }
 
         // GET: Users/QuizDefinitions/Details/5
@@ -29,37 +26,36 @@ namespace QuizFactory.Mvc.Areas.Users
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuizDefinition quizDefinition = db.QuizDefinitions.Find(id);
+            QuizDefinition quizDefinition = this.db.QuizDefinitions.Find(id);
             if (quizDefinition == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(quizDefinition);
+            return this.View(quizDefinition);
         }
 
         // GET: Users/QuizDefinitions/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
-            return View();
+            this.ViewBag.CategoryId = new SelectList(this.db.Categories, "Id", "Name");
+            return this.View();
         }
 
         // POST: Users/QuizDefinitions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,CreatedOn,Rating,CategoryId,IsPublic,IsDeleted,UpdatedOn")] QuizDefinition quizDefinition)
+        public ActionResult Create([Bind(Include = "Id,Title,CreatedOn,Rating,CategoryId,IsPublic,IsDeleted,UpdatedOn")]
+                                   QuizDefinition quizDefinition)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                db.QuizDefinitions.Add(quizDefinition);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.db.QuizDefinitions.Add(quizDefinition);
+                this.db.SaveChanges();
+                return this.RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", quizDefinition.CategoryId);
-            return View(quizDefinition);
+            this.ViewBag.CategoryId = new SelectList(this.db.Categories, "Id", "Name", quizDefinition.CategoryId);
+            return this.View(quizDefinition);
         }
 
         // GET: Users/QuizDefinitions/Edit/5
@@ -69,13 +65,13 @@ namespace QuizFactory.Mvc.Areas.Users
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuizDefinition quizDefinition = db.QuizDefinitions.Find(id);
+            QuizDefinition quizDefinition = this.db.QuizDefinitions.Find(id);
             if (quizDefinition == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", quizDefinition.CategoryId);
-            return View(quizDefinition);
+            this.ViewBag.CategoryId = new SelectList(this.db.Categories, "Id", "Name", quizDefinition.CategoryId);
+            return this.View(quizDefinition);
         }
 
         // POST: Users/QuizDefinitions/Edit/5
@@ -85,14 +81,14 @@ namespace QuizFactory.Mvc.Areas.Users
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,CreatedOn,Rating,CategoryId,IsPublic,IsDeleted,UpdatedOn")] QuizDefinition quizDefinition)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                db.Entry(quizDefinition).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.db.Entry(quizDefinition).State = EntityState.Modified;
+                this.db.SaveChanges();
+                return this.RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", quizDefinition.CategoryId);
-            return View(quizDefinition);
+            this.ViewBag.CategoryId = new SelectList(this.db.Categories, "Id", "Name", quizDefinition.CategoryId);
+            return this.View(quizDefinition);
         }
 
         // GET: Users/QuizDefinitions/Delete/5
@@ -102,12 +98,12 @@ namespace QuizFactory.Mvc.Areas.Users
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuizDefinition quizDefinition = db.QuizDefinitions.Find(id);
+            QuizDefinition quizDefinition = this.db.QuizDefinitions.Find(id);
             if (quizDefinition == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(quizDefinition);
+            return this.View(quizDefinition);
         }
 
         // POST: Users/QuizDefinitions/Delete/5
@@ -115,17 +111,17 @@ namespace QuizFactory.Mvc.Areas.Users
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuizDefinition quizDefinition = db.QuizDefinitions.Find(id);
-            db.QuizDefinitions.Remove(quizDefinition);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            QuizDefinition quizDefinition = this.db.QuizDefinitions.Find(id);
+            this.db.QuizDefinitions.Remove(quizDefinition);
+            this.db.SaveChanges();
+            return this.RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                this.db.Dispose();
             }
             base.Dispose(disposing);
         }

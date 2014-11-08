@@ -1,6 +1,6 @@
 ﻿@model QuizFactory.Mvc.ViewModels.QuestionViewModel
 
-<h2>@Model.QuestionText</h2>
+<h2>@Model.Number @Model.QuestionText</h2>
 @foreach (var item in @Model.Answers)
 {
    @Html.Partial("_AnswerPartial", item)
