@@ -21,7 +21,10 @@ namespace QuizFactory.Models
 
         public bool IsDeleted { get; set; }
 
-        [Required]
+        [Column(TypeName = "datetime")]
+		public DateTime? UpdatedOn { get; set; }
+        
+		[Required]
         public int Number { get; set; }
 
         public virtual QuizDefinition QuizDefinition { get; set; }

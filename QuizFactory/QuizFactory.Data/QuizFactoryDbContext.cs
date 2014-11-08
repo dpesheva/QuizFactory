@@ -38,5 +38,6 @@
               // .HasForeignKey(e => e.TakenQuizId)
                .WillCascadeOnDelete(false);
         }
+
     }
 }

@@ -81,7 +81,7 @@ a:hover {
     }
 
         .main-menu li a:hover {
-            background-color: #3F6CEB !important;
+            background-color: #EFCA2D !important;
         }
 
     .main-menu a, .dropdown-menu a {
@@ -164,7 +164,7 @@ a:hover {
 }
 
 .yellow {
-    color: #EFBF2D;
+    color: #EFCA2D;
 }
 
 .green {

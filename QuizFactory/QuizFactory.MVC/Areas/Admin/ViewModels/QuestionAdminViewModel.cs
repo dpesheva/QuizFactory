@@ -1,4 +1,5 @@
 ﻿using QuizFactory.Models;
+using QuizFactory.Mvc.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,25 +7,27 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 
-namespace QuizFactory.Mvc.ViewModels
+namespace QuizFactory.Mvc.Areas.Admin.ViewModels
 {
-    public class QuestionViewModel
+    public class QuestionAdminViewModel
     {
-        public static Expression<Func<QuestionDefinition, QuestionViewModel>> FromQuestionDefinition
+        public static Expression<Func<QuestionDefinition, QuestionAdminViewModel>> FromQuestionDefinition
         {
             get
             {
-                return question => new QuestionViewModel
+                return question => new QuestionAdminViewModel
                 {
                     Id = question.Id,
                     QuestionText = question.QuestionText,
                     Number = question.Number,
+                    IsDeleted = question.IsDeleted,
+                    UpdatedOn = question.UpdatedOn,
                     Answers = question.AnswersDefinitions.Select(a => new AnswerViewModel
                     {
                         Id = a.Id,
                         Text = a.Text,
                         IsCorrect = a.IsCorrect,
-                        Position = a.Position
+                        Position = a.Position,
                     }).ToList()
                 };
             }
@@ -38,7 +41,13 @@ namespace QuizFactory.Mvc.ViewModels
 
         [Required]
         public int Number { get; set; }
-        
+
+        [Display(Name = "Is Deleted")]
+        public bool IsDeleted { get; set; }
+
+        [Display(Name = "Updated On")]
+        public DateTime? UpdatedOn { get; set; }
+
         public ICollection<AnswerViewModel> Answers { get; set; }
     }
 }

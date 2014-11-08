@@ -178,9 +178,12 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QuizAdministrationController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\QuestionAdminViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\QuizDefinitionsController.cs" />
     <Compile Include="Areas\Users\Controllers\UsersController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\ViewModels\QuizAdminViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -226,6 +229,11 @@
     <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuizAdministration\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QuizAdministration\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QuizAdministration\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\QuizAdministration\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QuizAdministration\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -277,7 +285,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Users\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
