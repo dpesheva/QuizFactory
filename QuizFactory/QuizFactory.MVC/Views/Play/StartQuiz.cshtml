@@ -1,0 +1,6 @@
+﻿@model QuizFactory.Mvc.ViewModels.QuizViewModel
+
+<h1>@Model.Title</h1>
+<h3>@Model.Category</h3>
+@Html.Action("GetQuestion", new {quizId = @Model.Id , currentQuestion = 1})
+<h5>Created by: @Model.Author on @Model.CreatedOn</h5>

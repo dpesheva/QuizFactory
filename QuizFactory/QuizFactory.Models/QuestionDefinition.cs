@@ -21,6 +21,9 @@ namespace QuizFactory.Models
 
         public bool IsDeleted { get; set; }
 
+        [Required]
+        public int Number { get; set; }
+
         public virtual QuizDefinition QuizDefinition { get; set; }
 
         public virtual ICollection<AnswerDefinition> AnswersDefinitions { get; set; }

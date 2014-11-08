@@ -1,6 +1,8 @@
 ﻿namespace QuizFactory.Data.Repositories
 {
+    using System;
     using System.Linq;
+    using System.Linq.Expressions;
 
     public interface IRepository<T> where T : class
     {
@@ -13,6 +15,8 @@
         void Update(T entity);
 
         T Delete(T entity);
+        
+        IQueryable<T> SearchFor(Expression<Func<T, bool>> predicate);
 
         void Detach(T entity);
 

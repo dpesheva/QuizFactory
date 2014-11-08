@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlayController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -184,6 +185,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AnswerViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
+    <Compile Include="ViewModels\QuizMainInfoViewModel.cs" />
     <Compile Include="ViewModels\QuizViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -258,8 +260,9 @@
     <Content Include="Views\Shared\_QuizBoxPartial.cshtml" />
     <Content Include="Views\Shared\_OpenQuestionPartial.cshtml" />
     <Content Include="Views\Shared\_ListQuizBoxesPartial.cshtml" />
-    <Content Include="Views\Home\RecentContent.cshtml" />
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
+    <Content Include="Views\Play\StartQuiz.cshtml" />
+    <Content Include="Views\Shared\_AnswerPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

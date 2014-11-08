@@ -3,5 +3,7 @@
 <h2>@Model.QuestionText</h2>
 @foreach (var item in @Model.Answers)
 {
-    <input type="radio" name="" value=@item.Text>
+   @Html.Partial("_AnswerPartial", item)
 }
+
+<button value="ADD SUBMIT HELPER"/>

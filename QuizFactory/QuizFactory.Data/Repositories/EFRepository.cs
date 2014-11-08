@@ -5,6 +5,7 @@ namespace QuizFactory.Data.Repositories
 {
     using System.Data.Entity;
     using System.Linq;
+    using System.Linq.Expressions;
 
     public class EFRepository<T> : IRepository<T> where T : class
     {
@@ -46,6 +47,11 @@ namespace QuizFactory.Data.Repositories
         {
             this.ChangeEntityState(entity, EntityState.Deleted);
             return entity;
+        }
+
+        public IQueryable<T> SearchFor(Expression<Func<T, bool>> predicate)
+        {
+            return this.set.Where(predicate);
         }
 
         public void Detach(T entity)

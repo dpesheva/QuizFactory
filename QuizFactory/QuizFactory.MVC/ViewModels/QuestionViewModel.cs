@@ -18,13 +18,15 @@ namespace QuizFactory.Mvc.ViewModels
                 {
                     Id = question.Id,
                     QuestionText = question.QuestionText,
-                    QuizTitle = question.QuizDefinition.Title,
+                    Number = question.Number,
+                    //  QuizTitle = question.QuizDefinition.Title,
                     Answers = question.AnswersDefinitions.Select(a => new AnswerViewModel
                     {
                         Id = a.Id,
                         Text = a.Text,
                         IsCorrect = a.IsCorrect,
-                        Question = a.QuestionDefinition.QuestionText
+                        Position = a.Position,
+                        // Question = a.QuestionDefinition.QuestionText
                     }).ToList()
                 };
             }
@@ -35,8 +37,11 @@ namespace QuizFactory.Mvc.ViewModels
         [Required]
         public string QuestionText { get; set; }
 
-        [Display(Name = "Quiz Title")]
-        public string QuizTitle { get; set; }
+        [Required]
+        public int Number { get; set; }
+
+        //[Display(Name = "Quiz Title")]
+        //public string QuizTitle { get; set; }
 
         public ICollection<AnswerViewModel> Answers { get; set; }
     }

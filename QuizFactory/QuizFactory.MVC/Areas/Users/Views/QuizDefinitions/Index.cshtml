@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<QuizFactory.Models.QuizDefinition>
-
+@using HelperExtentions
 @{
     ViewBag.Title = "Index";
 }
@@ -24,9 +24,6 @@
             @Html.DisplayNameFor(model => model.IsPublic)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.UpdatedOn)
         </th>
         <th></th>
@@ -48,9 +45,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsPublic)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UpdatedOn)

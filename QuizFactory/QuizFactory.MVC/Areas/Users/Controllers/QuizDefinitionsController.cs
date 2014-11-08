@@ -49,7 +49,7 @@ namespace QuizFactory.Mvc.Areas.Users
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,CreatedOn,Rating,CategoryId,IsPublic,IsActive,UpdatedOn")] QuizDefinition quizDefinition)
+        public ActionResult Create([Bind(Include = "Id,Title,CreatedOn,Rating,CategoryId,IsPublic,IsDeleted,UpdatedOn")] QuizDefinition quizDefinition)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace QuizFactory.Mvc.Areas.Users
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,CreatedOn,Rating,CategoryId,IsPublic,IsActive,UpdatedOn")] QuizDefinition quizDefinition)
+        public ActionResult Edit([Bind(Include = "Id,Title,CreatedOn,Rating,CategoryId,IsPublic,IsDeleted,UpdatedOn")] QuizDefinition quizDefinition)
         {
             if (ModelState.IsValid)
             {

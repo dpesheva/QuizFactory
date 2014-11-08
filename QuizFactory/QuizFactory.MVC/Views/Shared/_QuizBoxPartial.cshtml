@@ -1,11 +1,14 @@
-﻿@model QuizFactory.Mvc.ViewModels.QuizViewModel
+﻿@model QuizFactory.Mvc.ViewModels.QuizMainInfoViewModel
 
 <div class="col-sm-4">
     <div class="quiz-box">
-        <h4>@Html.ActionLink(@Model.Title, "StartQuiz", "Play")</h4>
-        <p class="green">Questions: <strong class="red">@Model.NumberQuestions</strong></p>
-        <small class="yellow">Created on: @Model.CreatedOn</small>
-        <p><small class="yellow">by @Model.Author</small></p>
+        <h4>@Html.ActionLink(@Model.Title, "StartQuiz", "Play", new { id = @Model.Id }, new { })</h4>      
+        <p class="green">Questions: <strong class="red">@Model.QuestionsCount</strong></p>
+        <small class="yellow">Created on:</small>
+        <br/>
+        <small class="yellow">@Model.CreatedOn</small>
+        <br />
+        <small class="yellow">by @Model.Author</small>
         <p>Rating: @Model.Rating</p>
     </div>
 </div>

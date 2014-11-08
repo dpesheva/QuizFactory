@@ -1,18 +1,22 @@
-﻿using QuizFactory.Mvc.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-
-namespace QuizFactory.Mvc.Controllers
+﻿namespace QuizFactory.Mvc.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Net;
+    using System.Web;
+    using System.Web.Mvc;
+    using AutoMapper.QueryableExtensions;
+    using QuizFactory.Mvc.ViewModels;
+    using QuizFactory.Models;
+
     public class HomeController : BaseController
     {
+        Random Random = new Random();
+
         public ActionResult Index()
         {
-
             return View();
         }
 
@@ -27,12 +31,21 @@ namespace QuizFactory.Mvc.Controllers
         {
             if (this.db.QuizzesDefinitions.All().Any())
             {
-                // TODO return 3 random quizzes
-                var topPopular = this.db.QuizzesDefinitions.All().Take(3).Select(QuizViewModel.FromQuizDefinition).ToList();
-                return this.PartialView("_ListQuizBoxesPartial", topPopular);
+                int rnd = Random.Next();
+
+                var ramdomQuizzes = this.db.QuizzesDefinitions
+                    .All()
+                    .Where(q => q.IsPublic == true)
+                    .OrderBy(e => rnd)
+                    .Take(3)
+                    .Project()
+                    .To<QuizMainInfoViewModel>()
+                    .ToList();
+
+                return this.PartialView("_ListQuizBoxesPartial", ramdomQuizzes);
             }
 
-            return null; // TOTO return DataErrorInfoModelValidatorProvider msg
+            return null; // TODO return DataErrorInfoModelValidatorProvider msg
         }
 
         public ActionResult RecentContent()
@@ -43,11 +56,8 @@ namespace QuizFactory.Mvc.Controllers
                 return null; // TODO return error
             }
 
-            List<QuizViewModel> quizzes = this.db.QuizzesDefinitions
-                .All()
-                .OrderByDescending(q => q.CreatedOn)
-                .Select(QuizViewModel.FromQuizDefinition)
-                .ToList();
+            var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.CreatedOn);
+            var quizzes = RojectQuery(quizzesQuery);
 
             return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
@@ -60,13 +70,10 @@ namespace QuizFactory.Mvc.Controllers
                 return null; // TODO return error
             }
 
-            // TOTO add constraints, orderby
-            List<QuizViewModel> quizzes = this.db.QuizzesDefinitions.All()
-                .OrderByDescending(q => q.TakenQuizzes.Count)
-                .Select(QuizViewModel.FromQuizDefinition)
-                .ToList();
+            var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.TakenQuizzes.Count);
+            var quizzes = RojectQuery(quizzesQuery);
 
-            return this.PartialView("_ListQuizBoxesPartial", quizzes); ;// TODO return smthng
+            return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
 
         public ActionResult ByNameContent()
@@ -77,12 +84,10 @@ namespace QuizFactory.Mvc.Controllers
                 return null; // TODO return error
             }
 
-            List<QuizViewModel> quizzes = this.db.QuizzesDefinitions.All()
-                .OrderBy(q => q.Title)
-                .Select(QuizViewModel.FromQuizDefinition)
-                .ToList();
+            var quizzesQuery = this.db.QuizzesDefinitions.All().OrderBy(q => q.Title);
+            var quizzes = RojectQuery(quizzesQuery);
 
-            return this.PartialView("_ListQuizBoxesPartial", quizzes);// TODO return smthng
+            return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
 
         public ActionResult ByRatingContent()
@@ -93,12 +98,10 @@ namespace QuizFactory.Mvc.Controllers
                 return null; // TODO return error
             }
 
-            List<QuizViewModel> quizzes = this.db.QuizzesDefinitions.All()
-               .OrderByDescending(q => q.Rating)
-               .Select(QuizViewModel.FromQuizDefinition)
-               .ToList();
+            var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.Rating);
+            var quizzes = RojectQuery(quizzesQuery);
 
-            return this.PartialView("_ListQuizBoxesPartial", quizzes);// TODO return smthng
+            return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
 
         public ActionResult About()
@@ -107,6 +110,15 @@ namespace QuizFactory.Mvc.Controllers
 
             return View();
         }
+
+        private object RojectQuery(IOrderedQueryable<QuizDefinition> quizzesQuery)
+        {
+            return quizzesQuery.Where(q => q.IsPublic == true)
+                 .Project()
+                 .To<QuizMainInfoViewModel>()
+                 .ToList();
+        }
+
 
 
     }
