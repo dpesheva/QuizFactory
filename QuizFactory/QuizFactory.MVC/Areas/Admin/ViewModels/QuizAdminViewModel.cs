@@ -1,15 +1,15 @@
 ﻿namespace QuizFactory.Mvc.Areas.Admin.ViewModels
 {
-    using QuizFactory.Models;
-    using QuizFactory.Mvc.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Web;
+    using QuizFactory.Models;
+    using QuizFactory.Mvc.ViewModels;
+    using QuizFactory.Mvc.Areas.Users.ViewModels;
 
-    public class QuizAdminViewModel
+    public class QuizAdminViewModel : QuizViewModel
     {
         public static Expression<Func<QuizDefinition, QuizAdminViewModel>> FromQuizDefinition
         {
@@ -44,33 +44,12 @@
                 };
             }
         }
-
-        public int Id { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Title { get; set; }
-
-        public string Author { get; set; }
-
-        [Display(Name = "Created On")]
-        public DateTime CreatedOn { get; set; }
-
-        public decimal Rating { get; set; }
-
-        [Display(Name = "Public")]
-        public bool IsPublic { get; set; }
-
+       
         [Display(Name = "Is Deleted")]
         public bool IsDeleted { get; set; }
 
         [Display(Name = "Updated On")]
         public DateTime? UpdatedOn { get; set; }
-
-        public string Category { get; set; }
-
-        [Display(Name = "Number of questions")]
-        public string NumberQuestions { get; set; }
 
         public ICollection<QuestionAdminViewModel> Questions { get; set; }
     }

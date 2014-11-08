@@ -6,8 +6,10 @@
     using System.Web.Mvc;
 
     using QuizFactory.Models;
+    using QuizFactory.Mvc.Controllers;
 
-    public class CategoriesController : AdminController
+    [Authorize(Roles = "admin")]
+    public class CategoriesController : BaseController
     {
         // GET: Admin/Categories
         public ActionResult Index()
@@ -41,7 +43,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] Category category)
         {
-            if (this.db.Categories.SearchFor(c => c.Name == category.Name).FirstOrDefault() != null)
+            if (this.db.Categories.SearchFor(c => c.Name == category.Name && c.IsDeleted == false).FirstOrDefault() != null)
             {
                 this.ModelState.AddModelError("Name", "There is a category with the same name!");
             }
@@ -76,7 +78,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Category category)
         {
-            if (this.db.Categories.SearchFor(c => c.Name == category.Name && c.Id != category.Id).FirstOrDefault() != null)
+            if (this.db.Categories.SearchFor(c => c.Name == category.Name && c.Id != category.Id && c.IsDeleted == false).FirstOrDefault() != null)
             {
                 this.ModelState.AddModelError("Name", "There is a category with the same name!");
             }
@@ -110,6 +112,10 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (this.db.QuizzesDefinitions.All().Any(q => q.CategoryId == id))
+            {
+                return null; // TODO "Category can't be deleted. There are quzzes linked to it.
+            }
             Category category = this.db.Categories.Find(id);
             category.IsDeleted = true;
 

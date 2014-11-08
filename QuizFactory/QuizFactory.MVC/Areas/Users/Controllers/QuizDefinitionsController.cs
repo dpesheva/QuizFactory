@@ -7,10 +7,12 @@
     using System.Web.Mvc;
     using QuizFactory.Data;
     using QuizFactory.Models;
+    using QuizFactory.Mvc.Controllers;
 
-    public class QuizDefinitionsController : UsersController
+    // TODO DElete
+    public class QuizDefinitionsController : AbstractController
     {
-        private QuizFactoryDbContext db = new QuizFactoryDbContext();
+        QuizFactoryDbContext db = new QuizFactoryDbContext();
 
         // GET: Users/QuizDefinitions
         public ActionResult Index()

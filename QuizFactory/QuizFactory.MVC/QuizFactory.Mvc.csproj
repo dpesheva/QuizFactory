@@ -176,14 +176,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuizAdministrationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuestionAdminViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\QuizDefinitionsController.cs" />
-    <Compile Include="Areas\Users\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Users\Controllers\QuizUsersController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuizAdminViewModel.cs" />
+    <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -201,7 +201,7 @@
     <Compile Include="ViewModels\AnswerViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\QuizMainInfoViewModel.cs" />
-    <Compile Include="ViewModels\QuizViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\QuizViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -229,11 +229,15 @@
     <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\QuizAdministration\Create.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdministration\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdministration\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdministration\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdministration\Index.cshtml" />
+    <Content Include="Areas\Users\Views\QuizUsers\Index.cshtml" />
+    <Content Include="Areas\Users\Views\QuizUsers\Create.cshtml" />
+    <Content Include="Areas\Users\Views\QuizUsers\Delete.cshtml" />
+    <Content Include="Areas\Users\Views\QuizUsers\Edit.cshtml" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -285,7 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Users\ViewModels\" />
+    <Folder Include="Views\Abstract\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

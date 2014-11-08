@@ -11,20 +11,6 @@ namespace QuizFactory.Mvc.ViewModels
 {
     public class AnswerViewModel: IMapFrom<AnswerDefinition>
     {
-        //public static Expression<Func<AnswerDefinition, AnswerViewModel>> FromAnswerDefinition
-        //{
-        //    get
-        //    {
-        //        return answer => new AnswerViewModel
-        //        {
-        //            Id = answer.Id,
-        //            Text = answer.Text,
-        //            IsCorrect = answer.IsCorrect,
-        //            Question = answer.QuestionDefinition.QuestionText
-        //        };
-        //    }
-        //}
-
         [ScaffoldColumn(false)]
         public int Id { get; set; }
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuizFactory.Mvc.ViewModels.QuizViewModel>
+﻿@model IEnumerable<QuizFactory.Mvc.Areas.Users.ViewModels.QuizViewModel>
 @using HelperExtentions
 @{
     ViewBag.Title = "Quiz Factory";
@@ -6,13 +6,14 @@
 
 
 <div class="row">
-    <div class="container header-boxes">
-        @Html.Action("GetRandomQuizzes")
-    </div>
-    <h3>All @ViewBag.Category Quizzes</h3>
-    <ul class="nav nav-tabs">
-        <li class="active tab">
-            @Ajax.RawActionLink("<h4 class='content-title blue'>Most Recent</h4>", "RecentContent", "Home", new { catId = ViewBag.CategoryId },
+    <div class="col-sm-9">
+        <div class="container header-boxes">
+            @Html.Action("GetRandomQuizzes")
+        </div>
+        <h3>All @ViewBag.Category Quizzes</h3>
+        <ul class="nav nav-tabs">
+            <li class="active tab">
+                @Ajax.RawActionLink("<h4 class='content-title blue'>Most Recent</h4>", "RecentContent", "Home", new { catId = ViewBag.CategoryId },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
@@ -20,9 +21,9 @@
             LoadingElementId = "loading"
         },
                  new { id = "first-tab" })
-        </li>
-        <li class="tab">
-            @Ajax.RawActionLink("<h4 class='content-title red'>Most Popular</h4>", "PopularContent", "Home", new { catId = ViewBag.CategoryId },
+            </li>
+            <li class="tab">
+                @Ajax.RawActionLink("<h4 class='content-title red'>Most Popular</h4>", "PopularContent", "Home", new { catId = ViewBag.CategoryId },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
@@ -30,9 +31,9 @@
             LoadingElementId = "loading"
         },
         new { })
-        </li>
-        <li class="tab">
-            @Ajax.RawActionLink("<h4 class='content-title yellow'>By Name</h4>", "ByNameContent", "Home", new { catId = ViewBag.CategoryId },
+            </li>
+            <li class="tab">
+                @Ajax.RawActionLink("<h4 class='content-title yellow'>By Name</h4>", "ByNameContent", "Home", new { catId = ViewBag.CategoryId },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
@@ -40,9 +41,9 @@
             LoadingElementId = "loading"
         },
         new { })
-        </li>
-        <li class="tab">
-            @Ajax.RawActionLink("<h4 class='content-title green'>By Rating</h4>", "ByRatingContent", "Home", new { catId = ViewBag.CategoryId },
+            </li>
+            <li class="tab">
+                @Ajax.RawActionLink("<h4 class='content-title green'>By Rating</h4>", "ByRatingContent", "Home", new { catId = ViewBag.CategoryId },
     new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
@@ -50,17 +51,18 @@
             LoadingElementId = "loading"
         },
         new { })
-        </li>
-    </ul>
-    <div id="tabContent" class="tab-content">
-        <span id="loading" class="blue">Loading...</span>
-        <div class="container" id="content"></div>
+            </li>
+        </ul>
+        <div id="tabContent" class="tab-content">
+            <span id="loading" class="blue">Loading...</span>
+            <div class="container" id="content"></div>
+        </div>
     </div>
+    <aside class="col-sm-3">
+        @Html.Action("Categories", "Home")
+    </aside>
 </div>
 
-@section categories{
-    @Html.Action("Categories", "Home")
-}
 
 @section scripts{
     <script>

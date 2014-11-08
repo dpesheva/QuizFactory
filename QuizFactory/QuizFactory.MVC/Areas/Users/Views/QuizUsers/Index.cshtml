@@ -1,20 +1,17 @@
-﻿@model IEnumerable<QuizFactory.Mvc.Areas.Admin.ViewModels.QuizAdminViewModel>
+﻿@model IEnumerable<QuizFactory.Mvc.Areas.Users.ViewModels.QuizViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Quiz Administration</h2>
+<h2>My Quizzes</h2>
 
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author)
-        </th>
-        <th>
+         <th>
             @Html.DisplayNameFor(model => model.CreatedOn)
         </th>
         <th>
@@ -22,12 +19,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsPublic)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedOn)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Category)
@@ -43,10 +34,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
+         <td>
             @Html.DisplayFor(modelItem => item.CreatedOn)
         </td>
         <td>
@@ -56,12 +44,6 @@
             @Html.DisplayFor(modelItem => item.IsPublic)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedOn)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Category)
         </td>
         <td>
@@ -69,7 +51,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

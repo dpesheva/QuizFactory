@@ -7,7 +7,7 @@ using QuizFactory.Data;
 
 namespace QuizFactory.Mvc.Controllers
 {
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
         protected IQuizFactoryData db;
 

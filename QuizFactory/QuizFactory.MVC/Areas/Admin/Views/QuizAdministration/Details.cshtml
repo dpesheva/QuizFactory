@@ -4,87 +4,78 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details for quiz "@Model.Title"</h2>
 
-<div>
-    <h4>QuizAdminViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Author)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Author)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Rating)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Rating)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsPublic)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.IsPublic)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsPublic)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsPublic)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.IsDeleted)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.UpdatedOn)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UpdatedOn)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedOn)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedOn)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Category)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.NumberQuestions)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.NumberQuestions)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NumberQuestions)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumberQuestions)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to Quiz administration", "Index")
+    </p>

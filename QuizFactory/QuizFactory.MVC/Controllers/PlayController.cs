@@ -1,10 +1,9 @@
 ﻿namespace QuizFactory.Mvc.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
+    using QuizFactory.Mvc.Areas.Users.ViewModels;
     using QuizFactory.Mvc.ViewModels;
 
     public class PlayController : BaseController
@@ -12,13 +11,13 @@
         // GET: Play
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         // GET: Play/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return this.View();
         }
 
         //GET : Play/Start
@@ -26,16 +25,16 @@
         public ActionResult StartQuiz(int id)
         {
             var quiz = this.db.QuizzesDefinitions
-                .SearchFor(q => q.Id == id)
-                .Select(QuizViewModel.FromQuizDefinition)
-                .FirstOrDefault();
+                           .SearchFor(q => q.Id == id)
+                           .Select(QuizViewModel.FromQuizDefinition)
+                           .FirstOrDefault();
 
             if (quiz == null)
             {
-                return Redirect("Error"); // TODO 
+                return this.Redirect("Error"); // TODO 
             }
 
-            return View(quiz);
+            return this.View(quiz);
         }
 
         // POST: Play/Start
@@ -45,31 +44,28 @@
             try
             {
                 // TODO: Add insert logic here
-
                 //return next partial
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return this.View();
             }
         }
 
         public ActionResult GetQuestion(int quizId, int currentQuestion)
         {
-            
             var question = this.db.QuestionsDefinitions
-                .SearchFor(q => q.QuizDefinition.Id == quizId )
-                .Select(QuestionViewModel.FromQuestionDefinition)
-                .FirstOrDefault(); // TODO get next question
+                               .SearchFor(q => q.QuizDefinition.Id == quizId)
+                               .Select(QuestionViewModel.FromQuestionDefinition)
+                               .FirstOrDefault(); // TODO get next question
 
             if (question == null)
             {
-                return Redirect("Error"); // TODO 
+                return this.Redirect("Error"); // TODO 
             }
 
             return this.PartialView("_OpenQuestionPartial", question);
         }
-
     }
 }

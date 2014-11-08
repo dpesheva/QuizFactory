@@ -4,14 +4,19 @@
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
     using QuizFactory.Models;
     using QuizFactory.Mvc.Areas.Admin.ViewModels;
+    using System.Collections.Generic;
+    using QuizFactory.Mvc.Controllers;
 
-    public class QuizAdministrationController : AdminController
+    [Authorize(Roles = "admin")]
+    public class QuizAdministrationController : AbstractController
     {
         // GET: Admin/QuizAdministration
         public ActionResult Index()
         {
+            QuizAdminViewModel quizAdminViewModel = this.GetViewModelById(null);
             var allQuizzes = this.db.QuizzesDefinitions
                                  .All()
                                  .Select(QuizAdminViewModel.FromQuizDefinition)
@@ -45,13 +50,14 @@
         // POST: Admin/QuizAdministration/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Author,CreatedOn,Rating,IsPublic,IsDeleted,UpdatedOn,Category,NumberQuestions")]
+        public ActionResult Create(/*[Bind(Include = "Id,Title,Author,CreatedOn,Rating,IsPublic,IsDeleted,UpdatedOn,Category,NumberQuestions")]*/
                                    QuizAdminViewModel quizAdminViewModel)
         {
             if (this.ModelState.IsValid)
             {
-                QuizDefinition newQuiz = new QuizDefinition();
-                // TODO map view model to model
+                QuizDefinition newQuiz = MapViewModelToModel(quizAdminViewModel);
+
+
                 this.db.QuizzesDefinitions.Add(newQuiz);
                 this.db.SaveChanges();
                 return this.RedirectToAction("Index");
@@ -80,7 +86,7 @@
         // POST: Admin/QuizAdministration/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Author,CreatedOn,Rating,IsPublic,IsDeleted,UpdatedOn,Category,NumberQuestions")]
+        public ActionResult Edit(/*[Bind(Include = "Id,Title,Author,CreatedOn,Rating,IsPublic,IsDeleted,UpdatedOn,Category,NumberQuestions")]*/
                                  QuizAdminViewModel quizAdminViewModel)
         {
             if (this.ModelState.IsValid)
@@ -136,11 +142,42 @@
 
         private QuizAdminViewModel GetViewModelById(int? id)
         {
+            if (id == null)
+            {
+                // TODO
+            }
             QuizAdminViewModel quizAdminViewModel = this.db.QuizzesDefinitions
                                                         .SearchFor(q => q.Id == id)
                                                         .Select(QuizAdminViewModel.FromQuizDefinition)
                                                         .FirstOrDefault();
             return quizAdminViewModel;
+        }
+
+        private QuizDefinition MapViewModelToModel(QuizAdminViewModel quizAdminViewModel)
+        {
+            //    var user = this.db.Users.Find(User.Identity.GetUserId());
+            //    if (user == null)
+            //    {
+            //        return null; // TODO
+            //    }
+            //    var category = this.db.Categories.SearchFor(c => c.Name == quizAdminViewModel.Category).FirstOrDefault();
+            //    if (category == null)
+            //    {
+            //        return null; // TODO
+            //    }
+
+            //    return new QuizDefinition()
+            //      {
+            //          Id = quizAdminViewModel.Id,
+            //          Title = quizAdminViewModel.Title,
+            //          Category = category,
+            //          IsPublic = quizAdminViewModel.IsPublic,
+            //          CreatedOn = quizAdminViewModel.CreatedOn,
+            //          Author = user,
+            //          IsDeleted = false,
+            //          QuestionsDefinitions = new List<QuestionDefinition>()
+            //      };
+            return null;
         }
     }
 }

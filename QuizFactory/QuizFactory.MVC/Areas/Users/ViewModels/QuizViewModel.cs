@@ -1,6 +1,7 @@
-﻿namespace QuizFactory.Mvc.ViewModels
+﻿namespace QuizFactory.Mvc.Areas.Users.ViewModels
 {
     using QuizFactory.Models;
+    using QuizFactory.Mvc.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,7 @@
                     Id = quiz.Id,
                     Title = quiz.Title,
                     Category = quiz.Category.Name,
+                    CategoryId = quiz.CategoryId,
                     IsPublic = quiz.IsPublic,
                     CreatedOn = quiz.CreatedOn,
                     Author = quiz.Author.UserName,
@@ -28,14 +30,12 @@
                         Id = q.Id,
                         QuestionText = q.QuestionText,
                         Number = q.Number,
-                        // QuizTitle = q.QuizDefinition.Title,
                         Answers = q.AnswersDefinitions.Select(a => new AnswerViewModel
                         {
                             Id = a.Id,
                             Text = a.Text,
                             IsCorrect = a.IsCorrect,
-                            Position = a.Position,
-                            //  Question = a.QuestionDefinition.QuestionText
+                            Position = a.Position
                         }).ToList()
                     }).ToList()
                 };
@@ -59,6 +59,9 @@
         public bool IsPublic { get; set; }
 
         public string Category { get; set; }
+
+        [Required]
+        public int CategoryId { get; set; }
 
         [Display(Name = "Number of questions")]
         public string NumberQuestions { get; set; }
