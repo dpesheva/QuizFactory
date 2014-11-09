@@ -1,7 +1,7 @@
 ﻿namespace QuizFactory.Mvc.ViewModels
 {
     using AutoMapper;
-    using QuizFactory.Models;
+    using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Mapping;
     using System;
     using System.Collections.Generic;

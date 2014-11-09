@@ -206,6 +206,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\box_bgrnd.jpg" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -226,7 +227,6 @@
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdministration\Delete.cshtml" />
@@ -238,6 +238,7 @@
     <Content Include="Areas\Users\Views\QuizUsers\Delete.cshtml" />
     <Content Include="Areas\Users\Views\QuizUsers\Edit.cshtml" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="Areas\Users\Views\QuizUsers\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -306,10 +307,6 @@
     <ProjectReference Include="..\QuizFactory.Data\QuizFactory.Data.csproj">
       <Project>{c8ba5e54-fd59-41e5-9a2a-fbe1407f7e33}</Project>
       <Name>QuizFactory.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\QuizFactory.Models\QuizFactory.Models.csproj">
-      <Project>{ab2febaf-71a3-4f79-901a-6d6cf1081a10}</Project>
-      <Name>QuizFactory.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

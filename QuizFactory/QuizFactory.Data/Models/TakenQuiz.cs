@@ -1,12 +1,14 @@
-namespace QuizFactory.Models
+namespace QuizFactory.Data.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using QuizFactory.Data.Common;
+    using QuizFactory.Data.Common.Interfaces;
 
     [Table("TakenQuizzes")]
-    public partial class TakenQuiz
+    public partial class TakenQuiz : AuditInfo, IDeletableEntity
     {
         public TakenQuiz()
         {
@@ -18,6 +20,12 @@ namespace QuizFactory.Models
         public int QuizDefinitionId { get; set; }
 
         public ApplicationUser User { get; set; }
+       
+        [Index]
+        public bool IsDeleted { get; set; }
+
+        [Column(TypeName = "datetime")]
+        public DateTime? DeletedOn { get; set; }
 
         [Column(TypeName = "smallmoney")]
         public decimal? Score { get; set; }

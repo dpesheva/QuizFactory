@@ -1,4 +1,4 @@
-﻿@model QuizFactory.Models.QuizDefinition
+﻿@model QuizFactory.Data.Models.QuizDefinition
 @using HelperExtentions
 @{
     ViewBag.Title = "Create";
@@ -68,10 +68,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UpdatedOn, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DeletedOn, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdatedOn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdatedOn, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.DeletedOn, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DeletedOn, "", new { @class = "text-danger" })
             </div>
         </div>
 

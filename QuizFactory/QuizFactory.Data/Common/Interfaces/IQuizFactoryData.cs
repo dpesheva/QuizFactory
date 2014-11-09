@@ -3,8 +3,8 @@
     using System;
     using System.Linq;
 
-    using QuizFactory.Data.Repositories;
-    using QuizFactory.Models;
+    using QuizFactory.Data.Common.Interfaces;
+    using QuizFactory.Data.Models;
 
     // unit of work
     public interface IQuizFactoryData

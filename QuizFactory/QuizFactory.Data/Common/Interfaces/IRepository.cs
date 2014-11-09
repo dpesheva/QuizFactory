@@ -1,4 +1,4 @@
-﻿namespace QuizFactory.Data.Repositories
+﻿namespace QuizFactory.Data.Common.Interfaces
 {
     using System;
     using System.Linq;

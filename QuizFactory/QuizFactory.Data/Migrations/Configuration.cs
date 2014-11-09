@@ -18,7 +18,13 @@ namespace QuizFactory.Data.Migrations
 
         protected override void Seed(QuizFactoryDbContext context)
         {
-            var seedData = new SeedData();
+            if (!context.Roles.Any())
+            {
+               var seedUsers = new SeedUsers();
+               seedUsers.Generate(context);
+            }
+            
+            var seedData = new SeedData(context);
             if (!context.QuizDefinitions.Any())
             {
                 foreach (var item in seedData.Quizzes)
@@ -35,12 +41,6 @@ namespace QuizFactory.Data.Migrations
                 }
             }
 
-            if (!context.Roles.Any())
-            {
-               var seedUsers = new SeedUsers();
-               seedUsers.Generate(context);
-            }
-            
             context.SaveChanges();
         }
     }

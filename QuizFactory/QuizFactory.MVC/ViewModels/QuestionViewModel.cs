@@ -1,13 +1,13 @@
-﻿using QuizFactory.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Web;
-
-namespace QuizFactory.Mvc.ViewModels
+﻿namespace QuizFactory.Mvc.ViewModels
 {
+    using QuizFactory.Data.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Web;
+
     public class QuestionViewModel
     {
         public static Expression<Func<QuestionDefinition, QuestionViewModel>> FromQuestionDefinition
@@ -38,7 +38,7 @@ namespace QuizFactory.Mvc.ViewModels
 
         [Required]
         public int Number { get; set; }
-        
+
         public ICollection<AnswerViewModel> Answers { get; set; }
     }
 }

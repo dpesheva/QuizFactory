@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Linq.Expressions;
-    using QuizFactory.Models;
+    using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Mvc.Areas.Users.ViewModels;
 
@@ -24,7 +24,8 @@
                     CreatedOn = quiz.CreatedOn,
                     Author = quiz.Author.UserName,
                     IsDeleted = quiz.IsDeleted,
-                    UpdatedOn = quiz.UpdatedOn,
+                    DeletedOn = quiz.DeletedOn,
+                    ModifiedOn = quiz.ModifiedOn,
                     NumberQuestions = quiz.QuestionsDefinitions.Count.ToString(),
                     Questions = quiz.QuestionsDefinitions.Select(q => new QuestionAdminViewModel
                     {
@@ -32,7 +33,7 @@
                         QuestionText = q.QuestionText,
                         Number = q.Number,
                         IsDeleted = q.IsDeleted,
-                        UpdatedOn = q.UpdatedOn,
+                        DeletedOn = q.ModifiedOn,
                         Answers = q.AnswersDefinitions.Select(a => new AnswerViewModel
                         {
                             Id = a.Id,
@@ -44,12 +45,15 @@
                 };
             }
         }
-       
+
         [Display(Name = "Is Deleted")]
         public bool IsDeleted { get; set; }
 
-        [Display(Name = "Updated On")]
-        public DateTime? UpdatedOn { get; set; }
+        [Display(Name = "Deleted On")]
+        public DateTime? DeletedOn { get; set; }
+
+        [Display(Name = "Modified On")]
+        public DateTime? ModifiedOn { get; set; }
 
         public ICollection<QuestionAdminViewModel> Questions { get; set; }
     }

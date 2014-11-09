@@ -69,33 +69,27 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Common\AuditInfo.cs" />
+    <Compile Include="Common\Interfaces\IAuditInfo.cs" />
+    <Compile Include="Common\Interfaces\IDeletableEntity.cs" />
+    <Compile Include="Common\Interfaces\IDeletableEntityRepository.cs" />
+    <Compile Include="Common\Repositories\DeletableEntityRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData.cs" />
     <Compile Include="Migrations\SeedUsers.cs" />
+    <Compile Include="Models\AnswerDefinition.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\QuestionDefinition.cs" />
+    <Compile Include="Models\QuizDefinition.cs" />
+    <Compile Include="Models\TakenQuiz.cs" />
+    <Compile Include="Models\UsersAnswer.cs" />
     <Compile Include="QuizFactoryDbContext.cs" />
     <Compile Include="QuizFactoryData.cs" />
-    <Compile Include="IQuizFactoryData.cs" />
+    <Compile Include="Common\Interfaces\IQuizFactoryData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\EFRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\QuizFactory.Models\QuizFactory.Models.csproj">
-      <Project>{ab2febaf-71a3-4f79-901a-6d6cf1081a10}</Project>
-      <Name>QuizFactory.Models</Name>
-    </ProjectReference>
+    <Compile Include="Common\Repositories\EFRepository.cs" />
+    <Compile Include="Common\Interfaces\IRepository.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

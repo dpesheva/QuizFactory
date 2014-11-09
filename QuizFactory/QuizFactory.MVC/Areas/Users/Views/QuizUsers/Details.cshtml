@@ -1,4 +1,4 @@
-﻿@model QuizFactory.Data.Models.QuizDefinition
+﻿@model QuizFactory.Mvc.Areas.Users.ViewModels.QuizViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.DisplayNameFor(model => model.Category)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category.Name)
+            @Html.DisplayFor(model => model.Category)
         </dd>
 
         <dt>
@@ -49,26 +49,10 @@
         <dd>
             @Html.DisplayFor(model => model.IsPublic)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeletedOn)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeletedOn)
-        </dd>
-
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("View Questions", "Index") |
+    @Html.ActionLink("Back to My Quizzes", "Index")
 </p>

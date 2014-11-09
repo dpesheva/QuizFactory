@@ -30,6 +30,10 @@
                     <li>@Html.ActionLink("My Quizzes", "Index", "QuizUsers", new { area = "Users" }, new { })</li>
                     <li>@Html.ActionLink("Results", "Create", "QuizDefinitions", new { area = "Users" }, new { })</li>
                 }
+                @*else
+                {
+                    <li class="text-center blue">Login for more options</li>
+                }*@
                 @if (User.IsInRole("admin"))
                 {
                     <li class="dropdown">

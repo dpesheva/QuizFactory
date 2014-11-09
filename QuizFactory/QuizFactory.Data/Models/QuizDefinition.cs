@@ -1,18 +1,19 @@
-namespace QuizFactory.Models
+namespace QuizFactory.Data.Models
 {
+    using QuizFactory.Data.Common;
+    using QuizFactory.Data.Common.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("QuizzesDefinition")]
-    public partial class QuizDefinition
+    public partial class QuizDefinition : AuditInfo, IDeletableEntity
     {
         public QuizDefinition()
         {
             this.QuestionsDefinitions = new HashSet<QuestionDefinition>();
             this.TakenQuizzes = new HashSet<TakenQuiz>();
-            this.CreatedOn = DateTime.Now;
             this.Rating = 0m;
         }
 
@@ -24,9 +25,6 @@ namespace QuizFactory.Models
 
         public ApplicationUser Author { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime CreatedOn { get; set; }
-
         public decimal Rating { get; set; }
 
         [Required]
@@ -34,10 +32,11 @@ namespace QuizFactory.Models
 
         public bool IsPublic { get; set; }
 
+        [Index]
         public bool IsDeleted { get; set; }
 
         [Column(TypeName = "datetime")]
-        public DateTime? UpdatedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
 
         public virtual Category Category { get; set; }
 

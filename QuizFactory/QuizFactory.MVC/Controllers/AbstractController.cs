@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNet.Identity;
-using QuizFactory.Models;
-using QuizFactory.Mvc.Areas.Users.ViewModels;
-using QuizFactory.Mvc.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-
-namespace QuizFactory.Mvc.Controllers
+﻿namespace QuizFactory.Mvc.Controllers
 {
+    using Microsoft.AspNet.Identity;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.Areas.Users.ViewModels;
+    using QuizFactory.Mvc.ViewModels;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Web;
+    using System.Web.Mvc;
+
     public abstract class AbstractController : BaseController
     {
         // GET: ***/QuizAdministration

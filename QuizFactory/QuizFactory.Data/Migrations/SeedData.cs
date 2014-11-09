@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using QuizFactory.Models;
+using QuizFactory.Data.Models;
+using QuizFactory.Data;
 
 namespace QuizFactory.Migrations
 {
@@ -13,7 +14,7 @@ namespace QuizFactory.Migrations
 
         public List<QuizDefinition> Quizzes;
 
-        public SeedData()
+        public SeedData(QuizFactoryDbContext context)
         {
             this.Categories = new List<Category>();
             this.Categories.Add(new Category() { Name = "Numbers" });
@@ -24,7 +25,12 @@ namespace QuizFactory.Migrations
             this.Categories.Add(new Category() { Name = "Music" });
             this.Categories.Add(new Category() { Name = "Movies" });
 
-            ApplicationUser user = new ApplicationUser() { UserName = "pesho@abv.bg" };
+            ApplicationUser user = context.Users.FirstOrDefault();
+            if (user == null)
+            {
+                user = new ApplicationUser() { UserName = "pesho@abv.bg" };
+
+            }
 
             this.Quizzes = new List<QuizDefinition>();
 
@@ -72,6 +78,15 @@ namespace QuizFactory.Migrations
                 Author = user,
                 IsPublic = true
             });
+
+            this.Quizzes.Add(new QuizDefinition()
+            {
+                Category = this.Categories[6],
+                Title = "Twilight",
+                QuestionsDefinitions = this.GetQuestions6(),
+                Author = user,
+                IsPublic = true
+            });
         }
 
         private List<QuestionDefinition> GetQuestions1()
@@ -80,6 +95,7 @@ namespace QuizFactory.Migrations
             {
                 new QuestionDefinition()
                 {
+                    Number = 1,
                     QuestionText = "In what country, the world's seventh largest by geographical area, is Christmas known as Bada Din (the big day)?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -105,6 +121,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 2,
                     QuestionText = "Christmas Island, in the Indian Ocean, is a territory of which country?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -130,6 +147,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 3,
                     QuestionText = "'Three Kings Day' is known by what numerical name (that's 'name', not 'date') in Britain?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -155,6 +173,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 4,
                     QuestionText = "The North Pole, said to be Santa's home, is located in which ocean?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -180,6 +199,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 5,
                     QuestionText = "'And all the bells on earth shall ring, on Christmas day in the morning...' is from which Christmas carol?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -205,6 +225,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 6,
                     QuestionText = "Marzipan is made (conventionally in the western world) mainly from sugar and the flour or meal of which nut?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -230,6 +251,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 7,
                     QuestionText = "Peter Auty sang Walking In The Air in what film?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -264,6 +286,7 @@ namespace QuizFactory.Migrations
             {
                 new QuestionDefinition()
                 {
+                    Number = 1,
                     QuestionText = "The Bengal cat is a hybrid of a wildcat and a domestic cat. Which wildcat is used to create a Bengal?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -295,6 +318,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 2,
                     QuestionText = "Several breeds of domestic cats have been used in creating Bengals. Which of the following breeds WOULD NOT be a good choice for creating a Bengal?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -326,6 +350,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 3,
                     QuestionText = "Jean Mill is usually credited with founding the Bengal cat breed. In 1963, she bred a wildcat with a domestic cat, with the resulting female offspring being fertile. Where did this breeding take place?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -357,6 +382,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 4,
                     QuestionText = "Bengal cats were created for their exotic spots, but what other coat pattern occurs?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -388,6 +414,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 5,
                     QuestionText = "Which of the following is a coat trait that is unique to the Bengal breed?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -419,6 +446,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 6,
                     QuestionText = "In which of the following ways does a Bengal cat NOT differ from other domestic cats?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -450,6 +478,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 7,
                     QuestionText = "Your friend proudly displays her new Bengal kitten, but you suspect she has been duped. You turn the kitty over. What are you looking for?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -481,6 +510,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 8,
                     QuestionText = "Bengal cats are known for having doglike traits. Which of the following is NOT a Bengal trait?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -512,6 +542,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 9,
                     QuestionText = "Even the Bengal voice is different from other domestic cats. They make a variety of sounds to let you know exactly how they feel! But what sound are you UNLIKELY to hear from your Bengal?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -543,6 +574,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 10,
                     QuestionText = "Some people might confuse Bengals with Ocicats. There are some physical differences, but what is the main difference between the two breeds?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -583,6 +615,7 @@ namespace QuizFactory.Migrations
             {
                 new QuestionDefinition()
                 {
+                    Number = 1,
                     QuestionText = "Aside from an extra 385 yards, how many miles is a marathon race?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -614,6 +647,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 2,
                     QuestionText = "If 27 solid cubes are formed into one big 3x3x3 cube how many individual cubes, at most, are visible from any single angle?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -645,6 +679,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 3,
                     QuestionText = "In the movie Spinal Tap what number is: 'Well, it is one louder..'?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -676,6 +711,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 4,
                     QuestionText = "'Via Dolorosa' is the (how many) Stations of the Cross, the Christian ritual tracing the key stages of the death of Jesus, beginning with his condemnation and ending with his being laid in the tomb?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -707,6 +743,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 5,
                     QuestionText = "How many dots are on a (standard 1-6) dice?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -738,6 +775,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 6,
                     QuestionText = "The Russian 'Crimea Highway' trunk road from Moscow to the Crimea in Ukraine is the M (what)?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -769,6 +807,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 7,
                     QuestionText = "What number, between two hyphens, is used by journalists, etc., to mark the end of a newspaper or broadcast story?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -800,6 +839,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 8,
                     QuestionText = "'Roaring' refers to what pluralised number in describing a 1900s decade of western world prosperity?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -831,6 +871,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 9,
                     QuestionText = "Traditionally what number of years anniversary is symbolized by silver?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -871,6 +912,7 @@ namespace QuizFactory.Migrations
             {
                 new QuestionDefinition()
                 {
+                    Number = 1,
                     QuestionText = "How many unique dominoes are in a standard 'double six' set?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -902,6 +944,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 2,
                     QuestionText = "What number turned on its side (rotated 90 degrees) is the symbol for infinity?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -933,6 +976,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 3,
                     QuestionText = "The Marvel Comics superhero team led by Mr Fantastic was the Fanstastic (what)?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -964,6 +1008,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 4,
                     QuestionText = "What is the larger number of the binary system?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -989,6 +1034,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 5,
                     QuestionText = "Japanese haiku poems loosely comprise how many syllables?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1020,6 +1066,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 6,
                     QuestionText = "The Tropics of Cancer and Capricorn are respectively (what number)-and-half degrees north and south of the Equator?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1051,6 +1098,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 7,
                     QuestionText = "Greek deka, and Latin decem, are what number?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1082,6 +1130,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 8,
                     QuestionText = "Conventionally how many books are in the Bible's New Testament?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1113,6 +1162,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 9,
                     QuestionText = "How many legs (or arms) are most usually on a starfish?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1144,6 +1194,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 10,
                     QuestionText = "A lunar month is an average (how many) days plus 12 hours, 44 minutes and 3 seconds?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1184,6 +1235,7 @@ namespace QuizFactory.Migrations
             {
                 new QuestionDefinition()
                 {
+                    Number = 1,
                     QuestionText = "What is generally stated to be the number of major joints in the human body?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1215,6 +1267,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 2,
                     QuestionText = "What is the only number that equals twice the sum of its digits (digit means numerical symbol)?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1246,6 +1299,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 3,
                     QuestionText = "Any line of three numbers in the 'magic square' (a 3 x 3 grid of the numbers 1-9) adds up to what?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1277,6 +1331,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 4,
                     QuestionText = "What is the international SPI resin/polymer identification coding system number (typically shown within a recycling triangle symbol) for polystyrene?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1308,6 +1363,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 5,
                     QuestionText = "Traditionally the diameter of the 45rpm gramophone record is (how many) inches?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1339,6 +1395,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 6,
                     QuestionText = "Pure gold is (how many)-carat?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1370,6 +1427,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 7,
                     QuestionText = "The expression 'On cloud (what)' refers to being blissfully happy?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1401,6 +1459,7 @@ namespace QuizFactory.Migrations
                 },
                 new QuestionDefinition()
                 {
+                    Number = 8,
                     QuestionText = "Each player begins with (how many) pieces in a game of chess?",
                     AnswersDefinitions = new List<AnswerDefinition>()
                     {
@@ -1426,6 +1485,157 @@ namespace QuizFactory.Migrations
                         {
                             Position = 4,
                             Text = "14",
+                            IsCorrect = false
+                        }
+                    }
+                }
+            };
+
+            return questions;
+        }
+
+        private List<QuestionDefinition> GetQuestions6()
+        {
+            List<QuestionDefinition> questions = new List<QuestionDefinition>
+            {
+                new QuestionDefinition()
+                {
+                    Number = 1,
+                    QuestionText = "'Twilight': After Edward rescues Bella in Port Angeles and they go to dinner, what does Bella order?",
+                    AnswersDefinitions = new List<AnswerDefinition>()
+                    {
+                        new AnswerDefinition()
+                        {
+                            Position = 1,
+                            Text = "Mushroom linguini",
+                            IsCorrect = false
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 2,
+                            Text = "Mushroom ravioli",
+                            IsCorrect = true
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 3,
+                            Text = "Mushroom risotto",
+                            IsCorrect = false
+                        }
+                    }
+                },
+                new QuestionDefinition()
+                {
+                    Number = 2,
+                    QuestionText = "'Twilight': In the book James mentions 'the one who got away.' To whom is he referring?",
+                    AnswersDefinitions = new List<AnswerDefinition>()
+                    {
+                        new AnswerDefinition()
+                        {
+                            Position = 1,
+                            Text = "Alice",
+                            IsCorrect = true
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 2,
+                            Text = "Rosalie",
+                            IsCorrect = false
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 3,
+                            Text = "Victoria",
+                            IsCorrect = false
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 4,
+                            Text = "Kate",
+                            IsCorrect = false
+                        }
+                    }
+                },
+                new QuestionDefinition()
+                {
+                    Number = 3,
+                    QuestionText = "'New Moon': What film does Bella go to the cinema to see on Valentine's Day?",
+                    AnswersDefinitions = new List<AnswerDefinition>()
+                    {
+                        new AnswerDefinition()
+                        {
+                            Position = 1,
+                            Text = "Zombiekill",
+                            IsCorrect = false
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 2,
+                            Text = "Crosshairs",
+                            IsCorrect = true
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 3,
+                            Text = "Facepunch",
+                            IsCorrect = false
+                        }
+                    }
+                },
+                new QuestionDefinition()
+                {
+                    Number = 4,
+                    QuestionText = "'New Moon': After discovering how she was created in 'Twilight', Alice digs into her human life in 'New Moon'. She finds she had a sister; what was her name?",
+                    AnswersDefinitions = new List<AnswerDefinition>()
+                    {
+                        new AnswerDefinition()
+                        {
+                            Position = 1,
+                            Text = "Cynthia",
+                            IsCorrect = false
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 2,
+                            Text = "Rebecca",
+                            IsCorrect = false
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 3,
+                            Text = "Mary",
+                            IsCorrect = false
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 4,
+                            Text = "Renee",
+                            IsCorrect = true
+                        }
+                    }
+                },
+                new QuestionDefinition()
+                {
+                    Number = 5,
+                    QuestionText = "'Eclipse': Bella buys Alice and Edward concert tickets as their graduation present. Where was the concert at?",
+                    AnswersDefinitions = new List<AnswerDefinition>()
+                    {
+                        new AnswerDefinition()
+                        {
+                            Position = 1,
+                            Text = "Tacoma",
+                            IsCorrect = true
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 2,
+                            Text = "Seattle",
+                            IsCorrect = false
+                        },
+                        new AnswerDefinition()
+                        {
+                            Position = 4,
+                            Text = "Olympia",
                             IsCorrect = false
                         }
                     }

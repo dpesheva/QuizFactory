@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizFactory.Data", "QuizFactory.Data\QuizFactory.Data.csproj", "{C8BA5E54-FD59-41E5-9A2A-FBE1407F7E33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizFactory.Models", "QuizFactory.Models\QuizFactory.Models.csproj", "{AB2FEBAF-71A3-4F79-901A-6D6CF1081A10}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizFactory.Mvc", "QuizFactory.MVC\QuizFactory.Mvc.csproj", "{5C055DD4-A0B8-470E-94A6-76DE6820B8B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizFactory.Mvc.Tests", "QuizFactory.MVC.Tests\QuizFactory.Mvc.Tests.csproj", "{2D79EEE3-ACC5-44C1-85D6-A4C128F84ABD}"
@@ -23,10 +21,6 @@ Global
 		{C8BA5E54-FD59-41E5-9A2A-FBE1407F7E33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8BA5E54-FD59-41E5-9A2A-FBE1407F7E33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8BA5E54-FD59-41E5-9A2A-FBE1407F7E33}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB2FEBAF-71A3-4F79-901A-6D6CF1081A10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB2FEBAF-71A3-4F79-901A-6D6CF1081A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB2FEBAF-71A3-4F79-901A-6D6CF1081A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB2FEBAF-71A3-4F79-901A-6D6CF1081A10}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C055DD4-A0B8-470E-94A6-76DE6820B8B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C055DD4-A0B8-470E-94A6-76DE6820B8B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C055DD4-A0B8-470E-94A6-76DE6820B8B9}.Release|Any CPU.ActiveCfg = Release|Any CPU

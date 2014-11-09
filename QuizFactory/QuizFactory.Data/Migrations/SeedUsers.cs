@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using QuizFactory.Models;
+using QuizFactory.Data.Models;
 
 namespace QuizFactory.Data.Migrations
 {

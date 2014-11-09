@@ -8,7 +8,7 @@
     using QuizFactory.Mvc.Areas.Users.ViewModels;
     using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Mvc.Controllers;
-    using QuizFactory.Models;
+    using QuizFactory.Data.Models;
 
     [Authorize]
     public class QuizUsersController : AbstractController

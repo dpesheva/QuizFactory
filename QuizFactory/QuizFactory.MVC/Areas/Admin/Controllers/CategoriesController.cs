@@ -5,7 +5,7 @@
     using System.Net;
     using System.Web.Mvc;
 
-    using QuizFactory.Models;
+    using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Controllers;
 
     [Authorize(Roles = "admin")]

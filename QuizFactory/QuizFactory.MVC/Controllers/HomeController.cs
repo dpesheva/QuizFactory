@@ -6,7 +6,7 @@
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
-    using QuizFactory.Models;
+    using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels;
 
     public class HomeController : BaseController

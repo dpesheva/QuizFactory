@@ -1,12 +1,14 @@
-namespace QuizFactory.Models
+namespace QuizFactory.Data.Models
 {
+    using QuizFactory.Data.Common;
+    using QuizFactory.Data.Common.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("AnswersDefinition")]
-    public partial class AnswerDefinition
+    public partial class AnswerDefinition : AuditInfo, IDeletableEntity
     {
         public AnswerDefinition()
         {
@@ -21,7 +23,11 @@ namespace QuizFactory.Models
 
         public bool IsCorrect { get; set; }
 
+        [Index]
         public bool IsDeleted { get; set; }
+
+        [Column(TypeName = "datetime")]
+        public DateTime? DeletedOn{ get; set; }
 
         [Required]
         public int Position { get; set; }
@@ -29,5 +35,7 @@ namespace QuizFactory.Models
         public virtual QuestionDefinition QuestionDefinition { get; set; }
 
         public virtual ICollection<UsersAnswer> UsersAnswers { get; set; }
+
+
     }
 }

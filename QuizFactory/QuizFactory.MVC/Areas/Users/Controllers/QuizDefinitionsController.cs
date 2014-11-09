@@ -6,7 +6,7 @@
     using System.Net;
     using System.Web.Mvc;
     using QuizFactory.Data;
-    using QuizFactory.Models;
+    using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Controllers;
 
     // TODO DElete

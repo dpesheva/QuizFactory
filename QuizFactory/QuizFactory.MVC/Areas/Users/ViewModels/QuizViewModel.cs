@@ -1,6 +1,6 @@
 ﻿namespace QuizFactory.Mvc.Areas.Users.ViewModels
 {
-    using QuizFactory.Models;
+    using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels;
     using System;
     using System.Collections.Generic;

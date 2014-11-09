@@ -5,7 +5,7 @@
     using System.Net;
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
-    using QuizFactory.Models;
+    using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Areas.Admin.ViewModels;
     using System.Collections.Generic;
     using QuizFactory.Mvc.Controllers;

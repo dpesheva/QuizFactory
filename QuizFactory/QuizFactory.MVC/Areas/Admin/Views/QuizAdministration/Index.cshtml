@@ -27,7 +27,10 @@
             @Html.DisplayNameFor(model => model.IsDeleted)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UpdatedOn)
+            @Html.DisplayNameFor(model => model.DeletedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Category)
@@ -59,7 +62,10 @@
             @Html.DisplayFor(modelItem => item.IsDeleted)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UpdatedOn)
+            @Html.DisplayFor(modelItem => item.DeletedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedOn)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Category)

@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Owin;
-using QuizFactory.Models;
-using QuizFactory.Mvc.ViewModels;
-
-namespace QuizFactory.Mvc.Controllers
+﻿namespace QuizFactory.Mvc.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+    using Owin;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.ViewModels;
+
     [Authorize]
     public class AccountController : BaseController
     {
@@ -29,7 +29,8 @@ namespace QuizFactory.Mvc.Controllers
             UserManager = userManager;
         }
 
-        public ApplicationUserManager UserManager {
+        public ApplicationUserManager UserManager
+        {
             get
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -120,7 +121,7 @@ namespace QuizFactory.Mvc.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null) 
+            if (userId == null || code == null)
             {
                 return View("Error");
             }
@@ -180,13 +181,13 @@ namespace QuizFactory.Mvc.Controllers
         {
             return View();
         }
-	
+
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            if (code == null) 
+            if (code == null)
             {
                 return View("Error");
             }
@@ -414,13 +415,13 @@ namespace QuizFactory.Mvc.Controllers
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
-                        
+
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-                        
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -530,7 +531,8 @@ namespace QuizFactory.Mvc.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 

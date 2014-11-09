@@ -34,6 +34,8 @@ a:hover {
 .category {
     display: block;
     margin: 5px 0;
+    padding-top: 5px;
+    border-top: 1px solid #eee;
 }
 
 .left {
@@ -81,7 +83,7 @@ a:hover {
     }
 
         .main-menu li a:hover {
-            background-color:  #3F6CEB !important;/*#EFCA2D*/ 
+            background-color: #3F6CEB !important; /*#EFCA2D*/
         }
 
     .main-menu a, .dropdown-menu a {
@@ -114,7 +116,26 @@ a:hover {
     margin: 0;
 }
 
+.header-boxes {
+    margin: 20px 0;
+}
+
+    .header-boxes .quiz-box {
+        border-top: none;
+    }
+
+    .header-boxes :nth-child(2n+1) {
+        transform: rotate(-4deg);
+    }
+
+    .header-boxes :nth-child(2n) {
+        transform: rotate(6deg);
+    }
+
 .quiz-box {
+    background-image: url("Images/box_bgrnd.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
     border-top: solid 1px lightgray;
     border-radius: 5px;
     background-color: white;
@@ -125,24 +146,8 @@ a:hover {
     height: 80%;
 }
 
-.header-boxes {
-    margin: 20px 0;
-}
-
-    .header-boxes .quiz-box {
-        border-top: none;
-    }
-
-    .header-boxes :first-child {
-        transform: rotate(4deg);
-    }
-
-    .header-boxes :nth-child(2) {
-        transform: rotate(-4deg);
-    }
-
-    .header-boxes :last-child {
-        transform: rotate(-2deg);
+    .quiz-box > h4 {
+        transform: rotate(0deg) !important;
     }
 
 #tabContent {

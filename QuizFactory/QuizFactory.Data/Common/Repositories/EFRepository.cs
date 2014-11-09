@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
-
-namespace QuizFactory.Data.Repositories
+﻿namespace QuizFactory.Data.Common.Repositories
 {
+    using QuizFactory.Data.Common.Interfaces;
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using System.Linq.Expressions;
@@ -23,12 +22,12 @@ namespace QuizFactory.Data.Repositories
             this.set = context.Set<T>();
         }
 
-        public IQueryable<T> All()
+        public virtual IQueryable<T> All()
         {
             return this.set;
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             this.ChangeEntityState(entity, EntityState.Added);
         }
@@ -38,12 +37,12 @@ namespace QuizFactory.Data.Repositories
             return this.set.Find(id);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             this.ChangeEntityState(entity, EntityState.Modified);
         }
 
-        public T Delete(T entity)
+        public virtual T Delete(T entity)
         {
             this.ChangeEntityState(entity, EntityState.Deleted);
             return entity;
@@ -62,6 +61,11 @@ namespace QuizFactory.Data.Repositories
         public void SaveChanges()
         {
             this.context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            this.context.Dispose();
         }
 
         private void ChangeEntityState(T entity, EntityState state)
