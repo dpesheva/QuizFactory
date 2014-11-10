@@ -14,7 +14,7 @@
 
         void Update(T entity);
 
-        T Delete(T entity);
+        void Delete(T entity);
         
         IQueryable<T> SearchFor(Expression<Func<T, bool>> predicate);
 

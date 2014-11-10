@@ -69,27 +69,23 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\AuditInfo.cs" />
-    <Compile Include="Common\Interfaces\IAuditInfo.cs" />
-    <Compile Include="Common\Interfaces\IDeletableEntity.cs" />
-    <Compile Include="Common\Interfaces\IDeletableEntityRepository.cs" />
-    <Compile Include="Common\Repositories\DeletableEntityRepository.cs" />
+    <Compile Include="IQuizFactoryData.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData.cs" />
     <Compile Include="Migrations\SeedUsers.cs" />
-    <Compile Include="Models\AnswerDefinition.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\QuestionDefinition.cs" />
-    <Compile Include="Models\QuizDefinition.cs" />
-    <Compile Include="Models\TakenQuiz.cs" />
-    <Compile Include="Models\UsersAnswer.cs" />
-    <Compile Include="QuizFactoryDbContext.cs" />
     <Compile Include="QuizFactoryData.cs" />
-    <Compile Include="Common\Interfaces\IQuizFactoryData.cs" />
+    <Compile Include="QuizFactoryDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\Repositories\EFRepository.cs" />
-    <Compile Include="Common\Interfaces\IRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuizFactory.Data.Common\QuizFactory.Data.Common.csproj">
+      <Project>{9c6821ff-16e9-4922-801c-e3307408682f}</Project>
+      <Name>QuizFactory.Data.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuizFactory.Data.Models\QuizFactory.Data.Models.csproj">
+      <Project>{421621d9-eabb-4fb3-b5b6-aeb96471e06e}</Project>
+      <Name>QuizFactory.Data.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

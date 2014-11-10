@@ -304,6 +304,14 @@
       <Project>{28000772-3379-403f-a3e9-4f7fd204e6a8}</Project>
       <Name>HelperExtentions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QuizFactory.Data.Common\QuizFactory.Data.Common.csproj">
+      <Project>{9c6821ff-16e9-4922-801c-e3307408682f}</Project>
+      <Name>QuizFactory.Data.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuizFactory.Data.Models\QuizFactory.Data.Models.csproj">
+      <Project>{421621d9-eabb-4fb3-b5b6-aeb96471e06e}</Project>
+      <Name>QuizFactory.Data.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QuizFactory.Data\QuizFactory.Data.csproj">
       <Project>{c8ba5e54-fd59-41e5-9a2a-fbe1407f7e33}</Project>
       <Name>QuizFactory.Data</Name>

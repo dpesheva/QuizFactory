@@ -1,22 +1,19 @@
 ﻿namespace QuizFactory.Mvc.Controllers
 {
-    using Microsoft.AspNet.Identity;
-    using QuizFactory.Data.Models;
-    using QuizFactory.Mvc.Areas.Users.ViewModels;
-    using QuizFactory.Mvc.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
-    using System.Web;
     using System.Web.Mvc;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.Areas.Users.ViewModels;
 
     public abstract class AbstractController : BaseController
     {
         // GET: ***/QuizAdministration
         public ActionResult Index()
         {
-            var allQuizzes = GetAllQuizzes();
+            var allQuizzes = this.GetAllQuizzes();
             return this.View(allQuizzes);
         }
 
@@ -30,10 +27,6 @@
 
             var quizViewModel = this.GetViewModelById(id);
 
-            if (quizViewModel == null)
-            {
-                return this.HttpNotFound();
-            }
             return this.View(quizViewModel);
         }
 
@@ -45,16 +38,11 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            QuizViewModel quizAdminViewModel = this.GetViewModelById(id);
+            QuizViewModel quizViewModel = this.GetViewModelById(id);
 
-            if (quizAdminViewModel == null)
-            {
-                return this.HttpNotFound();
-            }
+            this.ViewBag.CategoryId = new SelectList(this.db.Categories.All().Where(c => c.IsDeleted == false).ToList(), "Id", "Name", quizViewModel.CategoryId);
 
-            this.ViewBag.CategoryId = new SelectList(this.db.Categories.All().Where(c => c.IsDeleted == false).ToList(), "Id", "Name");
-
-            return this.View(quizAdminViewModel);
+            return this.View(quizViewModel);
         }
 
         // POST: ***/QuizAdministration/Edit/5
@@ -64,12 +52,10 @@
         {
             if (this.ModelState.IsValid)
             {
-                var quiz = db.QuizzesDefinitions.Find(quizViewModel.Id);
-                MapViewModelToModel(quizViewModel, quiz);
+                var quiz = this.db.QuizzesDefinitions.Find(quizViewModel.Id);
+                this.MapViewModelToModel(quizViewModel, quiz);
 
                 this.db.SaveChanges();
-
-                quizViewModel.Id = quiz.Id;
 
                 return this.RedirectToAction("Index");
             }
@@ -89,10 +75,6 @@
 
             QuizViewModel quizAdminViewModel = this.GetViewModelById(id);
 
-            if (quizAdminViewModel == null)
-            {
-                return this.HttpNotFound();
-            }
             return this.View(quizAdminViewModel);
         }
 
@@ -124,16 +106,19 @@
         protected virtual QuizViewModel GetViewModelById(int? id)
         {
             // TODO Refactor
-
             if (id == null)
             {
                 // TODO
             }
             QuizViewModel quizAdminViewModel = this.db.QuizzesDefinitions
-                                                        .SearchFor(q => q.Id == id)
-                                                        .Select(QuizViewModel.FromQuizDefinition)
-                                                        .FirstOrDefault();
+                                                   .SearchFor(q => q.Id == id)
+                                                   .Select(QuizViewModel.FromQuizDefinition)
+                                                   .FirstOrDefault();
 
+            if (quizAdminViewModel == null)
+            {
+                return null; // TODO error;
+            }
             return quizAdminViewModel;
         }
 
@@ -148,7 +133,6 @@
             quiz.Title = quizViewModel.Title;
             quiz.CategoryId = quizViewModel.CategoryId;
             quiz.IsPublic = quizViewModel.IsPublic;
-
         }
     }
 }

@@ -8,16 +8,16 @@
 
     public class EFRepository<T> : IRepository<T> where T : class
     {
-        private QuizFactoryDbContext context;
+        private DbContext context;
         private IDbSet<T> set;
 
-        public EFRepository()
-            : this(new QuizFactoryDbContext())
+        public EFRepository(DbContext context)
         {
-        }
+            if (context == null)
+            {
+                throw new ArgumentException("An instance of DbContext is required to use this repository.", "context");
+            }
 
-        public EFRepository(QuizFactoryDbContext context)
-        {
             this.context = context;
             this.set = context.Set<T>();
         }
@@ -42,10 +42,9 @@
             this.ChangeEntityState(entity, EntityState.Modified);
         }
 
-        public virtual T Delete(T entity)
+        public virtual void Delete(T entity)
         {
             this.ChangeEntityState(entity, EntityState.Deleted);
-            return entity;
         }
 
         public IQueryable<T> SearchFor(Expression<Func<T, bool>> predicate)
@@ -68,7 +67,7 @@
             this.context.Dispose();
         }
 
-        private void ChangeEntityState(T entity, EntityState state)
+        protected void ChangeEntityState(T entity, EntityState state)
         {
             var entry = this.context.Entry(entity);
             if (entry.State == EntityState.Detached)
