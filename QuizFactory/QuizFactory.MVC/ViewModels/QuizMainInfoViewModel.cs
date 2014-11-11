@@ -30,12 +30,12 @@
         public string Category { get; set; }
 
         [Display(Name = "Number of questions")]
-        public int QuestionsCount { get; set; }
+        public int NumberQuestions { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<QuizDefinition, QuizMainInfoViewModel>()
-               .ForMember(dest => dest.QuestionsCount, opts => opts.MapFrom(src => src.QuestionsDefinitions.Count));
+               .ForMember(dest => dest.NumberQuestions, opts => opts.MapFrom(src => src.QuestionsDefinitions.Count));
 
             configuration.CreateMap<QuizDefinition, QuizMainInfoViewModel>()
               .ForMember(dest => dest.Author, opts => opts.MapFrom(src => src.Author.UserName));

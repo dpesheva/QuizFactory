@@ -19,6 +19,7 @@
                     Id = question.Id,
                     QuestionText = question.QuestionText,
                     Number = question.Number,
+                    QuizId = question.QuizDefinition.Id,
                     Answers = question.AnswersDefinitions.Select(a => new AnswerViewModel
                     {
                         Id = a.Id,
@@ -38,6 +39,8 @@
 
         [Required]
         public int Number { get; set; }
+
+        public int QuizId { get; set; }
 
         public ICollection<AnswerViewModel> Answers { get; set; }
     }

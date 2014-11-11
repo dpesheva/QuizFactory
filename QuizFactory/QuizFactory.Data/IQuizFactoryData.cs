@@ -9,19 +9,19 @@
     // unit of work
     public interface IQuizFactoryData
     {
-        IRepository<AnswerDefinition> AnswerDefinitions { get; }
+        IDeletableEntityRepository <AnswerDefinition> AnswerDefinitions { get; }
 
-        IRepository<QuestionDefinition> QuestionsDefinitions { get; }
-
-        IRepository<QuizDefinition> QuizzesDefinitions { get; }
-
-        IRepository<TakenQuiz> TakenQuizzes { get; }
-
-        IRepository<UsersAnswer> UsersAnswers { get; }
-
-        IRepository<Category> Categories { get; }
-
-        IRepository<ApplicationUser> Users { get; }
+        IDeletableEntityRepository<QuestionDefinition> QuestionsDefinitions { get; }
+       
+        IDeletableEntityRepository<QuizDefinition> QuizzesDefinitions { get; }
+        
+        IDeletableEntityRepository<TakenQuiz> TakenQuizzes { get; }
+      
+        IDeletableEntityRepository<UsersAnswer> UsersAnswers { get; }
+      
+        IDeletableEntityRepository<Category> Categories { get; }
+      
+        IDeletableEntityRepository<ApplicationUser> Users { get; }
 
         void SaveChanges();
     }

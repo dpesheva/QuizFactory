@@ -1,0 +1,41 @@
+﻿@model IEnumerable<QuizFactory.Mvc.ViewModels.QuestionViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuestionText)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionText)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id, quizId = item.QuizId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+@if (TempData["quizId"] != null)
+{
+    <p>
+        @Html.ActionLink("Add question", "Add", new { quizId = TempData["quizId"] })
+    </p>
+}

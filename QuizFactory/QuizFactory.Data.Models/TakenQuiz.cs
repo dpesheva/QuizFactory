@@ -8,7 +8,7 @@ namespace QuizFactory.Data.Models
     using QuizFactory.Data.Common.Interfaces;
 
     [Table("TakenQuizzes")]
-    public partial class TakenQuiz : AuditInfo, IDeletableEntity
+    public partial class TakenQuiz : DeletableEntity, IDeletableEntity
     {
         public TakenQuiz()
         {
@@ -21,12 +21,6 @@ namespace QuizFactory.Data.Models
 
         public ApplicationUser User { get; set; }
        
-        [Index]
-        public bool IsDeleted { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime? DeletedOn { get; set; }
-
         [Column(TypeName = "smallmoney")]
         public decimal? Score { get; set; }
 

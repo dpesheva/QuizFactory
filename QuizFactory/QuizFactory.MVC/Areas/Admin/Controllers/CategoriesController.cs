@@ -5,9 +5,11 @@
     using System.Net;
     using System.Web.Mvc;
 
-    using QuizFactory.Data;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Controllers;
+    using QuizFactory.Mvc.Areas.Admin.ViewModels;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     [Authorize(Roles = "admin")]
     public class CategoriesController : BaseController
@@ -15,22 +17,9 @@
         // GET: Admin/Categories
         public ActionResult Index()
         {
-            return this.View(this.db.Categories.All().Where(c => c.IsDeleted == false).ToList());
-        }
+            var allCategories = this.db.Categories.All().Project().To<CategoryViewModel>().ToList();
 
-        // GET: Admin/Categories/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Category category = this.db.Categories.Find(id);
-            if (category == null)
-            {
-                return this.HttpNotFound();
-            }
-            return this.View(category);
+            return this.View(allCategories);
         }
 
         // GET: Admin/Categories/Create
@@ -42,7 +31,7 @@
         // POST: Admin/Categories/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Category category)
+        public ActionResult Create([Bind(Include = "Name")] CategoryViewModel category)
         {
             if (this.db.Categories.SearchFor(c => c.Name == category.Name && c.IsDeleted == false).FirstOrDefault() != null)
             {
@@ -51,8 +40,11 @@
 
             if (this.ModelState.IsValid)
             {
-                this.db.Categories.Add(category);
+                Category newCategory = Mapper.Map<Category>(category);
+
+                this.db.Categories.Add(newCategory);
                 this.db.SaveChanges();
+                
                 return this.RedirectToAction("Index");
             }
 
@@ -66,7 +58,9 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = this.db.Categories.Find(id);
+
+            CategoryViewModel category = this.db.Categories.SearchFor(c => c.Id == id).Project().To<CategoryViewModel>().FirstOrDefault();
+
             if (category == null)
             {
                 return this.HttpNotFound();
@@ -77,7 +71,7 @@
         // POST: Admin/Categories/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit(CategoryViewModel category)
         {
             if (this.db.Categories.SearchFor(c => c.Name == category.Name && c.Id != category.Id && c.IsDeleted == false).FirstOrDefault() != null)
             {
@@ -86,8 +80,11 @@
 
             if (this.ModelState.IsValid)
             {
-                this.db.Categories.Update(category);
+                Category categoryToUpdate = this.db.Categories.Find(category.Id);
+                categoryToUpdate.Name = category.Name;
+
                 this.db.SaveChanges();
+
                 return this.RedirectToAction("Index");
             }
             return this.View(category);
@@ -100,7 +97,9 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = this.db.Categories.Find(id);
+
+            CategoryViewModel category = this.db.Categories.SearchFor(c => c.Id == id).Project().To<CategoryViewModel>().FirstOrDefault();
+
             if (category == null)
             {
                 return this.HttpNotFound();
@@ -118,22 +117,11 @@
                 return null; // TODO "Category can't be deleted. There are quzzes linked to it.
             }
             Category category = this.db.Categories.Find(id);
-            category.IsDeleted = true;
-
-            this.db.Categories.Update(category);
+          
+            this.db.Categories.Delete(category);
             this.db.SaveChanges();
             return this.RedirectToAction("Index");
         }
 
-
-        // TODO ??
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

@@ -8,7 +8,7 @@ namespace QuizFactory.Data.Models
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("AnswersDefinition")]
-    public partial class AnswerDefinition : AuditInfo, IDeletableEntity
+    public partial class AnswerDefinition : DeletableEntity, IDeletableEntity
     {
         public AnswerDefinition()
         {
@@ -22,12 +22,6 @@ namespace QuizFactory.Data.Models
         public string Text { get; set; }
 
         public bool IsCorrect { get; set; }
-
-        [Index]
-        public bool IsDeleted { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime? DeletedOn{ get; set; }
 
         [Required]
         public int Position { get; set; }

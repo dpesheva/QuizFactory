@@ -7,6 +7,7 @@
     using Microsoft.AspNet.Identity.EntityFramework;
     using QuizFactory.Data.Common.Interfaces;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -36,9 +37,14 @@
         [Column(TypeName = "datetime")]
         public DateTime? ModifiedOn { get; set; }
 
+        [Display(Name = "Deleted?")]
+        [Editable(false)]
         [Index]
         public bool IsDeleted { get; set; }
 
+        [Display(Name = "Deleted on")]
+        [Editable(false)]
+        [DataType(DataType.DateTime)]
         public DateTime? DeletedOn { get; set; }
     }
 }

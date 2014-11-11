@@ -20,9 +20,10 @@
             return this.View();
         }
 
+        [OutputCache(Duration = 10 * 60)]
         public ActionResult Categories()
         {
-            var categories = this.db.Categories.All().Where(c => c.IsDeleted == false).ToList();
+            var categories = this.db.Categories.All().ToList();
             return this.PartialView("_CategoriesPartial", categories);
         }
 
@@ -34,7 +35,7 @@
 
                 var ramdomQuizzes = this.db.QuizzesDefinitions
                                         .All()
-                                        .Where(q => q.IsPublic == true && q.IsDeleted == false)
+                                        .Where(q => q.IsPublic == true)
                                         .OrderBy(e => rnd)
                                         .Take(3)
                                         .Project()
@@ -56,7 +57,7 @@
             }
 
             var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.CreatedOn);
-            var quizzes = this.RojectQuery(quizzesQuery, catId);
+            var quizzes = this.ProjectQuery(quizzesQuery, catId);
 
             return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
@@ -70,7 +71,7 @@
             }
 
             var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.TakenQuizzes.Count);
-            var quizzes = this.RojectQuery(quizzesQuery, catId);
+            var quizzes = this.ProjectQuery(quizzesQuery, catId);
 
             return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
@@ -84,7 +85,7 @@
             }
 
             var quizzesQuery = this.db.QuizzesDefinitions.All().OrderBy(q => q.Title);
-            var quizzes = this.RojectQuery(quizzesQuery, catId);
+            var quizzes = this.ProjectQuery(quizzesQuery, catId);
 
             return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
@@ -98,22 +99,22 @@
             }
 
             var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.Rating);
-            var quizzes = this.RojectQuery(quizzesQuery, catId);
+            var quizzes = this.ProjectQuery(quizzesQuery, catId);
 
             return this.PartialView("_ListQuizBoxesPartial", quizzes);
         }
 
-        private object RojectQuery(IOrderedQueryable<QuizDefinition> quizzesQuery, int? catId)
+        private object ProjectQuery(IOrderedQueryable<QuizDefinition> quizzesQuery, int? catId)
         {
             if (catId == null)
             {
-                return quizzesQuery.Where(q => q.IsPublic == true && q.IsDeleted == false)
+                return quizzesQuery.Where(q => q.IsPublic == true)
                                    .Project()
                                    .To<QuizMainInfoViewModel>()
                                    .ToList();
             }
 
-            return quizzesQuery.Where(q => q.IsPublic == true && q.Category.Id == catId && q.IsDeleted == false)
+            return quizzesQuery.Where(q => q.IsPublic == true && q.Category.Id == catId)
                                .Project()
                                .To<QuizMainInfoViewModel>()
                                .ToList();

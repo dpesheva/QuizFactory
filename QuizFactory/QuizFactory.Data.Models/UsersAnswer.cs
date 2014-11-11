@@ -5,15 +5,9 @@ namespace QuizFactory.Data.Models
     using QuizFactory.Data.Common;
     using QuizFactory.Data.Common.Interfaces;
 
-    public partial class UsersAnswer : AuditInfo, IDeletableEntity
+    public partial class UsersAnswer : DeletableEntity, IDeletableEntity
     {
         public int Id { get; set; }
-
-        [Index]
-        public bool IsDeleted { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime? DeletedOn { get; set; }
 
         public virtual AnswerDefinition AnswerDefinition { get; set; }
 

@@ -1,0 +1,21 @@
+﻿@model QuizFactory.Mvc.ViewModels.QuestionViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <hr />
+    <p>
+        @Html.DisplayFor(model => model.Number)  @Html.DisplayFor(model => model.QuestionText)
+    </p>
+    @foreach (var item in Model.Answers)
+    {
+        @Html.RadioButton(item.Text, new { }, item.IsCorrect, new { @class = "disable" })
+    }
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", new { quizId = Model.QuizId })
+</p>

@@ -9,7 +9,7 @@ namespace QuizFactory.Data.Models
     using QuizFactory.Data.Common.Interfaces;
 
     [Table("QuestionsDefinition")]
-    public partial class QuestionDefinition: AuditInfo, IDeletableEntity
+    public partial class QuestionDefinition: DeletableEntity, IDeletableEntity
     {
         public QuestionDefinition()
         {
@@ -21,13 +21,7 @@ namespace QuizFactory.Data.Models
 
         [Required]
         public string QuestionText { get; set; }
-
-        [Index]
-        public bool IsDeleted { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime? DeletedOn{ get; set; }
-                
+ 
 		[Required]
         public int Number { get; set; }
 

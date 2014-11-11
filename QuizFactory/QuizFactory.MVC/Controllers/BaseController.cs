@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using QuizFactory.Data;
-
 namespace QuizFactory.Mvc.Controllers
 {
+    using System.Web;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using QuizFactory.Data;
+    using QuizFactory.Data.Models;
+
     public abstract class BaseController : Controller
     {
         protected IQuizFactoryData db;

@@ -8,7 +8,7 @@ namespace QuizFactory.Data.Models
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("QuizzesDefinition")]
-    public partial class QuizDefinition : AuditInfo, IDeletableEntity
+    public partial class QuizDefinition : DeletableEntity, IDeletableEntity
     {
         public QuizDefinition()
         {
@@ -31,12 +31,6 @@ namespace QuizFactory.Data.Models
         public int CategoryId { get; set; }
 
         public bool IsPublic { get; set; }
-
-        [Index]
-        public bool IsDeleted { get; set; }
-
-        [Column(TypeName = "datetime")]
-        public DateTime? DeletedOn { get; set; }
 
         public virtual Category Category { get; set; }
 

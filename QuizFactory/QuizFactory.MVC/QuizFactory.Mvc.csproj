@@ -178,11 +178,13 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuizAdministrationController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuestionAdminViewModel.cs" />
-    <Compile Include="Areas\Users\Controllers\QuizDefinitionsController.cs" />
+    <Compile Include="Areas\Users\Controllers\QuestionController.cs" />
     <Compile Include="Areas\Users\Controllers\QuizUsersController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuizAdminViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\IQuizViewModel.cs" />
     <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -217,11 +219,6 @@
     <Content Include="Areas\Users\Views\web.config" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Users\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Users\Views\QuizDefinitions\Create.cshtml" />
-    <Content Include="Areas\Users\Views\QuizDefinitions\Delete.cshtml" />
-    <Content Include="Areas\Users\Views\QuizDefinitions\Details.cshtml" />
-    <Content Include="Areas\Users\Views\QuizDefinitions\Edit.cshtml" />
-    <Content Include="Areas\Users\Views\QuizDefinitions\Index.cshtml" />
     <Content Include="Areas\Users\Views\Shared\_UsersLayout.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
@@ -239,6 +236,11 @@
     <Content Include="Areas\Users\Views\QuizUsers\Edit.cshtml" />
     <Content Include="ClassDiagram1.cd" />
     <Content Include="Areas\Users\Views\QuizUsers\Details.cshtml" />
+    <Content Include="Areas\Users\Views\Question\Add.cshtml" />
+    <Content Include="Areas\Users\Views\Question\Delete.cshtml" />
+    <Content Include="Areas\Users\Views\Question\Details.cshtml" />
+    <Content Include="Areas\Users\Views\Question\Edit.cshtml" />
+    <Content Include="Areas\Users\Views\Question\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -290,6 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Common\" />
     <Folder Include="Views\Abstract\" />
   </ItemGroup>
   <ItemGroup>

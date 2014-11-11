@@ -4,7 +4,7 @@
     <div class="quiz-box">
         <h4>@Html.ActionLink(@Model.Title, "StartQuiz", "Play", new { id = @Model.Id }, new { })</h4> 
         <p class="red">@Model.Category</p>     
-        <p class="green">@Model.QuestionsCount Questions</p>
+        <p class="green">@Model.NumberQuestions Questions</p>
         <small class="yellow">Add on @Model.CreatedOn</small>
         <br />
         <small class="yellow">by @Model.Author</small>

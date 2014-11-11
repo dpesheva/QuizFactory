@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuditInfo.cs" />
+    <Compile Include="DeletableEntity.cs" />
     <Compile Include="Interfaces\IAuditInfo.cs" />
     <Compile Include="Interfaces\IDeletableEntity.cs" />
     <Compile Include="Interfaces\IDeletableEntityRepository.cs" />

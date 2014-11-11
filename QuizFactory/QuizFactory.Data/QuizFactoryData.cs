@@ -30,7 +30,7 @@
         {
         }
 
-        public IRepository<AnswerDefinition> AnswerDefinitions
+        public IDeletableEntityRepository<AnswerDefinition> AnswerDefinitions
         {
             get
             {
@@ -38,7 +38,7 @@
             }
         }
 
-        public IRepository<QuestionDefinition> QuestionsDefinitions
+        public IDeletableEntityRepository<QuestionDefinition> QuestionsDefinitions
         {
             get
             {
@@ -46,7 +46,7 @@
             }
         }
 
-        public IRepository<QuizDefinition> QuizzesDefinitions
+        public IDeletableEntityRepository<QuizDefinition> QuizzesDefinitions
         {
             get
             {
@@ -54,7 +54,7 @@
             }
         }
 
-        public IRepository<TakenQuiz> TakenQuizzes
+        public IDeletableEntityRepository<TakenQuiz> TakenQuizzes
         {
             get
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        public IRepository<UsersAnswer> UsersAnswers
+        public IDeletableEntityRepository<UsersAnswer> UsersAnswers
         {
             get
             {
@@ -70,7 +70,7 @@
             }
         }
 
-        public IRepository<Category> Categories
+        public IDeletableEntityRepository<Category> Categories
         {
             get
             {
@@ -78,7 +78,7 @@
             }
         }
 
-        public IRepository<ApplicationUser> Users
+        public IDeletableEntityRepository<ApplicationUser> Users
         {
             get
             {
@@ -91,16 +91,16 @@
             this.context.SaveChanges();
         }
 
-        private IRepository<T> GetRepository<T>() where T : class
+        private IDeletableEntityRepository<T> GetRepository<T>() where T : class, IDeletableEntity
         {
             var typeOfModel = typeof(T);
 
             if (!this.repositories.ContainsKey(typeOfModel))
             {
-                this.repositories.Add(typeOfModel, Activator.CreateInstance(typeof(EFRepository<T>), this.context));
+                this.repositories.Add(typeOfModel, Activator.CreateInstance(typeof(DeletableEntityRepository<T>), this.context));
             }
 
-            return (IRepository<T>)this.repositories[typeOfModel];
+            return (IDeletableEntityRepository<T>)this.repositories[typeOfModel];
         }
     }
 }

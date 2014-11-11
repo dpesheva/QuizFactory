@@ -19,7 +19,8 @@
                 {
                     Id = quiz.Id,
                     Title = quiz.Title,
-                    Category = quiz.Category.Name,
+                    Category = quiz.Category.Name,                    
+                    CategoryId = quiz.CategoryId,
                     IsPublic = quiz.IsPublic,
                     CreatedOn = quiz.CreatedOn,
                     Author = quiz.Author.UserName,
