@@ -19,9 +19,10 @@
 
         private static void RegisterStyleBundles(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/Content/kendo").Include(
+            bundles.Add(new StyleBundle("~/Content/Kendo/kendoCss").Include(
                 "~/Content/Kendo/kendo.common.min.css",
-                "~/Content/Kendo/kendo.common-bootstrap.min.css",
+                "~/Content/Kendo/kendo.common.core.min.css",
+                 "~/Content/Kendo/kendo.common-bootstrap.min.css",
                 "~/Content/Kendo/kendo.metro.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

@@ -10,7 +10,7 @@
         <div class="container header-boxes">
             @Html.Action("GetRandomQuizzes")
         </div>
-        <h3>All @ViewBag.CategoryId Quizzes</h3>
+        <h3>All @ViewBag.Category Quizzes</h3>
         <ul class="nav nav-tabs">
             <li class="active tab">
                 @Ajax.RawActionLink("<h4 class='content-title blue'>Most Recent</h4>", "RecentContent", "Home", new { catId = ViewBag.CategoryId },

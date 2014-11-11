@@ -17,6 +17,12 @@
         {
             this.ViewBag.CategoryId = catId;
 
+            var category = this.db.Categories.Find(catId);
+            if (category != null)
+            {
+                this.ViewBag.Category = category.Name;
+            }
+
             return this.View();
         }
 

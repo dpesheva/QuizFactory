@@ -20,8 +20,6 @@
                     Id = question.Id,
                     QuestionText = question.QuestionText,
                     Number = question.Number,
-                    IsDeleted = question.IsDeleted,
-                    DeletedOn = question.DeletedOn,
                     ModifiedOn = question.ModifiedOn,
                     Answers = question.AnswersDefinitions.Select(a => new AnswerViewModel
                     {
@@ -42,12 +40,6 @@
 
         [Required]
         public int Number { get; set; }
-
-        [Display(Name = "Is Deleted")]
-        public bool IsDeleted { get; set; }
-
-        [Display(Name = "Deleted On")]
-        public DateTime? DeletedOn { get; set; }
 
         [Display(Name = "Modified On")]
         public DateTime? ModifiedOn { get; set; }
