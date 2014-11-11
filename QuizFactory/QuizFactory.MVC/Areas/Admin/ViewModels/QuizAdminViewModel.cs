@@ -8,6 +8,7 @@
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Mvc.Areas.Users.ViewModels;
+    using System.Web.Mvc;
 
     public class QuizAdminViewModel : QuizViewModel
     {
@@ -26,26 +27,27 @@
                     Author = quiz.Author.UserName,
                     ModifiedOn = quiz.ModifiedOn,
                     NumberQuestions = quiz.QuestionsDefinitions.Count.ToString(),
-                    Questions = quiz.QuestionsDefinitions.Select(q => new QuestionAdminViewModel
-                    {
-                        Id = q.Id,
-                        QuestionText = q.QuestionText,
-                        Number = q.Number,
-                        Answers = q.AnswersDefinitions.Select(a => new AnswerViewModel
-                        {
-                            Id = a.Id,
-                            Text = a.Text,
-                            IsCorrect = a.IsCorrect,
-                            Position = a.Position
-                        }).ToList()
-                    }).ToList()
+                    //Questions = quiz.QuestionsDefinitions.Select(q => new QuestionAdminViewModel
+                    //{
+                    //    Id = q.Id,
+                    //    QuestionText = q.QuestionText,
+                    //    Number = q.Number,
+                    //    Answers = q.AnswersDefinitions.Select(a => new AnswerViewModel
+                    //    {
+                    //        Id = a.Id,
+                    //        Text = a.Text,
+                    //        IsCorrect = a.IsCorrect,
+                    //        Position = a.Position
+                    //    }).ToList()
+                    //}).ToList()
                 };
             }
         }
 
+        [HiddenInput(DisplayValue=false)]
         [Display(Name = "Modified On")]
         public DateTime? ModifiedOn { get; set; }
 
-        public ICollection<QuestionAdminViewModel> Questions { get; set; }
+      //  public ICollection<QuestionAdminViewModel> Questions { get; set; }
     }
 }

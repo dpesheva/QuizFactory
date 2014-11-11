@@ -19,11 +19,10 @@
             cols.Bound(q => q.Rating);
             cols.Bound(q => q.CreatedOn).Format("{0: MM/dd/yyyy hh:mm tt}");
             cols.Bound(q => q.ModifiedOn).Format("{0: MM/dd/yyyy hh:mm tt}");
-           // cols.Command(q => q.Edit());
-           // cols.Command(q => q.Destroy());
+            cols.Command(q => q.Edit());
+            cols.Command(q => q.Destroy());
         })
-      //  .ToolBar(toolbar => toolbar.Create())
-      //  .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .Editable(editable => editable.Mode(GridEditMode.PopUp))//.TemplateName("AccountEditPopup")
         .Pageable(p => p.Refresh(true))
         .Sortable()
         .Groupable()
@@ -33,7 +32,7 @@
          .Ajax()
          .Model(m => m.Id(q => q.Id))
          .Read(read => read.Action("Read", ControllerName))
-         .Create(create => create.Action("Create", ControllerName))
+       //  .Create(create => create.Action("Create", ControllerName))
          .Update(update => update.Action("Update", ControllerName))
          .Destroy(update => update.Action("Destroy", ControllerName))
         )

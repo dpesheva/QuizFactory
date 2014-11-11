@@ -43,7 +43,7 @@ using QuizFactory.Data;
         {
             if (this.db.QuizzesDefinitions.All().Any())
             {
-                int rnd = this.Random.Next();
+                int rnd = this.Random.Next(this.db.QuizzesDefinitions.All().Count());
 
                 var ramdomQuizzes = this.db.QuizzesDefinitions
                                         .All()

@@ -8,8 +8,9 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Web;
+    using System.Web.Mvc;
 
-    public class QuizViewModel:IQuizViewModel
+    public class QuizViewModel : IQuizViewModel
     {
         public static Expression<Func<QuizDefinition, QuizViewModel>> FromQuizDefinition
         {
@@ -42,17 +43,18 @@
             }
         }
 
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Title { get; set; }
 
-        [Editable(false)]
+        [HiddenInput(DisplayValue = false)]
         public string Author { get; set; }
 
         [Display(Name = "Created on")]
-        [Editable(false)]
+        [HiddenInput(DisplayValue = false)]
         public DateTime CreatedOn { get; set; }
 
         public decimal Rating { get; set; }
@@ -66,6 +68,7 @@
         public int CategoryId { get; set; }
 
         [Display(Name = "Questions")]
+        [HiddenInput(DisplayValue = false)]
         public string NumberQuestions { get; set; }
 
         public ICollection<QuestionViewModel> Questions { get; set; }

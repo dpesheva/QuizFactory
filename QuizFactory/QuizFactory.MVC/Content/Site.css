@@ -141,7 +141,6 @@ a:hover {
     background-color: white;
     padding: 5px 10px;
     margin: 15px 5px;
-    box-shadow: 0 5px 5px lightgray;
     width: 80%;
     height: 80%;
 }
@@ -152,7 +151,6 @@ a:hover {
 
 #tabContent {
     background-color: white;
-    box-shadow: 0 5px 5px lightgray;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     border: solid 1px lightgray;
@@ -169,6 +167,19 @@ input[type="radio"][disabled], input[type="checkbox"][disabled], .radio[disabled
 
 .k-grid {
     box-shadow: 0 5px 5px lightgray;
+    font-size: 0.9em;
+}
+
+.k-grid-header th.k-with-icon .k-link {
+    margin-right: 0.5em !important;
+}
+
+.table > tbody > :nth-child(2n+1) {
+    background-color: white;
+}
+
+.table > tbody > tr > th {
+    border-bottom: solid 2px #bbb !important;
 }
 
 /* Colorts */
@@ -186,4 +197,16 @@ input[type="radio"][disabled], input[type="checkbox"][disabled], .radio[disabled
 
 .green {
     color: #A7D736;
+}
+
+.gray {
+    color: #787878;
+}
+
+.box-shadow {
+    box-shadow: 0 5px 5px lightgray;
+}
+
+.text-shadow {
+    text-shadow: 0 2px 5px lightgray;
 }
