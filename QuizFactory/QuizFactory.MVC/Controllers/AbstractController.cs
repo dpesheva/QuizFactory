@@ -9,9 +9,15 @@
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Areas.Users.ViewModels;
     using System.Linq.Expressions;
+    using QuizFactory.Data;
 
     public abstract class AbstractController : BaseController
     {
+        public AbstractController(IQuizFactoryData data)
+            : base(data)
+        {
+        }
+
         // GET: ***/QuizAdministration
         public ActionResult Index()
         {
@@ -45,7 +51,7 @@
             quiz.CategoryId = quizViewModel.CategoryId;
             quiz.IsPublic = quizViewModel.IsPublic;
         }
-        
+
         protected virtual List<QuizViewModel> GetAllQuizzes()
         {
             var allQuizzes = this.db.QuizzesDefinitions

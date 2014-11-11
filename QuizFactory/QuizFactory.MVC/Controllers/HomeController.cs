@@ -8,9 +8,15 @@
     using AutoMapper.QueryableExtensions;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels;
+using QuizFactory.Data;
 
     public class HomeController : BaseController
     {
+        public HomeController(IQuizFactoryData data)
+            : base(data)
+        {
+        }
+
         private Random Random = new Random();
 
         public ActionResult Index(int? catId)

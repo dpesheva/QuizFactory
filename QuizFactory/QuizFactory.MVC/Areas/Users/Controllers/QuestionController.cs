@@ -1,22 +1,23 @@
 ﻿namespace QuizFactory.Mvc.Areas.Users.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Data.Entity;
     using System.Linq;
     using System.Net;
-    using System.Web;
     using System.Web.Mvc;
     using QuizFactory.Data;
-    using QuizFactory.Mvc.ViewModels;
-    using QuizFactory.Mvc.Controllers;
     using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.Controllers;
     using QuizFactory.Mvc.Filters;
+    using QuizFactory.Mvc.ViewModels;
 
     [OwnerOrAdminAttribute]
     public class QuestionController : BaseController
     {
+        public QuestionController(IQuizFactoryData data)
+            : base(data)
+        {
+        }
+
         public ActionResult Index(int? quizId)
         {
             if (quizId == null)
@@ -27,11 +28,11 @@
             this.TempData["quizId"] = quizId;
 
             var allAquestions = this.db.QuestionsDefinitions
-                .SearchFor(q => q.QuizDefinition.Id == quizId)
-                .Select(QuestionViewModel.FromQuestionDefinition)
-                .ToList();
+                                    .SearchFor(q => q.QuizDefinition.Id == quizId)
+                                    .Select(QuestionViewModel.FromQuestionDefinition)
+                                    .ToList();
 
-            return View(allAquestions);
+            return this.View(allAquestions);
         }
 
         public ActionResult Details(int? id)
@@ -42,21 +43,21 @@
             }
 
             QuestionViewModel questionViewModel = this.db.QuestionsDefinitions
-                .SearchFor(q => q.Id == id)
-                .Select(QuestionViewModel.FromQuestionDefinition)
-                .FirstOrDefault();
+                                                      .SearchFor(q => q.Id == id)
+                                                      .Select(QuestionViewModel.FromQuestionDefinition)
+                                                      .FirstOrDefault();
 
             if (questionViewModel == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(questionViewModel);
+            return this.View(questionViewModel);
         }
 
         // GET: Users/Question/Add
         public ActionResult Add(int? quizId)
         {
-            return View();
+            return this.View();
         }
 
         // POST: Users/Question/Create
@@ -66,25 +67,25 @@
         [ValidateAntiForgeryToken]
         public ActionResult Add(QuestionViewModel questionViewModel, int? quizId)
         {
-            var quiz = db.QuizzesDefinitions.Find(quizId);
+            var quiz = this.db.QuizzesDefinitions.Find(quizId);
             if (quiz == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var newQuestion = new QuestionDefinition();
 
-                MapFromModel(questionViewModel, newQuestion);
+                this.MapFromModel(questionViewModel, newQuestion);
                 newQuestion.QuizDefinition = quiz;
 
-                db.QuestionsDefinitions.Add(newQuestion);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.db.QuestionsDefinitions.Add(newQuestion);
+                this.db.SaveChanges();
+                return this.RedirectToAction("Index");
             }
 
-            return View(questionViewModel);
+            return this.View(questionViewModel);
         }
 
         // GET: Users/Question/Edit/5
@@ -94,16 +95,16 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var questionViewModel = db.QuestionsDefinitions
-                .SearchFor(q => q.Id == id)
-                .Select(QuestionViewModel.FromQuestionDefinition)
-                .FirstOrDefault();
+            var questionViewModel = this.db.QuestionsDefinitions
+                                        .SearchFor(q => q.Id == id)
+                                        .Select(QuestionViewModel.FromQuestionDefinition)
+                                        .FirstOrDefault();
 
             if (questionViewModel == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(questionViewModel);
+            return this.View(questionViewModel);
         }
 
         // POST: Users/Question/Edit/5
@@ -113,13 +114,13 @@
         [ValidateAntiForgeryToken]
         public ActionResult Edit(QuestionViewModel questionViewModel, int? quizId)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 // TODO create new and set quiz id
-                db.SaveChanges();
-                return RedirectToAction("Index", new { quizId = quizId });
+                this.db.SaveChanges();
+                return this.RedirectToAction("Index", new { quizId = quizId });
             }
-            return View(questionViewModel);
+            return this.View(questionViewModel);
         }
 
         // GET: Users/Question/Delete/5
@@ -129,16 +130,16 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var questionViewModel = db.QuestionsDefinitions
-                .SearchFor(q => q.Id == id)
-                .Select(QuestionViewModel.FromQuestionDefinition)
-                .FirstOrDefault();
+            var questionViewModel = this.db.QuestionsDefinitions
+                                        .SearchFor(q => q.Id == id)
+                                        .Select(QuestionViewModel.FromQuestionDefinition)
+                                        .FirstOrDefault();
 
             if (questionViewModel == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
-            return View(questionViewModel);
+            return this.View(questionViewModel);
         }
 
         // POST: Users/Question/Delete/5
@@ -146,12 +147,12 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var question = db.QuestionsDefinitions.Find(id);
+            var question = this.db.QuestionsDefinitions.Find(id);
             var quizId = question.QuizDefinition.Id;
 
-            db.QuestionsDefinitions.Delete(question);
-            db.SaveChanges();
-            return RedirectToAction("Index", new { quizId = quizId });
+            this.db.QuestionsDefinitions.Delete(question);
+            this.db.SaveChanges();
+            return this.RedirectToAction("Index", new { quizId = quizId });
         }
 
         private void MapFromModel(QuestionViewModel questionViewModel, QuestionDefinition newQuestion)
@@ -170,7 +171,6 @@
 
                     newQuestion.AnswersDefinitions.Add(item);
                 }
-
             }
         }
     }

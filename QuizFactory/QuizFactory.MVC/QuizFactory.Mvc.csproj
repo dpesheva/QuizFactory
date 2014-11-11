@@ -66,6 +66,15 @@
       <HintPath>..\..\..\..\..\..\..\Program Files\Telerik\UI for ASP.NET MVC Q2 2014\wrappers\aspnetmvc\Binaries\Mvc5\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -118,6 +127,9 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -176,6 +188,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
@@ -233,7 +246,7 @@
     <Content Include="Areas\Admin\Views\QuizAdministration\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdministration\Details.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdministration\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\QuizAdministration\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuizAdministration\Index_.cshtml" />
     <Content Include="Areas\Users\Views\QuizUsers\Index.cshtml" />
     <Content Include="Areas\Users\Views\QuizUsers\Create.cshtml" />
     <Content Include="Areas\Users\Views\QuizUsers\Delete.cshtml" />
@@ -245,6 +258,19 @@
     <Content Include="Areas\Users\Views\Question\Details.cshtml" />
     <Content Include="Areas\Users\Views\Question\Edit.cshtml" />
     <Content Include="Areas\Users\Views\Question\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QuizAdministration\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Url.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

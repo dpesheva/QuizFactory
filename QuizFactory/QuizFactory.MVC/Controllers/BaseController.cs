@@ -18,9 +18,9 @@ namespace QuizFactory.Mvc.Controllers
             this.db = data;
         }
 
-        public BaseController()
-            : this(new QuizFactoryData())
-        {
-        }
+        //public BaseController()
+        //    : this(new QuizFactoryData())
+        //{
+        //}
     }
 }

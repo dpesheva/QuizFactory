@@ -5,9 +5,15 @@
     using System.Web.Mvc;
     using QuizFactory.Mvc.Areas.Users.ViewModels;
     using QuizFactory.Mvc.ViewModels;
+    using QuizFactory.Data;
 
     public class PlayController : BaseController
     {
+        public PlayController(IQuizFactoryData data)
+            : base(data)
+        {
+        }
+
         // GET: Play
         public ActionResult Index()
         {

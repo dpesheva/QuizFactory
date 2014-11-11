@@ -10,10 +10,16 @@
     using QuizFactory.Mvc.Areas.Admin.ViewModels;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using QuizFactory.Data;
 
     [Authorize(Roles = "admin")]
     public class CategoriesController : BaseController
     {
+        public CategoriesController(IQuizFactoryData data)
+            : base(data)
+        {
+        }
+
         // GET: Admin/Categories
         public ActionResult Index()
         {

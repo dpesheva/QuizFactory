@@ -58,7 +58,7 @@ a:hover {
     text-shadow: 0 2px 2px gray;
     border: solid 1px #8FB613;
     border-radius: 5px;
-    box-shadow: 0 3px 6px lightgray;
+    box-shadow: 0 4px 6px lightgray;
     background: rgb(167,217,57);
     background: -moz-linear-gradient(top, rgba(167,217,57,1) 0%, rgba(156,201,50,1) 64%, rgba(156,201,50,1) 81%, rgba(167,217,57,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(167,217,57,1)), color-stop(64%,rgba(156,201,50,1)), color-stop(81%,rgba(156,201,50,1)), color-stop(100%,rgba(167,217,57,1)));
@@ -161,6 +161,14 @@ a:hover {
 
 input[type="radio"][disabled], input[type="checkbox"][disabled], .radio[disabled], .radio-inline[disabled], .checkbox[disabled], .checkbox-inline[disabled], fieldset[disabled] input[type="radio"], fieldset[disabled] input[type="checkbox"], fieldset[disabled] .radio, fieldset[disabled] .radio-inline, fieldset[disabled] .checkbox, fieldset[disabled] .checkbox-inline {
     cursor: auto !important;
+}
+
+#admin-body {
+    margin: 15px 0;
+}
+
+.k-grid {
+    box-shadow: 0 5px 5px lightgray;
 }
 
 /* Colorts */

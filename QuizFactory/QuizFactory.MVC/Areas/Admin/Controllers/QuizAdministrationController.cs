@@ -4,16 +4,59 @@
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
-    using Microsoft.AspNet.Identity;
+    using Kendo.Mvc.UI;
+    using Kendo.Mvc.Extensions;
+    using QuizFactory.Data;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Areas.Admin.ViewModels;
-    using System.Collections.Generic;
-    using QuizFactory.Mvc.Controllers;
     using QuizFactory.Mvc.Areas.Users.ViewModels;
+    using QuizFactory.Mvc.Controllers;
 
     [Authorize(Roles = "admin")]
-    public class QuizAdministrationController : AbstractController
+    public class QuizAdministrationController : BaseController
     {
+        public QuizAdministrationController(IQuizFactoryData data)
+            : base(data)
+        {
+        }
+
+         public ActionResult Index()
+        {
+            var allQuizzes = this.db.QuizzesDefinitions
+                .All()
+                .Select(QuizAdminViewModel.FromQuizDefinition).ToList();
+
+            return this.View(allQuizzes);
+        }
+
+        [HttpPost]
+        public ActionResult Read([DataSourceRequest]DataSourceRequest request)
+        {
+            var allQuizzes = this.db.QuizzesDefinitions
+                .All()
+                .Select(QuizAdminViewModel.FromQuizDefinition)
+                .ToDataSourceResult(request);
+
+            return this.Json(allQuizzes);
+        }
+
+        [HttpPost]
+        public ActionResult Create([DataSourceRequest]DataSourceRequest request, QuizAdminViewModel model)
+        {
+            if (model != null && this.ModelState.IsValid)
+            {
+                var newQuiz = new QuizDefinition();
+                MapViewModelToModel(model, newQuiz);
+
+                this.db.QuizzesDefinitions.Add(newQuiz);
+                this.db.SaveChanges();
+                return this.RedirectToAction("Index");
+            }
+
+            return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+        }
+
+
         // GET: Admin/QuizAdministration/Details/5
         public ActionResult Details(int? id)
         {
@@ -85,6 +128,21 @@
             return this.View(quizAdminViewModel);
         }
 
+        protected void MapViewModelToModel(QuizAdminViewModel quizViewModel, QuizDefinition quiz)
+        {
+            var category = this.db.Categories.SearchFor(c => c.Id == quizViewModel.CategoryId).FirstOrDefault();
+            if (category == null)
+            {
+                return; // TODO
+            }
+
+            quiz.Title = quizViewModel.Title;
+            quiz.CategoryId = quizViewModel.CategoryId;
+            quiz.IsPublic = quizViewModel.IsPublic;
+            quiz.Rating = quizViewModel.Rating;
+        }
+
+
         private QuizAdminViewModel GetViewModelById(int? id)
         {
             QuizAdminViewModel quizAdminViewModel = this.db.QuizzesDefinitions
@@ -92,20 +150,6 @@
                                                         .Select(QuizAdminViewModel.FromQuizDefinition)
                                                         .FirstOrDefault();
             return quizAdminViewModel;
-        }
-
-        protected override void MapViewModelToModel(IQuizViewModel quizViewModel, QuizDefinition quiz)
-        {
-            base.MapViewModelToModel(quizViewModel, quiz);
-
-            var user = this.db.Users.SearchFor(u => u.UserName == quizViewModel.Author).FirstOrDefault();
-            if (user == null)
-            {
-                throw new ArgumentException("No such username");
-            }
-
-            quiz.Author = user;
-            quiz.Rating = quizViewModel.Rating;
         }
     }
 }

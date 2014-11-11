@@ -3,17 +3,22 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
-    using QuizFactory.Mvc.Areas.Users.ViewModels;
-    using QuizFactory.Mvc.ViewModels;
-    using QuizFactory.Mvc.Controllers;
+    using QuizFactory.Data;
     using QuizFactory.Data.Models;
-    using System.Net;
+    using QuizFactory.Mvc.Areas.Users.ViewModels;
+    using QuizFactory.Mvc.Controllers;
 
     [Authorize]
     public class QuizUsersController : AbstractController
     {
+        public QuizUsersController(IQuizFactoryData data)
+            : base(data)
+        {
+        }
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -21,7 +26,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            QuizViewModel quizViewModel = GetViewModelById(id);
+            QuizViewModel quizViewModel = this.GetViewModelById(id);
             return this.View(quizViewModel);
         }
 
@@ -32,7 +37,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            QuizViewModel quizViewModel = GetViewModelById(id);
+            QuizViewModel quizViewModel = this.GetViewModelById(id);
             this.ViewBag.CategoryId = new SelectList(this.db.Categories.All().ToList(), "Id", "Name", quizViewModel.CategoryId);
 
             return this.View(quizViewModel);
@@ -59,7 +64,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            QuizViewModel quizViewModel = GetViewModelById(id);
+            QuizViewModel quizViewModel = this.GetViewModelById(id);
 
             return this.View(quizViewModel);
         }
@@ -79,7 +84,7 @@
             if (this.ModelState.IsValid)
             {
                 QuizDefinition newQuiz = new QuizDefinition();
-                MapViewModelToModel(quizViewModel, newQuiz);
+                this.MapViewModelToModel(quizViewModel, newQuiz);
 
                 this.ViewBag.CategoryId = new SelectList(this.db.Categories.All().ToList(), "Id", "Name", quizViewModel.CategoryId);
 
@@ -94,23 +99,11 @@
             return this.View(quizViewModel);
         }
 
-        private QuizViewModel GetViewModelById(int? id)
-        {
-            var userId = this.User.Identity.GetUserId();
-
-            var quizViewModel = this.db.QuizzesDefinitions
-                                         .SearchFor(q => q.Id == id && q.Author.Id == userId)
-                                         .Select(QuizViewModel.FromQuizDefinition)
-                                         .FirstOrDefault();
-
-            return quizViewModel;
-        }
-
         protected override void MapViewModelToModel(IQuizViewModel quizViewModel, QuizDefinition newQuiz)
         {
             base.MapViewModelToModel(quizViewModel, newQuiz);
 
-            var user = this.db.Users.Find(User.Identity.GetUserId());
+            var user = this.db.Users.Find(this.User.Identity.GetUserId());
             
             newQuiz.Author = user;
             newQuiz.QuestionsDefinitions = new List<QuestionDefinition>();
@@ -128,6 +121,18 @@
                                  .ToList();
 
             return allQuizzes;
+        }
+
+        private QuizViewModel GetViewModelById(int? id)
+        {
+            var userId = this.User.Identity.GetUserId();
+
+            var quizViewModel = this.db.QuizzesDefinitions
+                                    .SearchFor(q => q.Id == id && q.Author.Id == userId)
+                                    .Select(QuizViewModel.FromQuizDefinition)
+                                    .FirstOrDefault();
+
+            return quizViewModel;
         }
     }
 }
