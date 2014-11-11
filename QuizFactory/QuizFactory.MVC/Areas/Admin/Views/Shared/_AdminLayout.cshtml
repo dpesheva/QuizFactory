@@ -1,7 +1,15 @@
 ﻿@{
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
+@section styles{
+    @Styles.Render("~/Content/kendo")
+@RenderSection("styles", required: false)
+}
 <div id="admin-body">
     @RenderBody()
 </div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/kendo")
+    @RenderSection("scripts", required: false)
+}

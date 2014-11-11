@@ -7,6 +7,8 @@
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.IgnoreList.Clear();
+
             RegisterScriptBundles(bundles);
             RegisterStyleBundles(bundles);
 
@@ -17,12 +19,15 @@
 
         private static void RegisterStyleBundles(BundleCollection bundles)
         {
-              bundles.Add(new StyleBundle("~/Content/kendo").Include(               
+            bundles.Add(new StyleBundle("~/Content/kendo").Include(
+                "~/Content/Kendo/kendo.common.min.css",
                 "~/Content/Kendo/kendo.common-bootstrap.min.css",
-                 "~/Content/Kendo/kendo.metro.min.css"));
+                "~/Content/Kendo/kendo.metro.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.css",
+                "~/Content/bootstrap.css"));
+
+            bundles.Add(new StyleBundle("~/Content/custom").Include(
                 "~/Content/site.css"));
         }
 
