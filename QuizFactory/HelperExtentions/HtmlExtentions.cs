@@ -6,7 +6,7 @@
     using System.Web.Mvc.Ajax;
     using System.Web.Routing;
 
-    public static class Extentions
+    public static class HtmlExtentions
     {
         public static MvcHtmlString RawActionLink(this AjaxHelper ajaxHelper, string linkText, string actionName, string controllerName, object routeValues, AjaxOptions ajaxOptions, object htmlAttributes)
         {
