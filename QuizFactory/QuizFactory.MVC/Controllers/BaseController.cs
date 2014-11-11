@@ -11,7 +11,7 @@ namespace QuizFactory.Mvc.Controllers
 
     public abstract class BaseController : Controller
     {
-        protected IQuizFactoryData db;
+        public IQuizFactoryData db;
 
         public BaseController(IQuizFactoryData data)
         {

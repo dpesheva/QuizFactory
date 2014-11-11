@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using QuizFactory.Data;
-using QuizFactory.Mvc.ViewModels;
-using QuizFactory.Mvc.Controllers;
-using QuizFactory.Data.Models;
-
-namespace QuizFactory.Mvc.Areas.Users.Controllers
+﻿namespace QuizFactory.Mvc.Areas.Users.Controllers
 {
-    // add custom attribute
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Web;
+    using System.Web.Mvc;
+    using QuizFactory.Data;
+    using QuizFactory.Mvc.ViewModels;
+    using QuizFactory.Mvc.Controllers;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.Filters;
+
+    [OwnerOrAdminAttribute]
     public class QuestionController : BaseController
     {
         public ActionResult Index(int? quizId)
@@ -68,7 +69,7 @@ namespace QuizFactory.Mvc.Areas.Users.Controllers
             var quiz = db.QuizzesDefinitions.Find(quizId);
             if (quiz == null)
             {
-                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             if (ModelState.IsValid)
@@ -114,7 +115,7 @@ namespace QuizFactory.Mvc.Areas.Users.Controllers
         {
             if (ModelState.IsValid)
             {
-               // TODO create new and set quiz id
+                // TODO create new and set quiz id
                 db.SaveChanges();
                 return RedirectToAction("Index", new { quizId = quizId });
             }
@@ -147,7 +148,7 @@ namespace QuizFactory.Mvc.Areas.Users.Controllers
         {
             var question = db.QuestionsDefinitions.Find(id);
             var quizId = question.QuizDefinition.Id;
-           
+
             db.QuestionsDefinitions.Delete(question);
             db.SaveChanges();
             return RedirectToAction("Index", new { quizId = quizId });
