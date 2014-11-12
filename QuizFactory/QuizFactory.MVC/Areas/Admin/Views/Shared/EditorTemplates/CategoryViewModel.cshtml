@@ -1,0 +1,16 @@
+﻿@model QuizFactory.Mvc.Areas.Admin.ViewModels.CategoryViewModel
+@using QuizFactory.Mvc.Areas.Admin.ViewModels
+
+@{
+    List<CategoryViewModel> categories = (List<CategoryViewModel>)TempData["categories"];
+}
+
+@(Html.Kendo().DropDownList()
+    .Name("Category")
+    .DataTextField("Name")
+    .DataValueField("Id")
+    .BindTo(categories)
+
+)
+
+

@@ -1,4 +1,5 @@
 ﻿@model QuizFactory.Mvc.ViewModels.QuestionViewModel
+@using HelperExtentions
 
 <h2>@Model.Number @Model.QuestionText</h2>
 @foreach (var item in @Model.Answers)
@@ -6,4 +7,4 @@
    @Html.Partial("_AnswerPartial", item)
 }
 
-<button value="ADD SUBMIT HELPER"/>
+@Html.Submit(null)

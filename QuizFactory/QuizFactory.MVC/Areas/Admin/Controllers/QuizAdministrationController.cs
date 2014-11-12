@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
+    using AutoMapper.QueryableExtensions;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.Extensions;
     using QuizFactory.Data;
@@ -11,6 +12,7 @@
     using QuizFactory.Mvc.Areas.Admin.ViewModels;
     using QuizFactory.Mvc.Areas.Users.ViewModels;
     using QuizFactory.Mvc.Controllers;
+    using System.Collections.Generic;
 
     [Authorize(Roles = "admin")]
     public class QuizAdministrationController : BaseController
@@ -20,13 +22,20 @@
         {
         }
 
-         public ActionResult Index()
+        public ActionResult Index()
         {
             var allQuizzes = this.db.QuizzesDefinitions
                 .All()
                 .Select(QuizAdminViewModel.FromQuizDefinition).ToList();
 
+            TempData["categories"] = this.db.Categories.All().Project().To<CategoryViewModel>().ToList();
+
             return this.View(allQuizzes);
+        }
+
+        public ICollection<CategoryViewModel> Categories()
+        {
+            return this.db.Categories.All().Project().To<CategoryViewModel>().ToList();
         }
 
         [HttpPost]

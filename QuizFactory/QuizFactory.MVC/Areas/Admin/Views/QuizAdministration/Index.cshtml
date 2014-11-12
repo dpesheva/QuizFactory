@@ -6,34 +6,35 @@
 }
 
 @(Html.Kendo()
-.Grid<QuizAdminViewModel>()
-    .Name("quiz-grid")
+.Grid<QuizAdminViewModel>
+    ()
+    .Name("Grid")
     .Columns(cols =>
-        {
-            cols.Bound(q => q.Id);
-            cols.Bound(q => q.Title);
-            cols.Bound(q => q.Author);
-            cols.Bound(q => q.Category);
-            cols.Bound(q => q.IsPublic);
-            cols.Bound(q => q.NumberQuestions);
-            cols.Bound(q => q.Rating);
-            cols.Bound(q => q.CreatedOn).Format("{0: MM/dd/yyyy hh:mm tt}");
-            cols.Bound(q => q.ModifiedOn).Format("{0: MM/dd/yyyy hh:mm tt}");
-            cols.Command(q => q.Edit());
-            cols.Command(q => q.Destroy());
-        })
-            .Editable(editable => editable.Mode(GridEditMode.PopUp))//.TemplateName("AccountEditPopup")
-        .Pageable(p => p.Refresh(true))
-        .Sortable()
-        .Groupable()
-        .Filterable()
+    {
+    cols.Bound(q => q.Id);
+    cols.Bound(q => q.Title);
+    cols.Bound(q => q.Author);
+    cols.Bound(q => q.Category).EditorTemplateName("CategoryViewModel"); // .EditorViewData( new {id = "#=Category#" });
+    cols.Bound(q => q.IsPublic);
+    cols.Bound(q => q.NumberQuestions);
+    cols.Bound(q => q.Rating);
+    cols.Bound(q => q.CreatedOn).Format("{0: MM/dd/yyyy hh:mm tt}");
+    cols.Bound(q => q.ModifiedOn).Format("{0: MM/dd/yyyy hh:mm tt}");
+    cols.Command(q => q.Edit());
+    cols.Command(q => q.Destroy());
+    })
+    .Editable(editable => editable.Mode(GridEditMode.PopUp))//.TemplateName("QuizEditPopup"))
+    .Pageable(p => p.Refresh(true))
+    .Sortable()
+    .Groupable()
+    .Filterable()
     .DataSource(data =>
-         data
-         .Ajax()
-         .Model(m => m.Id(q => q.Id))
-         .Read(read => read.Action("Read", ControllerName))
-       //  .Create(create => create.Action("Create", ControllerName))
-         .Update(update => update.Action("Update", ControllerName))
-         .Destroy(update => update.Action("Destroy", ControllerName))
-        )
-)
+    data
+    .Ajax()
+    .Model(m => m.Id(q => q.Id))
+    .Read(read => read.Action("Read", ControllerName))
+    .Create(create => create.Action("Create", ControllerName))
+    .Update(update => update.Action("Update", ControllerName))
+    .Destroy(update => update.Action("Destroy", ControllerName))
+    )
+    )

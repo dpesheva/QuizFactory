@@ -8,7 +8,7 @@
     using AutoMapper.QueryableExtensions;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels;
-using QuizFactory.Data;
+    using QuizFactory.Data;
 
     public class HomeController : BaseController
     {
@@ -22,8 +22,8 @@ using QuizFactory.Data;
         public ActionResult Index(int? catId)
         {
             this.ViewBag.CategoryId = catId;
-
             var category = this.db.Categories.Find(catId);
+
             if (category != null)
             {
                 this.ViewBag.Category = category.Name;

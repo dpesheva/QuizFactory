@@ -62,6 +62,7 @@
         [Display(Name = "Public")]
         public bool IsPublic { get; set; }
 
+        [UIHint("CategoryViewModel")]
         public string Category { get; set; }
 
         [Required]

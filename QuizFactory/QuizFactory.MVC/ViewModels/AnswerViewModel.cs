@@ -19,6 +19,7 @@
         public string Text { get; set; }
 
         [Required]
+        [UIHint("RadioButtonList")]
         public int Position { get; set; }
 
         [Display(Name = "Correct")]
