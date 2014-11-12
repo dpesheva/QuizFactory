@@ -27,12 +27,13 @@
 
             this.TempData["quizId"] = quizId;
 
-            var allAquestions = this.db.QuestionsDefinitions
-                                    .SearchFor(q => q.QuizDefinition.Id == quizId)
-                                    .Select(QuestionViewModel.FromQuestionDefinition)
-                                    .ToList();
+            var allQuestions = this.db.QuestionsDefinitions
+                                     .All()
+                                     .Where(q => q.QuizDefinition.Id == quizId)
+                                     .Select(QuestionViewModel.FromQuestionDefinition)
+                                     .ToList();
 
-            return this.View(allAquestions);
+            return this.View(allQuestions);
         }
 
         public ActionResult Details(int? id)
@@ -43,9 +44,10 @@
             }
 
             QuestionViewModel questionViewModel = this.db.QuestionsDefinitions
-                                                      .SearchFor(q => q.Id == id)
-                                                      .Select(QuestionViewModel.FromQuestionDefinition)
-                                                      .FirstOrDefault();
+                                                       .All()
+                                                       .Where(q => q.Id == id)
+                                                       .Select(QuestionViewModel.FromQuestionDefinition)
+                                                       .FirstOrDefault();
 
             if (questionViewModel == null)
             {
@@ -96,7 +98,8 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var questionViewModel = this.db.QuestionsDefinitions
-                                        .SearchFor(q => q.Id == id)
+                                        .All()
+                                        .Where(q => q.Id == id)
                                         .Select(QuestionViewModel.FromQuestionDefinition)
                                         .FirstOrDefault();
 
@@ -131,7 +134,8 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var questionViewModel = this.db.QuestionsDefinitions
-                                        .SearchFor(q => q.Id == id)
+                                        .All()
+                                        .Where(q => q.Id == id)
                                         .Select(QuestionViewModel.FromQuestionDefinition)
                                         .FirstOrDefault();
 
