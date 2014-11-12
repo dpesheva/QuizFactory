@@ -326,7 +326,7 @@
     <Content Include="Views\Shared\_AnswerPartial.cshtml" />
     <Content Include="Scripts\Kendo\jquery.min.map" />
     <Content Include="Views\Shared\DisplayTemplates\AnswerViewModel.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\QuestionViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\QuestionPlayViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Common\" />

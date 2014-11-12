@@ -27,7 +27,10 @@
         public void CreateMappings(IConfiguration configuration)
         {
             Mapper.CreateMap<QuestionDefinition, QuestionPlayViewModel>()
-                .ForMember(a => a.Answers, opt => opt.MapFrom(a => a.AnswersDefinitions));
+                .ForMember(a => a.Answers, opt => opt.MapFrom(a => a.AnswersDefinitions.Where(o => !o.IsDeleted)))
+                .ReverseMap();
+
+            Mapper.CreateMap<QuestionDefinition, QuestionPlayViewModel>().ReverseMap();
         }
     }
 }

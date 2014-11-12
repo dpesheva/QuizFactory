@@ -1,17 +1,14 @@
 ﻿namespace QuizFactory.Mvc.ViewModels
 {
-    using QuizFactory.Data.Models;
-    using QuizFactory.Mvc.Mapping;
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using System.Linq.Expressions;
-    using System.Web;
+    using AutoMapper;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.Mapping;
 
-    public class AnswerViewModel : IMapFrom<AnswerDefinition>
+    public class AnswerViewModel : IMapFrom<AnswerDefinition>, IHaveCustomMappings
     {
-       // [ScaffoldColumn(false)]
         public int Id { get; set; }
 
         [Required]
@@ -25,5 +22,14 @@
         public bool IsCorrect { get; set; }
 
         public int QuestionId { get; set; }
+
+        public void CreateMappings(IConfiguration configuration)
+        {
+            Mapper.CreateMap<AnswerDefinition, AnswerViewModel>()
+               .ForMember(a => a.QuestionId, options => options.MapFrom(a => a.QuestionDefinition.Id))
+               .ReverseMap();
+
+            Mapper.CreateMap<AnswerDefinition, AnswerViewModel>().ReverseMap();
+        }
     }
 }

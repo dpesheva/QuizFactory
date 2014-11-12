@@ -33,7 +33,7 @@
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<QuizDefinition, QuizMainInfoViewModel>()
-                         .ForMember(dest => dest.NumberQuestions, opts => opts.MapFrom(src => src.QuestionsDefinitions.Count));
+                         .ForMember(dest => dest.NumberQuestions, opts => opts.MapFrom(src => src.QuestionsDefinitions.Where(o => !o.IsDeleted).Count()));
 
             configuration.CreateMap<QuizDefinition, QuizMainInfoViewModel>()
                          .ForMember(dest => dest.Author, opts => opts.MapFrom(src => src.Author.UserName));

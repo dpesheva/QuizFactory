@@ -93,7 +93,7 @@
 
                 quizViewModel.Id = newQuiz.Id;
 
-                return this.RedirectToAction("Index");
+                return this.RedirectToAction("Edit", quizViewModel);
             }
 
             return this.View(quizViewModel);

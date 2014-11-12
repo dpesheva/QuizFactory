@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using AutoMapper.QueryableExtensions;
     using QuizFactory.Mvc.Areas.Users.ViewModels;
     using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Data;
@@ -23,7 +24,8 @@
             var quiz = this.db.QuizzesDefinitions
                 .All()
                 .Where(q => q.Id == id)
-                .Select(QuizViewModel.FromQuizDefinition)
+                .Project()
+                .To<QuizPlayViewModel>()
                 .FirstOrDefault();
 
             if (quiz == null)
@@ -41,7 +43,11 @@
         {
             try
             {
-                // TODO: Add insert logic here
+                if (this.ModelState.IsValid)
+                {
+                    // TODO: Add insert logic here
+                }
+
                 //return next partial
                 return this.RedirectToAction("PlayQuiz");
             }
