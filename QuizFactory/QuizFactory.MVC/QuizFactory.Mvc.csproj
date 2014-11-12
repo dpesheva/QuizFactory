@@ -218,7 +218,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AnswerViewModel.cs" />
+    <Compile Include="ViewModels\Play\AnswerPlayViewModel.cs" />
     <Compile Include="ViewModels\Play\QuestionPlayViewModel.cs" />
+    <Compile Include="ViewModels\Play\SelectedAnswersViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\QuizMainInfoViewModel.cs" />
     <Compile Include="Areas\Users\ViewModels\QuizViewModel.cs" />

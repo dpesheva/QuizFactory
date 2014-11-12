@@ -5,11 +5,10 @@
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
-    using QuizFactory.Mvc.Areas.Users.ViewModels;
-    using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Data;
+    using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Mvc.ViewModels.Play;
-
+    
     public class PlayController : BaseController
     {
         public PlayController(IQuizFactoryData data)
@@ -39,7 +38,7 @@
         // POST: Play/Start
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PlayQuiz(int? id, QuizPlayViewModel quiz, FormCollection f, ICollection<QuestionViewModel> list)
+        public ActionResult PlayQuiz( int id, Dictionary<string, string>  questions, /*SelectedAnswersViewModel selectedAnswers,*/ QuizPlayViewModel quiz)
         {
             try
             {
