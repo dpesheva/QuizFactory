@@ -1,0 +1,23 @@
+﻿@model QuizFactory.Mvc.Areas.Users.ViewModels.QuizViewModel
+
+<h2 class="green text-shadow">@Model.Title</h2>
+<h5 class="yellow text-shadow">Category @Model.Category</h5>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    @Html.EditorFor(x => x.Questions)
+    @Html.Submit(new { value = "Submit Quiz", @class="btn btn-primary box-shadow" })
+}
+
+@*@Html.Action("GetQuestion", new {quizId = @Model.Id , currentQuestion = 1})*@
+<h5 class="yellow">Created by: @Model.Author on @Model.CreatedOn</h5>
+
+@section scripts{
+    <script>
+        var isQuizValid = false;
+
+    </script>
+}

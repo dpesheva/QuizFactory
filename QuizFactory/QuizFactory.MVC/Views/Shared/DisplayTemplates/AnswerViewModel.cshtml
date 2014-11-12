@@ -1,7 +1,12 @@
-﻿
-@{
-    ViewBag.Title = "AnswerViewModel";
-}
-
-<h2>AnswerViewModel</h2>
-
+﻿@model  QuizFactory.Mvc.ViewModels.AnswerViewModel
+<div>
+    @if (Model.IsCorrect)
+    {
+        <i class="glyphicon glyphicon-ok green"></i>
+    }
+    else
+    {
+        <i class="glyphicon glyphicon-remove red"></i>
+    } 
+    @Html.DisplayFor(a => a.Text)
+</div>

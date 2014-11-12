@@ -1,13 +1,11 @@
 ﻿namespace QuizFactory.Mvc.ViewModels
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using AutoMapper;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Mapping;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Web;
 
     public class QuizMainInfoViewModel : IMapFrom<QuizDefinition>, IHaveCustomMappings
     {
@@ -35,14 +33,13 @@
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<QuizDefinition, QuizMainInfoViewModel>()
-               .ForMember(dest => dest.NumberQuestions, opts => opts.MapFrom(src => src.QuestionsDefinitions.Count));
+                         .ForMember(dest => dest.NumberQuestions, opts => opts.MapFrom(src => src.QuestionsDefinitions.Count));
 
             configuration.CreateMap<QuizDefinition, QuizMainInfoViewModel>()
-              .ForMember(dest => dest.Author, opts => opts.MapFrom(src => src.Author.UserName));
+                         .ForMember(dest => dest.Author, opts => opts.MapFrom(src => src.Author.UserName));
 
             configuration.CreateMap<QuizDefinition, QuizMainInfoViewModel>()
-              .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.Category.Name));
+                         .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.Category.Name));
         }
     }
-
 }

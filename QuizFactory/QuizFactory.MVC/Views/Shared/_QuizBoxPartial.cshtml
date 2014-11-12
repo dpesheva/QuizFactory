@@ -2,7 +2,7 @@
 
 <div class="col-sm-4">
     <div class="quiz-box box-shadow">
-        <h4>@Html.ActionLink(@Model.Title, "StartQuiz", "Play", new { id = @Model.Id }, new { })</h4>
+        <h4>@Html.ActionLink(@Model.Title, "PlayQuiz", "Play", new { id = @Model.Id }, new { })</h4>
         <p class="red">@Model.Category</p>
         <p class="green">@Model.NumberQuestions Questions</p>
         <small class="yellow">From @Model.CreatedOn</small>

@@ -1,10 +1,16 @@
 ﻿@model QuizFactory.Mvc.ViewModels.QuestionViewModel
 @using HelperExtentions
 
-<h2>@Model.Number @Model.QuestionText</h2>
+<h2>@Model.Number. @Model.QuestionText</h2>
+@Html.DisplayFor(q => q.Answers)
+
+
+
 @foreach (var item in @Model.Answers)
 {
-   @Html.Partial("_AnswerPartial", item)
+    @Html.RadioButtonFor(c => Model.Number.ToString(), Model.Number)
+    // @Html.Partial("_AnswerPartial", item)
+    //  @Html.DisplayForModel(item)
 }
 
 @Html.Submit(null)

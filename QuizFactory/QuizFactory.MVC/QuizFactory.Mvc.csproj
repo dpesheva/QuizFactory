@@ -218,9 +218,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AnswerViewModel.cs" />
+    <Compile Include="ViewModels\Play\QuestionPlayViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\QuizMainInfoViewModel.cs" />
     <Compile Include="Areas\Users\ViewModels\QuizViewModel.cs" />
+    <Compile Include="ViewModels\Play\QuizPlayViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -320,10 +322,11 @@
     <Content Include="Views\Shared\_OpenQuestionPartial.cshtml" />
     <Content Include="Views\Shared\_ListQuizBoxesPartial.cshtml" />
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
-    <Content Include="Views\Play\StartQuiz.cshtml" />
+    <Content Include="Views\Play\PlayQuiz.cshtml" />
     <Content Include="Views\Shared\_AnswerPartial.cshtml" />
     <Content Include="Scripts\Kendo\jquery.min.map" />
     <Content Include="Views\Shared\DisplayTemplates\AnswerViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\QuestionViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Common\" />

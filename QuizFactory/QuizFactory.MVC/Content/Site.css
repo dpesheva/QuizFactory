@@ -182,6 +182,18 @@ input[type="radio"][disabled], input[type="checkbox"][disabled], .radio[disabled
     border-bottom: solid 2px #bbb !important;
 }
 
+.question {
+    padding: 5px 15px 5px 25px;
+    margin: 15px 0;
+    background-color: white;
+    border-radius: 5px;
+}
+
+    .question > h4 {
+        border-bottom: solid 1px #ddd;
+        padding-bottom: 5px;
+    }
+
 /* Colorts */
 .blue {
     color: #3F6CEB;

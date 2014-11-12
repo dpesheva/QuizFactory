@@ -1,0 +1,11 @@
+﻿@model  QuizFactory.Mvc.ViewModels.QuestionViewModel
+
+<div class="question box-shadow gray">
+    <h4>@Model.Number. @Model.QuestionText </h4>
+    @foreach (var a in Model.Answers)
+    {
+        <p>
+            @Html.RadioButton( "", Model.Number)  @a.Text
+        </p>
+    }
+</div>
