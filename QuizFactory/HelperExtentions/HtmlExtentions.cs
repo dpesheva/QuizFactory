@@ -15,13 +15,14 @@
             return MvcHtmlString.Create(lnk.ToString().Replace(repID, linkText));
         }
 
-        public static TagBuilder Submit(this HtmlHelper helper, object htmlAttributes)
+        public static MvcHtmlString Submit(this HtmlHelper helper, object htmlAttributes)
         {
             var input = new TagBuilder("input");
             var attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes) as IDictionary<string, object>;
             input.MergeAttributes(attributes);
-            input.Attributes.Add("typ", "submit");
-            return input;
+            input.Attributes.Add("type", "submit");
+           
+            return new MvcHtmlString(input.ToString(TagRenderMode.Normal));
         }
     }
 }
