@@ -1,11 +1,13 @@
 ﻿namespace QuizFactory.Mvc.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using QuizFactory.Mvc.Areas.Users.ViewModels;
     using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Data;
+    using QuizFactory.Mvc.ViewModels.Play;
 
     public class PlayController : BaseController
     {
@@ -14,26 +16,15 @@
         {
         }
 
-        // GET: Play
-        public ActionResult Index()
-        {
-            return this.View();
-        }
-
-        // GET: Play/Details/5
-        public ActionResult Details(int id)
-        {
-            return this.View();
-        }
-
-        //GET : Play/Start
+        //GET : Play/PlayQuiz
         [HttpGet]
-        public ActionResult StartQuiz(int id)
+        public ActionResult PlayQuiz(int? id)
         {
             var quiz = this.db.QuizzesDefinitions
-                           .SearchFor(q => q.Id == id)
-                           .Select(QuizViewModel.FromQuizDefinition)
-                           .FirstOrDefault();
+                .All()
+                .Where(q => q.Id == id)
+                .Select(QuizViewModel.FromQuizDefinition)
+                .FirstOrDefault();
 
             if (quiz == null)
             {
@@ -45,24 +36,26 @@
 
         // POST: Play/Start
         [HttpPost]
-        public ActionResult StartQuiz(int id, int answerId)
+        [ValidateAntiForgeryToken]
+        public ActionResult PlayQuiz(int? id, QuizPlayViewModel quiz, FormCollection f, ICollection<QuestionViewModel> list)
         {
             try
             {
                 // TODO: Add insert logic here
                 //return next partial
-                return this.RedirectToAction("Index");
+                return this.RedirectToAction("PlayQuiz");
             }
             catch
             {
-                return this.View();
+                return this.View(quiz);
             }
         }
 
         public ActionResult GetQuestion(int quizId, int currentQuestion)
         {
             var question = this.db.QuestionsDefinitions
-                               .SearchFor(q => q.QuizDefinition.Id == quizId)
+                               .All()
+                               .Where(q => q.QuizDefinition.Id == quizId)
                                .Select(QuestionViewModel.FromQuestionDefinition)
                                .FirstOrDefault(); // TODO get next question
 
