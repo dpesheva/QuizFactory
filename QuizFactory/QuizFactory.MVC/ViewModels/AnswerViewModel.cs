@@ -11,7 +11,7 @@
 
     public class AnswerViewModel : IMapFrom<AnswerDefinition>
     {
-        [ScaffoldColumn(false)]
+       // [ScaffoldColumn(false)]
         public int Id { get; set; }
 
         [Required]
@@ -19,12 +19,11 @@
         public string Text { get; set; }
 
         [Required]
-        [UIHint("RadioButtonList")]
         public int Position { get; set; }
 
         [Display(Name = "Correct")]
         public bool IsCorrect { get; set; }
 
-        // public string Question { get; set; }
+        public int QuestionId { get; set; }
     }
 }
