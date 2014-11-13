@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<QuizFactory.Mvc.ViewModels.QuizMainInfoViewModel>
+
 @using HelperExtentions
+
 @{
     ViewBag.Title = "Quiz Factory";
 }
@@ -56,15 +58,7 @@
         <div id="tabContent" class="tab-content box-shadow">
             <span id="loading" class="blue">Loading...</span>
             <div class="container" id="content"></div>  
-            @for (int i = 1; i <= ViewBag.Pages; i++)
-            {
-                @Ajax.ActionLink(i.ToString(), "RecentContent", "Home", new { page = i, catId = ViewBag.CategoryId },
-                new AjaxOptions
-                {
-                    InsertionMode = InsertionMode.Replace,
-                    UpdateTargetId = "content"
-                })
-            }        
+             
         </div>
     </div>
     <aside class="col-sm-3">

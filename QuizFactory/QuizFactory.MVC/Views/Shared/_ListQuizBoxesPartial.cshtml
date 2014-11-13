@@ -1,7 +1,12 @@
-﻿@model IEnumerable<QuizFactory.Mvc.ViewModels.QuizMainInfoViewModel>
-
+﻿@*@model IEnumerable<QuizFactory.Mvc.ViewModels.QuizMainInfoViewModel>*@
+@model IPagedList<QuizFactory.Mvc.ViewModels.QuizMainInfoViewModel>
 
     @foreach (var item in Model)
     {
         @Html.Partial("_QuizBoxPartial", item)
     }
+
+<div class="pager">
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount, 
+        new AjaxOptions { UpdateTargetId = "content" })
+</div> 
