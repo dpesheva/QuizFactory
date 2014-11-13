@@ -61,7 +61,7 @@
                                         .To<QuizMainInfoViewModel>()
                                         .ToList();
 
-                return this.PartialView("_ListQuizBoxesPartial", ramdomQuizzes.ToPagedList(1, PageSize));
+                return this.PartialView("_RandomQuizBoxesPartial", ramdomQuizzes);
             }
 
             return null; // TODO return DataErrorInfoModelValidatorProvider msg

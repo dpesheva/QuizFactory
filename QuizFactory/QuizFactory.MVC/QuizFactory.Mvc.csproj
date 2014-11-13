@@ -336,6 +336,7 @@
     <Content Include="Views\Shared\EditorTemplates\QuestionPlayViewModel.cshtml" />
     <Content Include="Views\Play\DisplayAnswers.cshtml" />
     <Content Include="Views\Play\PlayQuiz.cshtml" />
+    <Content Include="Views\Shared\_RandomQuizBoxesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Common\" />
