@@ -1,0 +1,17 @@
+﻿@model QuizFactory.Mvc.ViewModels.Play.QuizPlayViewModel
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2 class="green text-shadow">@Model.Title</h2>
+<h5 class="yellow text-shadow">Category @Model.Category</h5>
+
+@RenderBody()
+
+@*@Html.Action("GetQuestion", new {quizId = @Model.Id , currentQuestion = 1})*@
+<h5 class="yellow">Created by: @Model.Author on @Model.CreatedOn</h5>
+
+
+@section scripts{
+       @RenderSection("scripts", required: false)
+}

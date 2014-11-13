@@ -1,0 +1,45 @@
+﻿@using QuizFactory.Mvc.ViewModels.Play;
+
+@model QuizFactory.Mvc.ViewModels.Play.QuizPlayViewModel
+
+@{
+    Layout = "~/Views/Play/PlayQuizLayout.cshtml";
+}
+
+@{
+    var r = (SelectedAnswersViewModel)TempData["results"];
+    Dictionary<string, string> results = (Dictionary<string, string>)r.Questions;
+}
+
+@foreach (var question in Model.Questions)
+{ 
+    <div class="question box-shadow gray">
+        <h4>@question.Number. @question.QuestionText </h4>
+        @{
+
+            foreach (var answer in question.Answers)
+            {
+                string answerColor = "";
+                bool isSelected = false;
+                if (results.ContainsKey((question.Number - 1).ToString()) && results[(question.Number - 1).ToString()] == answer.Position.ToString())
+                {
+                    answerColor = "blue";
+                    isSelected = true;
+                }
+                <p class=@answerColor>@answer.Text
+                    @if (answer.IsCorrect)
+                    {
+                        <i class="glyphicon glyphicon-ok green"></i>
+                    }
+                    else if (isSelected) //Selected wrong answer
+                    {
+                        <i class="glyphicon glyphicon-remove red"></i>
+                    }                   
+                </p>
+            }
+        }
+
+    </div>
+}
+
+<h3>VOTING</h3>

@@ -53,11 +53,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Glimpse.AspNet">
-      <HintPath>..\packages\Glimpse.AspNet.1.8.0\lib\net45\Glimpse.AspNet.dll</HintPath>
+    <Reference Include="Glimpse.AspNet, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Glimpse.AspNet.1.9.2\lib\net45\Glimpse.AspNet.dll</HintPath>
     </Reference>
-    <Reference Include="Glimpse.Core">
-      <HintPath>..\packages\Glimpse.1.8.2\lib\net45\Glimpse.Core.dll</HintPath>
+    <Reference Include="Glimpse.Core, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
     </Reference>
     <Reference Include="Glimpse.Mvc5">
       <HintPath>..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
@@ -324,11 +326,13 @@
     <Content Include="Views\Shared\_OpenQuestionPartial.cshtml" />
     <Content Include="Views\Shared\_ListQuizBoxesPartial.cshtml" />
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
-    <Content Include="Views\Play\PlayQuiz.cshtml" />
+    <Content Include="Views\Play\PlayQuizLayout.cshtml" />
     <Content Include="Views\Shared\_AnswerPartial.cshtml" />
     <Content Include="Scripts\Kendo\jquery.min.map" />
     <Content Include="Views\Shared\DisplayTemplates\AnswerViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\QuestionPlayViewModel.cshtml" />
+    <Content Include="Views\Play\DisplayAnswers.cshtml" />
+    <Content Include="Views\Play\PlayQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Common\" />

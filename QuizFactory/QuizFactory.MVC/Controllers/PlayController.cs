@@ -8,7 +8,7 @@
     using QuizFactory.Data;
     using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Mvc.ViewModels.Play;
-    
+
     public class PlayController : BaseController
     {
         public PlayController(IQuizFactoryData data)
@@ -38,38 +38,47 @@
         // POST: Play/Start
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PlayQuiz( int id, Dictionary<string, string>  questions, /*SelectedAnswersViewModel selectedAnswers,*/ QuizPlayViewModel quiz)
+        public ActionResult PlayQuiz(int id, SelectedAnswersViewModel selectedAnswers)
         {
-            try
+            // var result = ProcessSelectedAnswers(selectedAnswers);
+
+            if (User.Identity.IsAuthenticated)
             {
-                if (this.ModelState.IsValid)
-                {
-                    // TODO: Add insert logic here
-                }
-
-                //return next partial
-                return this.RedirectToAction("PlayQuiz");
+                // SaveResult(selectedAnswers);
             }
-            catch
-            {
-                return this.View(quiz);
-            }
-        }
 
-        public ActionResult GetQuestion(int quizId, int currentQuestion)
-        {
-            var question = this.db.QuestionsDefinitions
-                               .All()
-                               .Where(q => q.QuizDefinition.Id == quizId)
-                               .Select(QuestionViewModel.FromQuestionDefinition)
-                               .FirstOrDefault(); // TODO get next question
+            // TODO
 
-            if (question == null)
+            var quiz = this.db.QuizzesDefinitions
+          .All()
+          .Where(q => q.Id == id)
+          .Project()
+          .To<QuizPlayViewModel>()
+          .FirstOrDefault();
+
+            if (quiz == null)
             {
                 return this.Redirect("Error"); // TODO 
             }
+            TempData["results"] = selectedAnswers;
+            return this.View("DisplayAnswers", quiz);
 
-            return this.PartialView("_OpenQuestionPartial", question);
         }
+
+        //public ActionResult GetQuestion(int quizId, int currentQuestion)
+        //{
+        //    var question = this.db.QuestionsDefinitions
+        //                       .All()
+        //                       .Where(q => q.QuizDefinition.Id == quizId)
+        //                       .Select(QuestionViewModel.FromQuestionDefinition)
+        //                       .FirstOrDefault(); // TODO get next question
+
+        //    if (question == null)
+        //    {
+        //        return this.Redirect("Error"); // TODO 
+        //    }
+
+        //    return this.PartialView("_OpenQuestionPartial", question);
+        //}
     }
 }
