@@ -1634,7 +1634,7 @@ namespace QuizFactory.Migrations
                         },
                         new AnswerDefinition()
                         {
-                            Position = 4,
+                            Position = 3,
                             Text = "Olympia",
                             IsCorrect = false
                         }
