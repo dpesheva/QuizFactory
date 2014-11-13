@@ -1,6 +1,7 @@
 ﻿namespace QuizFactory.Mvc.Areas.Users.ViewModels
 {
     using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.Areas.Admin.ViewModels;
     using QuizFactory.Mvc.ViewModels;
     using System;
     using System.Collections.Generic;
@@ -62,10 +63,10 @@
         [Display(Name = "Public")]
         public bool IsPublic { get; set; }
 
-        [UIHint("CategoryViewModel")]
         public string Category { get; set; }
 
         [Required]
+        [UIHint("CategoryViewModel")]
         public int CategoryId { get; set; }
 
         [Display(Name = "Questions")]

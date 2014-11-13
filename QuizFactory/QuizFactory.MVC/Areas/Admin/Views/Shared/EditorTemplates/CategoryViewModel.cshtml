@@ -1,16 +1,14 @@
-﻿@model QuizFactory.Mvc.Areas.Admin.ViewModels.CategoryViewModel
-@using QuizFactory.Mvc.Areas.Admin.ViewModels
-
+﻿@using QuizFactory.Mvc.Areas.Admin.ViewModels
+@model int?
 @{
     List<CategoryViewModel> categories = (List<CategoryViewModel>)TempData["categories"];
-}
+   }
 
 @(Html.Kendo().DropDownList()
-    .Name("Category")
+    .Name("CategoryId")
+    .SelectedIndex((int)ViewData["selectedId"])
     .DataTextField("Name")
     .DataValueField("Id")
     .BindTo(categories)
 
 )
-
-
