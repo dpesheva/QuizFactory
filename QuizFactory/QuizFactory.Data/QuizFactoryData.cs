@@ -3,38 +3,37 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
-    using QuizFactory.Data.Models;
     using QuizFactory.Data.Common.Interfaces;
     using QuizFactory.Data.Common.Repositories;
-
+    using QuizFactory.Data.Models;
 
     public class QuizFactoryData : IQuizFactoryData
     {
-        private QuizFactoryDbContext context;
-        private IDictionary<Type, object> repositories;
+        private readonly IQuizFactoryDbContext context;
+        private readonly Dictionary<Type, object> repositories = new Dictionary<Type, object>();
 
-        public static QuizFactoryData Create()
-        {
-            return new QuizFactoryData();
-        }
-
-        public QuizFactoryData(QuizFactoryDbContext context)
+        public QuizFactoryData(IQuizFactoryDbContext context)
         {
             this.context = context;
-            this.repositories = new Dictionary<Type, object>();
         }
 
-        public QuizFactoryData()
-            : this(new QuizFactoryDbContext())
+        //public QuizFactoryData()
+        //    : this(new QuizFactoryDbContext())
+        //{
+        //}
+        public IQuizFactoryDbContext Context
         {
+            get
+            {
+                return this.context;
+            }
         }
 
         public IDeletableEntityRepository<AnswerDefinition> AnswerDefinitions
         {
             get
             {
-                return this.GetRepository<AnswerDefinition>();
+                return this.GetDeletableEntityRepository<AnswerDefinition>();
             }
         }
 
@@ -42,7 +41,7 @@
         {
             get
             {
-                return this.GetRepository<QuestionDefinition>();
+                return this.GetDeletableEntityRepository<QuestionDefinition>();
             }
         }
 
@@ -50,7 +49,7 @@
         {
             get
             {
-                return this.GetRepository<QuizDefinition>();
+                return this.GetDeletableEntityRepository<QuizDefinition>();
             }
         }
 
@@ -58,7 +57,7 @@
         {
             get
             {
-                return this.GetRepository<TakenQuiz>();
+                return this.GetDeletableEntityRepository<TakenQuiz>();
             }
         }
 
@@ -66,7 +65,7 @@
         {
             get
             {
-                return this.GetRepository<UsersAnswer>();
+                return this.GetDeletableEntityRepository<UsersAnswer>();
             }
         }
 
@@ -74,7 +73,7 @@
         {
             get
             {
-                return this.GetRepository<Category>();
+                return this.GetDeletableEntityRepository<Category>();
             }
         }
 
@@ -82,7 +81,7 @@
         {
             get
             {
-                return this.GetRepository<ApplicationUser>();
+                return this.GetDeletableEntityRepository<ApplicationUser>();
             }
         }
 
@@ -91,7 +90,23 @@
             this.context.SaveChanges();
         }
 
-        private IDeletableEntityRepository<T> GetRepository<T>() where T : class, IDeletableEntity
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (this.context != null)
+                {
+                    this.context.Dispose();
+                }
+            }
+        }
+
+        private IDeletableEntityRepository<T> GetDeletableEntityRepository<T>() where T : class, IDeletableEntity
         {
             var typeOfModel = typeof(T);
 

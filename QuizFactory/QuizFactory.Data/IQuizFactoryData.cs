@@ -6,9 +6,10 @@
     using QuizFactory.Data.Common.Interfaces;
     using QuizFactory.Data.Models;
 
-    // unit of work
     public interface IQuizFactoryData
     {
+        IQuizFactoryDbContext Context { get; }
+
         IDeletableEntityRepository <AnswerDefinition> AnswerDefinitions { get; }
 
         IDeletableEntityRepository<QuestionDefinition> QuestionsDefinitions { get; }

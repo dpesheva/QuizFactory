@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IQuizFactoryData.cs" />
+    <Compile Include="IQuizFactoryDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData.cs" />
     <Compile Include="Migrations\SeedUsers.cs" />
