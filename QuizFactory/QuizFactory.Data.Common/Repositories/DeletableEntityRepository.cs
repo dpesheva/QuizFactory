@@ -21,7 +21,7 @@
             base.ChangeEntityState(entity, EntityState.Modified);
         }
 
-        public void HardDelete(T entity)
+        public void ActualDelete(T entity)
         {
             base.Delete(entity);
         }
