@@ -12,11 +12,17 @@
     using QuizFactory.Mvc.Controllers;
 
     [Authorize]
-    public class QuizUsersController : AbstractController
+    public class QuizUsersController : HomeController
     {
         public QuizUsersController(IQuizFactoryData data)
             : base(data)
         {
+        }
+
+        public ActionResult Index()
+        {
+            var allQuizzes = this.GetAllQuizzes();
+            return this.View(allQuizzes);
         }
 
         public ActionResult Details(int? id)
@@ -26,8 +32,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            QuizViewModel quizViewModel = this.GetViewModelById(id);
-            return this.View(quizViewModel);
+            return this.View(this.GetViewModelById(id));
         }
 
         public ActionResult Edit(int? id)
@@ -49,10 +54,14 @@
         {
             if (this.ModelState.IsValid)
             {
-                // TODO create new and disable the old
+                // create new and disable the old //TODO Manage questions
+                this.CreateQuiz(quizViewModel, true);
+                this.db.QuizzesDefinitions.Delete(quizViewModel.Id);
+
                 this.db.SaveChanges();
                 return this.RedirectToAction("Index");
             }
+
             return this.View(quizViewModel);
         }
 
@@ -64,9 +73,21 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            QuizViewModel quizViewModel = this.GetViewModelById(id);
+            return this.View(this.GetViewModelById(id));
+        }
 
-            return this.View(quizViewModel);
+        // POST: ***/QuizAdministration/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var quiz = this.db.QuizzesDefinitions
+                           .SearchFor(q => q.Id == id)
+                           .FirstOrDefault();
+
+            this.db.QuizzesDefinitions.Delete(quiz);
+            this.db.SaveChanges();
+            return this.RedirectToAction("Index");
         }
 
         // GET: User/QuizAdministration/Create
@@ -83,15 +104,10 @@
         {
             if (this.ModelState.IsValid)
             {
-                QuizDefinition newQuiz = new QuizDefinition();
-                this.MapViewModelToModel(quizViewModel, newQuiz);
-
-                this.ViewBag.CategoryId = new SelectList(this.db.Categories.All().ToList(), "Id", "Name", quizViewModel.CategoryId);
-
-                this.db.QuizzesDefinitions.Add(newQuiz);
+                this.CreateQuiz(quizViewModel, false);
                 this.db.SaveChanges();
 
-                quizViewModel.Id = newQuiz.Id;
+                this.ViewBag.CategoryId = new SelectList(this.db.Categories.All().ToList(), "Id", "Name", quizViewModel.CategoryId);
 
                 return this.RedirectToAction("Edit", quizViewModel);
             }
@@ -99,18 +115,26 @@
             return this.View(quizViewModel);
         }
 
-        protected override void MapViewModelToModel(IQuizViewModel quizViewModel, QuizDefinition newQuiz)
+        private void MapViewModelToModel(IQuizViewModel quizViewModel, QuizDefinition dbQuiz, bool replace)
         {
-            base.MapViewModelToModel(quizViewModel, newQuiz);
+            var category = this.db.Categories.SearchFor(c => c.Id == quizViewModel.CategoryId).FirstOrDefault();
+            if (category == null)
+            {
+                return; // TODO
+            }
+
+            dbQuiz.Title = quizViewModel.Title;
+            dbQuiz.CategoryId = quizViewModel.CategoryId;
+            dbQuiz.IsPublic = quizViewModel.IsPublic;
 
             var user = this.db.Users.Find(this.User.Identity.GetUserId());
-            
-            newQuiz.Author = user;
-            newQuiz.QuestionsDefinitions = new List<QuestionDefinition>();
+
+            dbQuiz.Author = user;
+            dbQuiz.QuestionsDefinitions = new List<QuestionDefinition>();
         }
 
         //return all quizzes by user
-        protected override List<QuizViewModel> GetAllQuizzes()
+        private List<QuizViewModel> GetAllQuizzes()
         {
             var userId = this.User.Identity.GetUserId();
 
@@ -121,6 +145,14 @@
                                  .ToList();
 
             return allQuizzes;
+        }
+
+        private void CreateQuiz(QuizViewModel quizViewModel, bool replace)
+        {
+            QuizDefinition newQuiz = new QuizDefinition();
+            this.MapViewModelToModel(quizViewModel, newQuiz, replace);
+            this.db.QuizzesDefinitions.Add(newQuiz);
+            quizViewModel.Id = newQuiz.Id;
         }
 
         private QuizViewModel GetViewModelById(int? id)
