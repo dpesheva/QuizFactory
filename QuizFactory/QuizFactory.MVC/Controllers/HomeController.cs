@@ -12,6 +12,7 @@
     using QuizFactory.Data;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq.Expressions;
 
     public class HomeController : BaseController
     {
@@ -66,7 +67,7 @@
 
             return null; // TODO return DataErrorInfoModelValidatorProvider msg
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Search(string search, int? page)
@@ -79,8 +80,7 @@
                 .To<QuizMainInfoViewModel>()
                 .ToList();
 
-            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
-            return this.View(quizzes.ToPagedList(currentPageIndex, PageSize));
+           return FormatOutput(page, quizzes);
         }
 
         public ActionResult RecentContent(int? catId, int? page)
@@ -88,16 +88,13 @@
             if (!this.Request.IsAjaxRequest())
             {
                 this.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return null; // TODO return error
+                return this.Redirect("Error"); // TODO return error
             }
 
-            var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.CreatedOn);
-            var quizzes = this.ProjectQuery(quizzesQuery, catId);
-
-            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
-            return this.PartialView("_ListQuizBoxesPartial", quizzes.ToPagedList(currentPageIndex, PageSize));
+            var quizzes = GetData(catId, q => q.CreatedOn, false);
+            return FormatOutput(page, quizzes);
         }
-
+        
         public ActionResult PopularContent(int? catId, int? page)
         {
             if (!this.Request.IsAjaxRequest())
@@ -106,11 +103,8 @@
                 return null; // TODO return error
             }
 
-            var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.TakenQuizzes.Count);
-            var quizzes = this.ProjectQuery(quizzesQuery, catId);
-
-            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
-            return this.PartialView("_ListQuizBoxesPartial", quizzes.ToPagedList(currentPageIndex, PageSize));
+            var quizzes = GetData(catId, q => q.TakenQuizzes.Count, false);
+            return FormatOutput(page, quizzes);
         }
 
         public ActionResult ByNameContent(int? catId, int? page)
@@ -121,11 +115,8 @@
                 return null; // TODO return error
             }
 
-            var quizzesQuery = this.db.QuizzesDefinitions.All().OrderBy(q => q.Title);
-            var quizzes = this.ProjectQuery(quizzesQuery, catId);
-
-            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
-            return this.PartialView("_ListQuizBoxesPartial", quizzes.ToPagedList(currentPageIndex, PageSize));
+            var quizzes = GetData(catId, q => q.Title, true);
+            return FormatOutput(page, quizzes);
         }
 
         public ActionResult ByRatingContent(int? catId, int? page)
@@ -136,28 +127,43 @@
                 return null; // TODO return error
             }
 
-            var quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(q => q.Rating);
-            var quizzes = this.ProjectQuery(quizzesQuery, catId);
-
-            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
-            return this.PartialView("_ListQuizBoxesPartial", quizzes.ToPagedList(currentPageIndex, PageSize));
+            var quizzes = GetData(catId, q => q.Rating, false);
+            return FormatOutput(page, quizzes);
         }
 
-        private IEnumerable<QuizMainInfoViewModel> ProjectQuery(IQueryable<QuizDefinition> quizzesQuery, int? catId)
+        private IEnumerable<QuizMainInfoViewModel> GetData<TOrderBy>(int? catId, Expression<Func<QuizDefinition, TOrderBy>> predicate, bool asc)
         {
-            ViewBag.Pages = Math.Ceiling((double)quizzesQuery.Count() / PageSize);
+            IQueryable<QuizDefinition> quizzesQuery;
 
-            var filteredQuizzes = quizzesQuery;
+            if (asc)
+            {
+                quizzesQuery = this.db.QuizzesDefinitions.All().OrderBy(predicate);
+            }
+            else
+            {
+                quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(predicate);
+            }
+
+            Expression<Func<QuizDefinition, bool>> filter = (q => q.IsPublic == true);
 
             if (catId != null)
             {
-                filteredQuizzes = quizzesQuery.Where(q => q.Category.Id == catId);
+                filter = q => (q.IsPublic == true) && (q.Category.Id == catId);
             }
 
-            return filteredQuizzes.Where(q => q.IsPublic == true)
+            return quizzesQuery.Where(filter)
                                .Project()
                                .To<QuizMainInfoViewModel>()
                                .ToList();
+
+        }
+
+        private ActionResult FormatOutput(int? page, IEnumerable<QuizMainInfoViewModel> quizzes)
+        {
+            ViewBag.Pages = Math.Ceiling((double)quizzes.Count() / PageSize);
+
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            return this.PartialView("_ListQuizBoxesPartial", quizzes.ToPagedList(currentPageIndex, PageSize));
         }
     }
 }
