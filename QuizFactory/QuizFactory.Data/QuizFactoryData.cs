@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using QuizFactory.Data.Common.Interfaces;
-    using QuizFactory.Data.Common.Repositories;
     using QuizFactory.Data.Models;
+    using QuizFactory.Data.Repositories;
 
     public class QuizFactoryData : IQuizFactoryData
     {

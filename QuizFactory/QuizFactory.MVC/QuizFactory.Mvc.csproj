@@ -203,6 +203,7 @@
     <Compile Include="Areas\Admin\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuestionAdminViewModel.cs" />
     <Compile Include="Areas\Common\Controllers\KendoGridAdministrationController.cs" />
+    <Compile Include="Areas\Common\ViewModels\QuizViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\QuestionController.cs" />
     <Compile Include="Areas\Users\Controllers\QuizUsersController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
@@ -279,6 +280,8 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\CategoryViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\QuizAdminViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\QuizAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\DisplayTemplates\Public.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -336,7 +339,6 @@
     <Content Include="Views\Shared\_RandomQuizBoxesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\QuizAdmin\" />
     <Folder Include="Content\Kendo\" />
   </ItemGroup>
   <ItemGroup>

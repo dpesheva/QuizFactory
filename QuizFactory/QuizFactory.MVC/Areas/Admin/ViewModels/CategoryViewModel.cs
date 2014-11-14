@@ -25,7 +25,6 @@ namespace QuizFactory.Mvc.Areas.Admin.ViewModels
 
         public void CreateMappings(IConfiguration configuration)
         {
-
             configuration.CreateMap<Category, CategoryViewModel>().ReverseMap();
         }
     }

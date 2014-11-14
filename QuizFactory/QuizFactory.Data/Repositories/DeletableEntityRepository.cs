@@ -1,19 +1,18 @@
-﻿namespace QuizFactory.Data.Common.Repositories
+﻿namespace QuizFactory.Data.Repositories
 {
-    using System.Linq;
-
-    using System.Data.Entity;
-    using QuizFactory.Data.Common.Interfaces;
     using System;
+    using System.Data.Entity;
+    using System.Linq;
+    using QuizFactory.Data.Common.Interfaces;
 
     public class DeletableEntityRepository<T> : EFRepository<T>, IDeletableEntityRepository<T>
         where T : class, IDeletableEntity
     {
-        public DeletableEntityRepository(DbContext context)
+        public DeletableEntityRepository(IQuizFactoryDbContext context)
             : base(context)
         {
         }
-
+       
         public override void Delete(T entity)
         {
             entity.IsDeleted = true;

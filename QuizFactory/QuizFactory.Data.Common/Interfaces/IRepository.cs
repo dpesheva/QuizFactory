@@ -15,11 +15,15 @@
         void Update(T entity);
 
         void Delete(T entity);
-        
+
+        void Delete(object id);
+
         IQueryable<T> SearchFor(Expression<Func<T, bool>> predicate);
 
         void Detach(T entity);
 
         void SaveChanges();
+
+        void UpdateValues(Expression<Func<T, object>> entity);
     }
 }

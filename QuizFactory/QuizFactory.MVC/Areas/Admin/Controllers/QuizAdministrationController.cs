@@ -24,13 +24,15 @@
 
         public ActionResult Index()
         {
-            var allQuizzes = this.db.QuizzesDefinitions
-                .All()
-                .Select(QuizAdminViewModel.FromQuizDefinition).ToList();
+            //var allQuizzes = this.db.QuizzesDefinitions
+            //    .All()
+            //    .Select(QuizAdminViewModel.FromQuizDefinition).ToList();
 
-            TempData["categories"] = this.db.Categories.All().Project().To<CategoryViewModel>().ToList();
+            //TempData["categories"] = this.db.Categories.All().Project().To<CategoryViewModel>().ToList();
 
-            return this.View(allQuizzes);
+            //return this.View(allQuizzes);
+
+            return null;
         }
 
         public ICollection<CategoryViewModel> Categories()
@@ -41,12 +43,13 @@
         [HttpPost]
         public ActionResult Read([DataSourceRequest]DataSourceRequest request)
         {
-            var allQuizzes = this.db.QuizzesDefinitions
-                .All()
-                .Select(QuizAdminViewModel.FromQuizDefinition)
-                .ToDataSourceResult(request);
+            //var allQuizzes = this.db.QuizzesDefinitions
+            //    .All()
+            //    .Select(QuizAdminViewModel.FromQuizDefinition)
+            //    .ToDataSourceResult(request);
 
-            return this.Json(allQuizzes);
+            //return this.Json(allQuizzes);
+            return null;
         }
 
         [HttpPost]
@@ -154,11 +157,13 @@
 
         private QuizAdminViewModel GetViewModelById(int? id)
         {
-            QuizAdminViewModel quizAdminViewModel = this.db.QuizzesDefinitions
-                                                        .SearchFor(q => q.Id == id)
-                                                        .Select(QuizAdminViewModel.FromQuizDefinition)
-                                                        .FirstOrDefault();
-            return quizAdminViewModel;
+            //QuizAdminViewModel quizAdminViewModel = this.db.QuizzesDefinitions
+            //                                            .SearchFor(q => q.Id == id)
+            //                                            .Select(QuizAdminViewModel.FromQuizDefinition)
+            //                                            .FirstOrDefault();
+            //return quizAdminViewModel;
+
+            return null;
         }
     }
 }

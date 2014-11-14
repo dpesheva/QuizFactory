@@ -77,8 +77,14 @@
     <Compile Include="QuizFactoryData.cs" />
     <Compile Include="QuizFactoryDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DeletableEntityRepository.cs" />
+    <Compile Include="Repositories\EFRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HelperExtentions\HelperExtentions.csproj">
+      <Project>{28000772-3379-403f-a3e9-4f7fd204e6a8}</Project>
+      <Name>HelperExtentions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QuizFactory.Data.Common\QuizFactory.Data.Common.csproj">
       <Project>{9c6821ff-16e9-4922-801c-e3307408682f}</Project>
       <Name>QuizFactory.Data.Common</Name>

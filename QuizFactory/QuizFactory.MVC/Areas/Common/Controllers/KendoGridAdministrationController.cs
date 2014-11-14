@@ -4,11 +4,12 @@
     using System.Data.Entity;
     using System.Web.Mvc;
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
     using QuizFactory.Data;
     using QuizFactory.Data.Common;
-    using QuizFactory.Mvc.Areas.Users.ViewModels;
+    using QuizFactory.Mvc.Areas.Common.ViewModels;
     using QuizFactory.Mvc.Controllers;
 
     public abstract class KendoGridAdministrationController : BaseController
@@ -19,12 +20,9 @@
         }
 
         [HttpPost]
-        public ActionResult Read([DataSourceRequest]
-                                 DataSourceRequest request)
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            var ads =
-                this.GetData()
-                    .ToDataSourceResult(request);
+            var ads = this.GetData().ToDataSourceResult(request);
 
             return this.Json(ads);
         }
@@ -56,12 +54,11 @@
                 var dbModel = this.GetById<TModel>(id);
                 Mapper.Map<TViewModel, TModel>(model, dbModel);
                 this.ChangeEntityStateAndSave(dbModel, EntityState.Modified);
-                // model.ModifiedOn = dbModel.ModifiedOn;
+                model.ModifiedOn = dbModel.ModifiedOn;
             }
         }
 
-        protected JsonResult GridOperation<T>(T model, [DataSourceRequest]
-                                              DataSourceRequest request)
+        protected JsonResult GridOperation<T>(T model, [DataSourceRequest] DataSourceRequest request)
         {
             return this.Json(new[] { model }.ToDataSourceResult(request, ModelState));
         }
