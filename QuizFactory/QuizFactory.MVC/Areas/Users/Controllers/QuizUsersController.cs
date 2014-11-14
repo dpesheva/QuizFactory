@@ -12,7 +12,7 @@
     using QuizFactory.Mvc.Controllers;
 
     [Authorize]
-    public class QuizUsersController : HomeController
+    public class QuizUsersController : BaseController
     {
         public QuizUsersController(IQuizFactoryData data)
             : base(data)
@@ -42,7 +42,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            QuizViewModel quizViewModel = this.GetViewModelById(id);
+            QuizUserViewModel quizViewModel = this.GetViewModelById(id);
             this.ViewBag.CategoryId = new SelectList(this.db.Categories.All().ToList(), "Id", "Name", quizViewModel.CategoryId);
 
             return this.View(quizViewModel);
@@ -50,7 +50,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(QuizViewModel quizViewModel)
+        public ActionResult Edit(QuizUserViewModel quizViewModel)
         {
             if (this.ModelState.IsValid)
             {
@@ -100,7 +100,7 @@
         // POST: User/QuizAdministration/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(QuizViewModel quizViewModel)
+        public ActionResult Create(QuizUserViewModel quizViewModel)
         {
             if (this.ModelState.IsValid)
             {
@@ -115,7 +115,7 @@
             return this.View(quizViewModel);
         }
 
-        private void MapViewModelToModel(IQuizViewModel quizViewModel, QuizDefinition dbQuiz, bool replace)
+        private void MapViewModelToModel(QuizUserViewModel quizViewModel, QuizDefinition dbQuiz, bool replace)
         {
             var category = this.db.Categories.SearchFor(c => c.Id == quizViewModel.CategoryId).FirstOrDefault();
             if (category == null)
@@ -134,20 +134,20 @@
         }
 
         //return all quizzes by user
-        private List<QuizViewModel> GetAllQuizzes()
+        private List<QuizUserViewModel> GetAllQuizzes()
         {
             var userId = this.User.Identity.GetUserId();
 
             var allQuizzes = this.db.QuizzesDefinitions
                                  .All()
                                  .Where(q => q.Author.Id == userId)
-                                 .Select(QuizViewModel.FromQuizDefinition)
+                                 .Select(QuizUserViewModel.FromQuizDefinition)
                                  .ToList();
 
             return allQuizzes;
         }
 
-        private void CreateQuiz(QuizViewModel quizViewModel, bool replace)
+        private void CreateQuiz(QuizUserViewModel quizViewModel, bool replace)
         {
             QuizDefinition newQuiz = new QuizDefinition();
             this.MapViewModelToModel(quizViewModel, newQuiz, replace);
@@ -155,13 +155,13 @@
             quizViewModel.Id = newQuiz.Id;
         }
 
-        private QuizViewModel GetViewModelById(int? id)
+        private QuizUserViewModel GetViewModelById(int? id)
         {
             var userId = this.User.Identity.GetUserId();
 
             var quizViewModel = this.db.QuizzesDefinitions
                                     .SearchFor(q => q.Id == id && q.Author.Id == userId)
-                                    .Select(QuizViewModel.FromQuizDefinition)
+                                    .Select(QuizUserViewModel.FromQuizDefinition)
                                     .FirstOrDefault();
 
             return quizViewModel;
