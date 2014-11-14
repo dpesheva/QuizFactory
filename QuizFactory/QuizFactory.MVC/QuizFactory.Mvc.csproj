@@ -201,6 +201,7 @@
     <Compile Include="Areas\Admin\Controllers\QuizAdministrationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuestionAdminViewModel.cs" />
+    <Compile Include="Areas\Common\Controllers\KendoGridAdministrationController.cs" />
     <Compile Include="Areas\Users\Controllers\QuestionController.cs" />
     <Compile Include="Areas\Users\Controllers\QuizUsersController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
@@ -252,15 +253,10 @@
     <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\QuizAdministration\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\QuizAdministration\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\QuizAdministration\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\QuizAdministration\Index_.cshtml" />
     <Content Include="Areas\Users\Views\QuizUsers\Index.cshtml" />
     <Content Include="Areas\Users\Views\QuizUsers\Create.cshtml" />
     <Content Include="Areas\Users\Views\QuizUsers\Delete.cshtml" />
     <Content Include="Areas\Users\Views\QuizUsers\Edit.cshtml" />
-    <Content Include="ClassDiagram1.cd" />
     <Content Include="Areas\Users\Views\QuizUsers\Details.cshtml" />
     <Content Include="Areas\Users\Views\Question\Add.cshtml" />
     <Content Include="Areas\Users\Views\Question\Delete.cshtml" />
@@ -339,7 +335,6 @@
     <Content Include="Views\Shared\_RandomQuizBoxesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Common\" />
     <Folder Include="Content\Kendo\" />
   </ItemGroup>
   <ItemGroup>
