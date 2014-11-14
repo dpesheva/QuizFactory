@@ -281,7 +281,6 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\CategoryViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\QuizAdminViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdmin\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\DisplayTemplates\Public.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -337,8 +336,10 @@
     <Content Include="Views\Play\DisplayAnswers.cshtml" />
     <Content Include="Views\Play\PlayQuiz.cshtml" />
     <Content Include="Views\Shared\_RandomQuizBoxesPartial.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Shared\DisplayTemplates\" />
     <Folder Include="Content\Kendo\" />
   </ItemGroup>
   <ItemGroup>

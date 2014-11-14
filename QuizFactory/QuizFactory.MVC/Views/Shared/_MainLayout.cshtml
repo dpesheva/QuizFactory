@@ -52,8 +52,14 @@
                 }
             </ul>
             <div class="right search-form">
-                <input type="text" class="search-box" />
-                <button class="glyphicon glyphicon-search serch-button"></button>
+                @using (Html.BeginForm("Search", "Home", new { }, FormMethod.Post, new { }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.TextBox("search", "", new { @class = "search-box gray", placeholder = "Search..." })
+                    <label for="submit" class="glyphicon glyphicon-search search-button">  </label>
+                    @Html.Submit(new { id = "submit", value = "", @class = "hidden" })
+
+                }
             </div>
         </div>
     </div>
