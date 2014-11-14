@@ -1,12 +1,12 @@
-﻿@model IEnumerable<QuizFactory.Mvc.Areas.Users.ViewModels.QuizViewModel>
+﻿@model IEnumerable<QuizFactory.Mvc.Areas.Users.ViewModels.QuizUserViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>My Quizzes</h2>
+<h2 class="green text-shadow">My Quizzes</h2>
 
-<table class="table">
+<table class="table box-shadow gray">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)

@@ -1,12 +1,8 @@
 ﻿@model  QuizFactory.Mvc.ViewModels.AnswerViewModel
-<div>
+<div class="answer-display">
+    @Html.DisplayFor(a => a.Text)
     @if (Model.IsCorrect)
     {
         <i class="glyphicon glyphicon-ok green"></i>
     }
-    else
-    {
-        <i class="glyphicon glyphicon-remove red"></i>
-    } 
-    @Html.DisplayFor(a => a.Text)
 </div>

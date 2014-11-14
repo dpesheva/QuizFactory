@@ -1,14 +1,14 @@
-﻿@model QuizFactory.Mvc.Areas.Users.ViewModels.QuizViewModel
+﻿@model QuizFactory.Mvc.Areas.Users.ViewModels.QuizUserViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="green text-shadow">Details</h2>
 
 <div>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal gray">
         <dt>
             @Html.DisplayNameFor(model => model.Category)
         </dt>
@@ -50,9 +50,15 @@
         </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to My Quizzes", "Index") |
-    @Html.ActionLink("View Questions", "Index") 
 
-</p>
+<div>
+    <div class="col-md-offset-1 col-md-11 questions-button">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary box-shadow" })
+    </div>
+    <div class="col-md-offset-1 col-md-11 questions-button">
+        @Html.ActionLink("View questions", "Index", "Question", new { quizId = @Model.Id }, new { @class = "btn btn-warning box-shadow" })
+    </div>
+    @Html.ActionLink("Back to My Quizzes", "Index")
+
+</div>
+

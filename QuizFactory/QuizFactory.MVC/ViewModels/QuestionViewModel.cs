@@ -35,6 +35,8 @@
 
         [Required]
         [Display(Name = "Question")]
+    
+        [DataType(DataType.MultilineText)] 
         public string QuestionText { get; set; }
 
         [Required]

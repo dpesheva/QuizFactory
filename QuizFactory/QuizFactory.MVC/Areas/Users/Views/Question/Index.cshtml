@@ -3,8 +3,9 @@
 @{
     ViewBag.Title = "Index";
 }
+<h2 class="green text-shadow">Quiz </h2>
 
-<table class="table">
+<table class="table gray box-shadow">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Number)
@@ -36,6 +37,6 @@
 @if (TempData["quizId"] != null)
 {
     <p>
-        @Html.ActionLink("Add question", "Add", new { quizId = TempData["quizId"] })
+        @Html.ActionLink("Add question", "Add", new { quizId = TempData["quizId"] }, new { @class = "btn btn-primary pull-right box-shadow"})
     </p>
 }

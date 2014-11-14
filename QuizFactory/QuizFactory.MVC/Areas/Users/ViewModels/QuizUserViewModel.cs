@@ -11,13 +11,13 @@
     using System.Web;
     using System.Web.Mvc;
 
-    public class QuizViewModel : IQuizViewModel
+    public class QuizUserViewModel 
     {
-        public static Expression<Func<QuizDefinition, QuizViewModel>> FromQuizDefinition
+        public static Expression<Func<QuizDefinition, QuizUserViewModel>> FromQuizDefinition
         {
             get
             {
-                return quiz => new QuizViewModel
+                return quiz => new QuizUserViewModel
                 {
                     Id = quiz.Id,
                     Title = quiz.Title,
@@ -55,7 +55,7 @@
         public string Author { get; set; }
 
         [Display(Name = "Created on")]
-        [HiddenInput(DisplayValue = false)]
+        [Editable(false)]
         public DateTime CreatedOn { get; set; }
 
         public decimal Rating { get; set; }
@@ -70,7 +70,7 @@
         public int CategoryId { get; set; }
 
         [Display(Name = "Questions")]
-        [HiddenInput(DisplayValue = false)]
+        [Editable(false)]
         public string NumberQuestions { get; set; }
 
         public ICollection<QuestionViewModel> Questions { get; set; }

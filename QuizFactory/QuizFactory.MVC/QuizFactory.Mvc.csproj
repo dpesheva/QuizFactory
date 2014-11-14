@@ -208,8 +208,6 @@
     <Compile Include="Areas\Users\Controllers\QuizUsersController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuizAdminViewModel.cs" />
-    <Compile Include="Areas\Users\ViewModels\IQuizViewModel.cs" />
-    <Compile Include="Controllers\AbstractController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -231,7 +229,7 @@
     <Compile Include="ViewModels\Play\SelectedAnswersViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\QuizMainInfoViewModel.cs" />
-    <Compile Include="Areas\Users\ViewModels\QuizViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\QuizUserViewModel.cs" />
     <Compile Include="ViewModels\Play\QuizPlayViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

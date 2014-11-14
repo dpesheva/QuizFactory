@@ -116,6 +116,10 @@ a:hover {
     margin: 0;
 }
 
+.answer-display {
+    margin: 5px;
+}
+
 .header-boxes {
     margin: 20px 0;
 }
@@ -197,6 +201,11 @@ input[type="radio"][disabled], input[type="checkbox"][disabled], .radio[disabled
         border-bottom: solid 1px #ddd;
         padding-bottom: 5px;
     }
+
+.questions-button {
+    padding-left: 4px;
+    margin-bottom: 20px;
+}
 
 /* Colorts */
 .blue {

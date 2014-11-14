@@ -4,20 +4,12 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2 class="red text-shadow">Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3 class="gray">Are you sure you want to delete this?</h3>
 <div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.QuestionText)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.QuestionText)
-        </dd>
-
+    <dl class="dl-horizontal gray">
         <dt>
             @Html.DisplayNameFor(model => model.Number)
         </dt>
@@ -26,14 +18,22 @@
             @Html.DisplayFor(model => model.Number)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestionText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuestionText)
+        </dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index", new { quizId = @Model.QuizId })
+        <div class="form-group col-md-offset-2">
+            <input type="submit" value="Delete" class="btn btn-danger box-shadow" />
         </div>
     }
+    @Html.ActionLink("Back to Questions", "Index", new { quizId = @Model.QuizId })
 </div>

@@ -4,18 +4,20 @@
     ViewBag.Title = "Details";
 }
 
-<div>
-    <hr />
+<div class="gray">
+    <h4>
+        @Html.DisplayFor(model => model.Number).  @Html.DisplayFor(model => model.QuestionText)
+    </h4>
     <p>
-        @Html.DisplayFor(model => model.Number)  @Html.DisplayFor(model => model.QuestionText)
+        @Html.DisplayFor(m => m.Answers)
     </p>
-    @foreach (var item in Model.Answers)
-    {
-        @Html.RadioButton(item.Text, new { }, item.IsCorrect, new { @class = "disable" })
-    }
+</div>
+
+
+<div>
+    <div class="questions-button">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary box-shadow" })
+    </div>
+    @Html.ActionLink("Back to Questions", "Index", new { quizId = Model.QuizId })
 
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", new { quizId = Model.QuizId })
-</p>
