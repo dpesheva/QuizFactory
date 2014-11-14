@@ -1,5 +1,6 @@
 ﻿namespace QuizFactory.Mvc.Areas.Common.Controllers
 {
+    using System;
     using System.Collections;
     using System.Data.Entity;
     using System.Web.Mvc;
@@ -52,9 +53,17 @@
             if (model != null && this.ModelState.IsValid)
             {
                 var dbModel = this.GetById<TModel>(id);
-                Mapper.Map<TViewModel, TModel>(model, dbModel);
+                try
+                {
+                    Mapper.Map<TViewModel, TModel>(model, dbModel);
+                }
+                catch (Exception ex)
+                {
+
+                }
+
                 this.ChangeEntityStateAndSave(dbModel, EntityState.Modified);
-                model.ModifiedOn = dbModel.ModifiedOn;
+               // model.ModifiedOn = dbModel.ModifiedOn;
             }
         }
 

@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Web;
+    using System.Web.Mvc;
 
     public class QuestionAdminViewModel
     {
@@ -41,6 +42,7 @@
         [Required]
         public int Number { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         [Display(Name = "Modified On")]
         public DateTime? ModifiedOn { get; set; }
 

@@ -96,20 +96,20 @@ a:hover {
 
 .search-box {
     border-radius: 5px;
-    height: 1.3em;
+    height: 1.4em;
     margin: 0;
     border: none;
     padding: 0 5px;
 }
 
-.serch-button {
+.search-button {
     color: white;
     background-color: transparent;
     border: none;
 }
 
 .search-form {
-    margin: 4px 0;
+    margin: 5px 0;
 }
 
 .content-title {
@@ -174,9 +174,10 @@ input[type="radio"][disabled], input[type="checkbox"][disabled], .radio[disabled
     margin-right: 0.5em !important;
 }
 
-.pager :nth-child(2n+1){
-    margin:5px;
+.pager :nth-child(2n+1) {
+    margin: 5px;
 }
+
 .table > tbody > :nth-child(2n+1) {
     background-color: white;
 }

@@ -8,8 +8,9 @@
     using AutoMapper;
     using QuizFactory.Mvc.Mapping;
     using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.ViewModels;
 
-    public abstract class QuizViewModel:IMapFrom<QuizDefinition>, IHaveCustomMappings
+    public abstract class QuizViewModel : IMapFrom<QuizDefinition>, IHaveCustomMappings
     {
         [HiddenInput(DisplayValue = false)]
         public int? Id { get; set; }
@@ -21,11 +22,11 @@
         [Display(Name = "Created on")]
         [HiddenInput(DisplayValue = false)]
         public DateTime CreatedOn { get; set; }
-         
-        [HiddenInput(DisplayValue = false)]
-        [Display(Name = "Modified On")]
-        public DateTime? ModifiedOn { get; set; }
-        
+
+        //[Display(Name = "Modified On")]
+        //[HiddenInput(DisplayValue = false)]
+        //public DateTime? ModifiedOn { get; set; }
+
         public decimal Rating { get; set; }
 
         [Display(Name = "Public")]
@@ -41,7 +42,7 @@
         [HiddenInput(DisplayValue = false)]
         public string NumberQuestions { get; set; }
 
-            //  public ICollection<QuestionViewModel> Questions { get; set; }
+       // public ICollection<QuestionViewModel> Questions { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

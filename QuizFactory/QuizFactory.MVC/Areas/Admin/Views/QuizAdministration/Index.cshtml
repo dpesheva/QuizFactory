@@ -22,7 +22,7 @@
         cols.Bound(q => q.NumberQuestions);
         cols.Bound(q => q.Rating);
         cols.Bound(q => q.CreatedOn).Format("{0: MM/dd/yyyy hh:mm tt}");
-        cols.Bound(q => q.ModifiedOn).Format("{0: MM/dd/yyyy hh:mm tt}");
+       // cols.Bound(q => q.ModifiedOn).Format("{0: MM/dd/yyyy hh:mm tt}");
         cols.Command(q => q.Edit());
         cols.Command(q => q.Destroy());
     })

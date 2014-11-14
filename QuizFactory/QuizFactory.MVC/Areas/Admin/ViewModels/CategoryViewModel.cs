@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace QuizFactory.Mvc.Areas.Admin.ViewModels
 {
@@ -16,11 +17,11 @@ namespace QuizFactory.Mvc.Areas.Admin.ViewModels
         public string Name { get; set; }
 
         [Display(Name = "Created on")]
-        [Editable(false)]
+        [HiddenInput(DisplayValue = false)]
         public DateTime CreatedOn { get; set; }
 
         [Display(Name = "Modified on")]
-        [Editable(false)]
+        [HiddenInput(DisplayValue = false)]
         public DateTime? ModifiedOn { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
