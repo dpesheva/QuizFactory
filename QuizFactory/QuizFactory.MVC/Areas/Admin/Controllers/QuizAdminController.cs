@@ -17,6 +17,7 @@
     using Model = QuizFactory.Data.Models.QuizDefinition;
     using ViewModel = QuizFactory.Mvc.Areas.Admin.ViewModels.QuizAdminViewModel;
 
+    [Authorize(Roles = "admin")]
     public class QuizAdminController : KendoGridAdministrationController
     {
         public QuizAdminController(IQuizFactoryData data)
