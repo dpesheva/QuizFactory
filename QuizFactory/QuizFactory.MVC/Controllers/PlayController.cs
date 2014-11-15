@@ -114,7 +114,7 @@
             foreach (var item in selectedAnswers)
             {
                 var answerId = item.Value;
-                // var answer = this.db.AnswerDefinitions.Find(answerId);
+                
                 UsersAnswer givenAnswer = new UsersAnswer();
                 givenAnswer.AnswerDefinitionId = answerId;
                 givenAnswer.TakenQuiz = takenQuiz;

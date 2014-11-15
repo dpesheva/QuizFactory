@@ -118,15 +118,30 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(QuestionViewModel questionViewModel, int? quizId)
+        public ActionResult Edit(QuestionUserViewModel questionViewModel, int? quizId)
         {
+            var quiz = this.db.QuizzesDefinitions.Find(quizId);
+            if (quiz == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }    
+            
             if (this.ModelState.IsValid)
             {
-                // TODO create new and set quiz id
+                this.db.QuestionsDefinitions.Delete(questionViewModel.Id);
+
+                var newQuestion = new QuestionDefinition();
+
+                this.MapFromModel(questionViewModel, newQuestion);
+                newQuestion.QuizDefinition = quiz;
+
+                this.db.QuestionsDefinitions.Add(newQuestion);
+                
                 this.db.SaveChanges();
                 return this.RedirectToAction("Index", new { quizId = quizId });
             }
-            return this.View(questionViewModel);
+
+            return this.Edit(questionViewModel.Id);
         }
 
         // GET: Users/Question/Delete/5
@@ -168,11 +183,16 @@
             for (var i = 0; i < questionViewModel.Answers.Count; i++)
             {
                 var item = questionViewModel.Answers[i];
+
+                if (item == string.Empty)
+                    break;
+                
                 var answ = new AnswerDefinition()
                 {
                     Text = item,
                     Position = i,
-                    QuestionDefinition = newQuestion
+                    QuestionDefinition = newQuestion,
+                    IsCorrect = i == int.Parse(questionViewModel.CorrectAnswer)
                 };
 
                 db.AnswerDefinitions.Add(answ);

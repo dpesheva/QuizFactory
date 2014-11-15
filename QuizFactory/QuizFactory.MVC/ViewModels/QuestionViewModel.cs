@@ -44,6 +44,6 @@
         [Required]
         public int QuizId { get; set; }
 
-        public ICollection<AnswerViewModel> Answers { get; set; }
+        public IList<AnswerViewModel> Answers { get; set; }
     }
 }

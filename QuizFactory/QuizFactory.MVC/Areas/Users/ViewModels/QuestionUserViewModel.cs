@@ -36,6 +36,9 @@
 
         public int QuizId { get; set; }
 
+        [Required]
+        public string CorrectAnswer { get; set; }
+
         public IList<string> Answers { get; set; }
     }
 
