@@ -6,7 +6,8 @@
 
 @{
      Dictionary<int, int> results = (Dictionary<int, int>)TempData["results"];
-}
+    var percentage = (int)TempData["scorePercentage"];
+ }
 
 @foreach (var question in Model.Questions)
 { 
@@ -38,5 +39,9 @@
 
     </div>
 }
-
+<div class="progress box-shadow">
+    <div class="progress-bar" role="progressbar" aria-valuenow=@percentage aria-valuemin="0" aria-valuemax="100" style="width: @percentage%;">
+        @percentage%
+    </div>
+</div>
 <h3>VOTING</h3>

@@ -1,4 +1,4 @@
-﻿namespace QuizFactory.Mvc.ViewModels
+﻿namespace QuizFactory.Mvc.Areas.Users.ViewModels
 {
     using QuizFactory.Data.Models;
     using System;
@@ -6,26 +6,19 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Web;
 
-    public class QuestionViewModel
+    public class QuestionUserViewModel
     {
-        public static Expression<Func<QuestionDefinition, QuestionViewModel>> FromQuestionDefinition
+        public static Expression<Func<QuestionDefinition, QuestionUserViewModel>> FromQuestionDefinition
         {
             get
             {
-                return question => new QuestionViewModel
+                return question => new QuestionUserViewModel
                 {
                     Id = question.Id,
                     QuestionText = question.QuestionText,
                     Number = question.Number,
-                    QuizId = question.QuizDefinition.Id,
-                    Answers = question.AnswersDefinitions.Select(a => new AnswerViewModel
-                        {
-                            Id = a.Id,
-                            Text = a.Text,
-                            IsCorrect = a.IsCorrect
-                        }).ToList()
+                    QuizId = question.QuizDefinition.Id
                 };
             }
         }
@@ -41,9 +34,9 @@
         [Required]
         public int Number { get; set; }
 
-        [Required]
         public int QuizId { get; set; }
 
-        public ICollection<AnswerViewModel> Answers { get; set; }
+        public IList<string> Answers { get; set; }
     }
+
 }

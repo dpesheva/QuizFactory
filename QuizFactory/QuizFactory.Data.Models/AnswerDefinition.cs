@@ -24,7 +24,6 @@ namespace QuizFactory.Data.Models
         public bool IsCorrect { get; set; }
 
         // TODO unique in question
-        [Required]
         public int Position { get; set; }
 
         public virtual QuestionDefinition QuestionDefinition { get; set; }

@@ -42,14 +42,9 @@
         [ValidateAntiForgeryToken]
         public ActionResult PlayQuiz(int id, Dictionary<string, string> questions)
         {
-            Dictionary<int, int> selectedAnswersInt = ConvertToIntValues(questions);
-            // TODO
-            //   var result = ProcessSelectedAnswers(selectedAnswersInt);
+            int correctCount;
+            Dictionary<int, int> selectedAnswersInt = ProcessResults(id, questions, out correctCount);
 
-            if (User.Identity.IsAuthenticated)
-            {
-                SaveResult(id, selectedAnswersInt);
-            }
 
             var quiz = this.db.QuizzesDefinitions
                 .All()
@@ -62,33 +57,54 @@
             {
                 return this.Redirect("Error"); // TODO 
             }
+            if (selectedAnswersInt.Count() != quiz.Questions.Count())
+            {
+                return this.Redirect("Error"); // TODO			
+            }
 
             TempData["results"] = selectedAnswersInt;
+            var scorePercentage = 100 * correctCount / quiz.Questions.Count();
+            TempData["scorePercentage"] = scorePercentage;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                SaveResult(id, selectedAnswersInt, scorePercentage);
+            }
+
             return this.View("DisplayAnswers", quiz);
         }
 
-        private int ProcessSelectedAnswers(Dictionary<int, int> selectedAnswers)
+        private Dictionary<int, int> ProcessResults(int quizId, Dictionary<string, string> questions, out int correctCount)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
-        }
-
-        private Dictionary<int, int> ConvertToIntValues(Dictionary<string, string> questions)
-        {
+            correctCount = 0;
             Dictionary<int, int> result = new Dictionary<int, int>();
 
             foreach (var item in questions)
             {
                 var answerId = int.Parse(item.Value);
-                var questionId = this.db.AnswerDefinitions.Find(answerId).QuestionDefinition.Id;
 
-                result.Add(questionId, answerId);
+                var answer = this.db.AnswerDefinitions.Find(answerId);
+                var question = answer.QuestionDefinition;
+
+                if (question.QuizDefinition.Id != quizId)
+                {
+                    // TODO: frontend error or malicious user			
+                    throw new Exception();
+                }
+
+                if (answer.IsCorrect)
+                {
+                    correctCount++;
+                }
+
+
+                result.Add(question.Id, answerId);
             }
 
             return result;
         }
 
-        private void SaveResult(int quizId, Dictionary<int, int> selectedAnswers)
+        private void SaveResult(int quizId, Dictionary<int, int> selectedAnswers, int scorePercentage)
         {
             var user = User.Identity.GetUserId();
             TakenQuiz takenQuiz = new TakenQuiz();
@@ -105,6 +121,7 @@
                 db.UsersAnswers.Add(givenAnswer);
             }
 
+            takenQuiz.Score = scorePercentage;
             this.db.TakenQuizzes.Add(takenQuiz);
             this.db.SaveChanges();
         }

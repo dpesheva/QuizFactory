@@ -22,6 +22,17 @@
         </div>
 
         <div class="form-group">
+            @Html.RadioButton("answer", new { value = "1" })
+           <input type="text" name="answers[0]" />
+        </div>
+
+        <div class="form-group">
+            @Html.RadioButton("answer", new { value = "2" })
+            <input type="text" name="answers[1]" />
+        </div>
+
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

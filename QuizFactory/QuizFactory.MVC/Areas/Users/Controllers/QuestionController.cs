@@ -9,6 +9,7 @@
     using QuizFactory.Mvc.Controllers;
     using QuizFactory.Mvc.Filters;
     using QuizFactory.Mvc.ViewModels;
+    using QuizFactory.Mvc.Areas.Users.ViewModels;
 
     [OwnerOrAdminAttribute]
     public class QuestionController : BaseController
@@ -69,7 +70,7 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(QuestionViewModel questionViewModel, int? quizId)
+        public ActionResult Add(QuestionUserViewModel questionViewModel, int? quizId)
         {
             var quiz = this.db.QuizzesDefinitions.Find(quizId);
             if (quiz == null)
@@ -161,22 +162,20 @@
             return this.RedirectToAction("Index", new { quizId = quizId });
         }
 
-        private void MapFromModel(QuestionViewModel questionViewModel, QuestionDefinition newQuestion)
+        private void MapFromModel(QuestionUserViewModel questionViewModel, QuestionDefinition newQuestion)
         {
             newQuestion.QuestionText = questionViewModel.QuestionText;
-            foreach (var item in newQuestion.AnswersDefinitions)
+            for (var i = 0; i < questionViewModel.Answers.Count; i++)
             {
-                if (item != null)
+                var item = questionViewModel.Answers[i];
+                var answ = new AnswerDefinition()
                 {
-                    new AnswerDefinition()
-                    {
-                        Text = item.Text,
-                        Position = item.Position,
-                        QuestionDefinition = newQuestion
-                    };
+                    Text = item,
+                    Position = i,
+                    QuestionDefinition = newQuestion
+                };
 
-                    newQuestion.AnswersDefinitions.Add(item);
-                }
+                db.AnswerDefinitions.Add(answ);
             }
         }
     }

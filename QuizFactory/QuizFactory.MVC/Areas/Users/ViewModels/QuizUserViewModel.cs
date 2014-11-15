@@ -32,13 +32,13 @@
                         Id = q.Id,
                         QuestionText = q.QuestionText,
                         Number = q.Number,
-                        Answers = q.AnswersDefinitions.Select(a => new AnswerViewModel
-                        {
-                            Id = a.Id,
-                            Text = a.Text,
-                            IsCorrect = a.IsCorrect,
-                            Position = a.Position
-                        }).ToList()
+                        //Answers = q.AnswersDefinitions.Select(a => new AnswerViewModel
+                        //{
+                        //    Id = a.Id,
+                        //    Text = a.Text,
+                        //    IsCorrect = a.IsCorrect,
+                        //    Position = a.Position
+                        //}).ToList()
                     }).ToList()
                 };
             }

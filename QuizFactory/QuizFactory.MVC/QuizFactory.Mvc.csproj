@@ -209,6 +209,7 @@
     <Compile Include="Areas\Users\Controllers\ScoreController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuizAdminViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\QuestionUserViewModel.cs" />
     <Compile Include="Areas\Users\ViewModels\TakenQuizViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
