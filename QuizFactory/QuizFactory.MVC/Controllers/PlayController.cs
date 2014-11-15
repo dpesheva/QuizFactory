@@ -43,12 +43,12 @@
         public ActionResult PlayQuiz(int id, Dictionary<string, string> questions)
         {
             Dictionary<int, int> selectedAnswersInt = ConvertToIntValues(questions);
-             // TODO
-         //   var result = ProcessSelectedAnswers(selectedAnswersInt);
-              
+            // TODO
+            //   var result = ProcessSelectedAnswers(selectedAnswersInt);
+
             if (User.Identity.IsAuthenticated)
             {
-                 SaveResult(id, selectedAnswersInt);
+                SaveResult(id, selectedAnswersInt);
             }
 
             var quiz = this.db.QuizzesDefinitions
@@ -66,7 +66,7 @@
             TempData["results"] = selectedAnswersInt;
             return this.View("DisplayAnswers", quiz);
         }
- 
+
         private int ProcessSelectedAnswers(Dictionary<int, int> selectedAnswers)
         {
             // TODO: Implement this method
@@ -76,9 +76,13 @@
         private Dictionary<int, int> ConvertToIntValues(Dictionary<string, string> questions)
         {
             Dictionary<int, int> result = new Dictionary<int, int>();
+
             foreach (var item in questions)
             {
-                result.Add(int.Parse(item.Key), int.Parse(item.Value));
+                var answerId = int.Parse(item.Value);
+                var questionId = this.db.AnswerDefinitions.Find(answerId).QuestionDefinition.Id;
+
+                result.Add(questionId, answerId);
             }
 
             return result;
@@ -94,7 +98,7 @@
             foreach (var item in selectedAnswers)
             {
                 var answerId = item.Value;
-               // var answer = this.db.AnswerDefinitions.Find(answerId);
+                // var answer = this.db.AnswerDefinitions.Find(answerId);
                 UsersAnswer givenAnswer = new UsersAnswer();
                 givenAnswer.AnswerDefinitionId = answerId;
                 givenAnswer.TakenQuiz = takenQuiz;

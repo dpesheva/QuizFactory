@@ -28,7 +28,7 @@
         function onRadioClick() {
             var allReady = true;
 
-            for (a in allAnswerIds) {
+            for (var a in allAnswerIds) {
                 if (!$("input[id='" + a + "']:checked").length) {
                     allReady = false;
                     break;
@@ -38,7 +38,7 @@
             if (allReady) {
                 $("input[type='submit']").removeClass("disabled");
             }
-            return false;
+            return true;
         }
 
         answers.click(onRadioClick);

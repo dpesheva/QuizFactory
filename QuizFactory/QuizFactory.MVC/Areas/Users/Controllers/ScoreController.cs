@@ -73,10 +73,10 @@
         {
             Dictionary<int, int> result = new Dictionary<int, int>();
             var userAnswers = takenQuiz.UsersAnswers;
-
+                       
             foreach (var item in userAnswers)
             {
-                result.Add(item.AnswerDefinition.QuestionDefinition.Number, item.AnswerDefinitionId);
+                result.Add(item.AnswerDefinition.QuestionDefinition.Id, item.AnswerDefinitionId);
             }
 
             return result;

@@ -18,7 +18,7 @@
             {
                 string answerColor = "";
                 bool isSelected = false;
-                if (results.ContainsKey((question.Number - 1)) && results[(question.Number - 1)] == answer.Id)
+                if (results.ContainsKey((question.Id)) && results[(question.Id)] == answer.Id)
                 {
                     answerColor = "blue";
                     isSelected = true;
