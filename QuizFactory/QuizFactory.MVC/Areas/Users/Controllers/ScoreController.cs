@@ -52,7 +52,7 @@
                 .FirstOrDefault();
 
             var quizDef = this.db.QuizzesDefinitions
-                .All()
+                .AllWithDeleted()
                 .Where(q => q.Id == takenQuiz.QuizDefinitionId)
                 .Project()
                 .To<QuizPlayViewModel>()
