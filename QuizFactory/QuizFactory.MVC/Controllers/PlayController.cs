@@ -43,14 +43,13 @@
         public ActionResult PlayQuiz(int id, Dictionary<string, string> questions)
         {
             Dictionary<int, int> selectedAnswersInt = ConvertToIntValues(questions);
-            // TODO
-            // var result = ProcessSelectedAnswers(selectedAnswers);
-
+             // TODO
+         //   var result = ProcessSelectedAnswers(selectedAnswersInt);
+              
             if (User.Identity.IsAuthenticated)
             {
-                SaveResult(id, selectedAnswersInt);
+                 SaveResult(id, selectedAnswersInt);
             }
-
 
             var quiz = this.db.QuizzesDefinitions
                 .All()
@@ -63,9 +62,15 @@
             {
                 return this.Redirect("Error"); // TODO 
             }
+
             TempData["results"] = selectedAnswersInt;
             return this.View("DisplayAnswers", quiz);
-
+        }
+ 
+        private int ProcessSelectedAnswers(Dictionary<int, int> selectedAnswers)
+        {
+            // TODO: Implement this method
+            throw new NotImplementedException();
         }
 
         private Dictionary<int, int> ConvertToIntValues(Dictionary<string, string> questions)

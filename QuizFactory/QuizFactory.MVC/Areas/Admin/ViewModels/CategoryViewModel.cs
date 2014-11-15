@@ -1,15 +1,13 @@
-﻿using AutoMapper;
-using QuizFactory.Data.Models;
-using QuizFactory.Mvc.Mapping;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace QuizFactory.Mvc.Areas.Admin.ViewModels
+﻿namespace QuizFactory.Mvc.Areas.Admin.ViewModels
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Web.Mvc;
+    using AutoMapper;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.Mapping;
+
     public class CategoryViewModel : IMapFrom<Category>, IHaveCustomMappings
     {
         public int Id { get; set; }

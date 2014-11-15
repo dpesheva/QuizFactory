@@ -166,7 +166,8 @@
             var userId = this.User.Identity.GetUserId();
 
             var quizViewModel = this.db.QuizzesDefinitions
-                                    .SearchFor(q => q.Id == id && q.Author.Id == userId)
+                                    .All()
+                                    .Where(q => q.Id == id && q.Author.Id == userId)
                                     .Select(QuizUserViewModel.FromQuizDefinition)
                                     .FirstOrDefault();
 

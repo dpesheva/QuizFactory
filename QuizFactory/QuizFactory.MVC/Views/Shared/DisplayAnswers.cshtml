@@ -1,15 +1,11 @@
-﻿@using QuizFactory.Mvc.ViewModels.Play;
-
-@model QuizFactory.Mvc.ViewModels.Play.QuizPlayViewModel
+﻿@model QuizFactory.Mvc.ViewModels.Play.QuizPlayViewModel
 
 @{
     Layout = "~/Views/Play/PlayQuizLayout.cshtml";
 }
 
 @{
-    //var r = (SelectedAnswersViewModel)TempData["results"];
-    //Dictionary<string, string> results = (Dictionary<string, string>)r.Questions;
-    Dictionary<int, int> results = (Dictionary<int, int>)TempData["results"];
+     Dictionary<int, int> results = (Dictionary<int, int>)TempData["results"];
 }
 
 @foreach (var question in Model.Questions)
@@ -22,7 +18,6 @@
             {
                 string answerColor = "";
                 bool isSelected = false;
-               // if (results.ContainsKey((question.Number - 1).ToString()) && results[(question.Number - 1).ToString()] == answer.Id.ToString())
                 if (results.ContainsKey((question.Number - 1)) && results[(question.Number - 1)] == answer.Id)
                 {
                     answerColor = "blue";
