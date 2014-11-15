@@ -4,13 +4,12 @@
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
-
-    using QuizFactory.Data.Models;
-    using QuizFactory.Mvc.Controllers;
-    using QuizFactory.Mvc.Areas.Admin.ViewModels;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using QuizFactory.Data;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.Areas.Admin.ViewModels;
+    using QuizFactory.Mvc.Controllers;
 
     [Authorize(Roles = "admin")]
     public class CategoriesController : BaseController
@@ -37,7 +36,8 @@
         // POST: Admin/Categories/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name")] CategoryViewModel category)
+        public ActionResult Create([Bind(Include = "Name")]
+                                   CategoryViewModel category)
         {
             if (this.db.Categories.SearchFor(c => c.Name == category.Name && c.IsDeleted == false).FirstOrDefault() != null)
             {
@@ -50,7 +50,7 @@
 
                 this.db.Categories.Add(newCategory);
                 this.db.SaveChanges();
-                
+
                 return this.RedirectToAction("Index");
             }
 
@@ -120,14 +120,15 @@
         {
             if (this.db.QuizzesDefinitions.All().Any(q => q.CategoryId == id))
             {
-                return null; // TODO "Category can't be deleted. There are quzzes linked to it.
+                this.ModelState.AddModelError("Error", "Category can't be deleted. There are quzzes linked to it.");
+                CategoryViewModel categoryModel = this.db.Categories.SearchFor(c => c.Id == id).Project().To<CategoryViewModel>().FirstOrDefault();
+                return this.View(categoryModel);
             }
             Category category = this.db.Categories.Find(id);
-          
+
             this.db.Categories.Delete(category);
             this.db.SaveChanges();
             return this.RedirectToAction("Index");
         }
-
     }
 }

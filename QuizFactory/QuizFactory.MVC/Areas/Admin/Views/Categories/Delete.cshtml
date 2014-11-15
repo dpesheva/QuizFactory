@@ -23,14 +23,14 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
-    <div class="form-group col-md-offset-2">
-        <input type="submit" value="Delete" class="btn btn-danger box-shadow" />
-    </div>
+        @Html.ValidationMessage("Error", new { @class = "red" })
+        <div class="form-group col-md-offset-2">
+            <input type="submit" value="Delete" class="btn btn-danger box-shadow" />
+        </div>
     }
 
     <div>
         @Html.ActionLink("Back to Categories administration", "Index")
     </div>
-   
+
 </div>
