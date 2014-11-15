@@ -6,6 +6,7 @@
     using System.Net;
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
+    using MvcPaging;
     using QuizFactory.Data;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Areas.Users.ViewModels;
@@ -14,15 +15,19 @@
     [Authorize]
     public class QuizUsersController : BaseController
     {
+        private const int PageSize = 10;
         public QuizUsersController(IQuizFactoryData data)
             : base(data)
         {
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var allQuizzes = this.GetAllQuizzes();
-            return this.View(allQuizzes);
+            ViewBag.Pages = Math.Ceiling((double)allQuizzes.Count() / PageSize);
+
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            return this.View(allQuizzes.ToPagedList(currentPageIndex, PageSize));
         }
 
         public ActionResult Details(int? id)
@@ -55,7 +60,8 @@
             if (this.ModelState.IsValid)
             {
                 // create new and disable the old //TODO Manage questions
-                this.CreateQuiz(quizViewModel, true);
+                QuizDefinition newQuiz = this.CreateQuiz(quizViewModel, false);
+
                 this.db.QuizzesDefinitions.Delete(quizViewModel.Id);
 
                 this.db.SaveChanges();
@@ -104,12 +110,12 @@
         {
             if (this.ModelState.IsValid)
             {
-                this.CreateQuiz(quizViewModel, false);
+                QuizDefinition newQuiz = this.CreateQuiz(quizViewModel, false);
                 this.db.SaveChanges();
 
-                this.ViewBag.CategoryId = new SelectList(this.db.Categories.All().ToList(), "Id", "Name", quizViewModel.CategoryId);
+                quizViewModel.Id = newQuiz.Id;
 
-                return this.RedirectToAction("Edit", quizViewModel);
+                return this.RedirectToAction("Edit", new { id = quizViewModel.Id });
             }
 
             return this.View(quizViewModel);
@@ -147,12 +153,12 @@
             return allQuizzes;
         }
 
-        private void CreateQuiz(QuizUserViewModel quizViewModel, bool replace)
+        private QuizDefinition CreateQuiz(QuizUserViewModel quizViewModel, bool replace)
         {
             QuizDefinition newQuiz = new QuizDefinition();
             this.MapViewModelToModel(quizViewModel, newQuiz, replace);
             this.db.QuizzesDefinitions.Add(newQuiz);
-            quizViewModel.Id = newQuiz.Id;
+            return newQuiz;
         }
 
         private QuizUserViewModel GetViewModelById(int? id)

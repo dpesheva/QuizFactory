@@ -86,7 +86,7 @@
 
                 this.db.QuestionsDefinitions.Add(newQuestion);
                 this.db.SaveChanges();
-                return this.RedirectToAction("Index");
+                return this.RedirectToAction("Index", new { quizId = quizId });
             }
 
             return this.View(questionViewModel);
