@@ -26,19 +26,29 @@
 
         @for (int i = 0; i < Model.Answers.Count; i++)
         {
-            @Html.RadioButton("correctAnswer", i.ToString(), new{ @checked =  Model.Answers[i].IsCorrect})
-          
-            <input type="text" value=@(Model.Answers[i].Text) name="answers[@i]" />
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-1 text-right">
+                    @Html.RadioButton("correctAnswer", i.ToString(), new { @checked = Model.Answers[i].IsCorrect })
+                </div>
+                <div class="col-md-10">
+                    <input type="text" value=@(Model.Answers[i].Text) name="answers[@i]" class="form-control" />
+                </div>
+            </div>
         }
 
-        @Html.RadioButton("correctAnswer", Model.Answers.Count.ToString())
-        
-        <input type="text" name="answers[@Model.Answers.Count]" />
-        
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary box-shadow" />
+            <div class="col-md-offset-1 col-md-1 text-right">
+                @Html.RadioButton("correctAnswer", Model.Answers.Count.ToString())
             </div>
+            <div class="col-md-10">
+                <input type="text" name="answers[@Model.Answers.Count]" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-primary box-shadow" />
         </div>
     </div>
 }
