@@ -16,14 +16,13 @@
 
     public class HomeController : BaseController
     {
-        const int PageSize = 6;
+        private const int PageSize = 6;
+        private static Random Random = new Random();
 
         public HomeController(IQuizFactoryData data)
             : base(data)
         {
         }
-
-        private Random Random = new Random();
 
         public ActionResult Index(int? catId)
         {
@@ -51,7 +50,7 @@
         {
             if (this.db.QuizzesDefinitions.All().Any())
             {
-                int rnd = this.Random.Next(this.db.QuizzesDefinitions.All().Count());
+                int rnd = Random.Next(this.db.QuizzesDefinitions.All().Count());
 
                 var ramdomQuizzes = this.db.QuizzesDefinitions
                                         .All()
@@ -68,8 +67,6 @@
             return null; // TODO return DataErrorInfoModelValidatorProvider msg
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Search(string search, int? page)
         {
             search = search ?? "";
@@ -79,8 +76,11 @@
                 .Project()
                 .To<QuizMainInfoViewModel>()
                 .ToList();
+            ViewBag.SearchString = search;
+            ViewBag.Pages = Math.Ceiling((double)quizzes.Count() / PageSize);
 
-           return FormatOutput(page, quizzes);
+            int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+            return this.View(quizzes.ToPagedList(currentPageIndex, PageSize));
         }
 
         public ActionResult RecentContent(int? catId, int? page)
@@ -94,7 +94,7 @@
             var quizzes = GetData(catId, q => q.CreatedOn, false);
             return FormatOutput(page, quizzes);
         }
-        
+
         public ActionResult PopularContent(int? catId, int? page)
         {
             if (!this.Request.IsAjaxRequest())

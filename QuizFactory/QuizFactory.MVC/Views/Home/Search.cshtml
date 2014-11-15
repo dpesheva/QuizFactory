@@ -1,5 +1,13 @@
 ﻿@model IPagedList<QuizFactory.Mvc.ViewModels.QuizMainInfoViewModel>
 
 <h2 class="green">Search Results</h2>
+   <div class="clearfix">
+        @foreach (var item in Model)
+        {
+            @Html.Partial("_QuizBoxPartial", item)
+        }
+    </div>
 
-@Html.Partial("_ListQuizBoxesPartial", @Model)
+    <div class="pager gray">
+        @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.AddRouteValue("search", ViewBag.SearchString))
+    </div> 

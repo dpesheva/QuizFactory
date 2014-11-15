@@ -1,9 +1,12 @@
-﻿@model IPagedList<QuizFactory.Mvc.ViewModels.QuizMainInfoViewModel>
+﻿@using MvcPaging
+@model IPagedList<QuizFactory.Mvc.ViewModels.QuizMainInfoViewModel>
 
+<div class="clearfix">
     @foreach (var item in Model)
     {
         @Html.Partial("_QuizBoxPartial", item)
     }
+</div>
 
 <div class="pager gray">
     @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount,
