@@ -282,7 +282,6 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\QuizAdminViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdmin\Index.cshtml" />
     <Content Include="Areas\Users\Views\Score\Index.cshtml" />
-    <Content Include="Areas\Users\Views\Score\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

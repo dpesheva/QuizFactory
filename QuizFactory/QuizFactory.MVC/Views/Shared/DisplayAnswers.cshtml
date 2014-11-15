@@ -11,7 +11,7 @@
 @foreach (var question in Model.Questions)
 { 
     <div class="question box-shadow gray">
-        <h4>@question.Number. @question.QuestionText </h4>
+        <h4>@question.QuestionText </h4>
         @{
 
             foreach (var answer in question.Answers)
