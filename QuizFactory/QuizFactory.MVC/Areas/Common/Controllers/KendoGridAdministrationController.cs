@@ -53,17 +53,10 @@
             if (model != null && this.ModelState.IsValid)
             {
                 var dbModel = this.GetById<TModel>(id);
-                try
-                {
-                    Mapper.Map<TViewModel, TModel>(model, dbModel);
-                }
-                catch (Exception ex)
-                {
-
-                }
+                Mapper.Map<TViewModel, TModel>(model, dbModel);
 
                 this.ChangeEntityStateAndSave(dbModel, EntityState.Modified);
-               // model.ModifiedOn = dbModel.ModifiedOn;
+                // model.ModifiedOn = dbModel.ModifiedOn;
             }
         }
 
