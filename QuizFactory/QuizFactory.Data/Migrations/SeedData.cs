@@ -24,6 +24,8 @@ namespace QuizFactory.Migrations
             this.Categories.Add(new Category() { Name = "Geography" });
             this.Categories.Add(new Category() { Name = "Music" });
             this.Categories.Add(new Category() { Name = "Movies" });
+            this.Categories.Add(new Category() { Name = "Sport" });
+            this.Categories.Add(new Category() { Name = "Tv" });
 
             ApplicationUser user = context.Users.FirstOrDefault();
             if (user == null)
@@ -83,6 +85,15 @@ namespace QuizFactory.Migrations
             {
                 Category = this.Categories[6],
                 Title = "Twilight",
+                QuestionsDefinitions = this.GetQuestions6(),
+                Author = user,
+                IsPublic = true
+            });
+
+            this.Quizzes.Add(new QuizDefinition()
+            {
+                Category = this.Categories[8],
+                Title = "Twilight Tv Series",
                 QuestionsDefinitions = this.GetQuestions6(),
                 Author = user,
                 IsPublic = true
