@@ -15,7 +15,32 @@
 
 @section scripts{
     <script>
-        var isQuizValid = false;
+        $("input[type='submit']").addClass("disabled");
 
+        var allAnswerIds = {};
+
+        var answers = $("input[type='radio']");
+
+        answers.each(function (idx, elm) {
+            allAnswerIds[elm.id] = 1;
+        })
+
+        function onRadioClick() {
+            var allReady = true;
+
+            for (a in allAnswerIds) {
+                if (!$("input[id='" + a + "']:checked").length) {
+                    allReady = false;
+                    break;
+                }
+            }
+
+            if (allReady) {
+                $("input[type='submit']").removeClass("disabled");
+            }
+            return false;
+        }
+
+        answers.click(onRadioClick);
     </script>
 }
