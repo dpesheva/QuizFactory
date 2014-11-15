@@ -19,8 +19,10 @@ namespace QuizFactory.Data.Models
 
         public int QuizDefinitionId { get; set; }
 
-        public ApplicationUser User { get; set; }
-       
+        public string UserId { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+
         [Column(TypeName = "smallmoney")]
         public decimal? Score { get; set; }
 

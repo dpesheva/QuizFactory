@@ -5,7 +5,9 @@
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
+    using Microsoft.AspNet.Identity;
     using QuizFactory.Data;
+    using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Mvc.ViewModels.Play;
 
@@ -38,31 +40,64 @@
         // POST: Play/Start
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PlayQuiz(int id, SelectedAnswersViewModel selectedAnswers)
+        public ActionResult PlayQuiz(int id, Dictionary<string, string> questions)
         {
+            Dictionary<int, int> selectedAnswersInt = ConvertToIntValues(questions);
+            // TODO
             // var result = ProcessSelectedAnswers(selectedAnswers);
 
             if (User.Identity.IsAuthenticated)
             {
-                // SaveResult(selectedAnswers);
+                SaveResult(id, selectedAnswersInt);
             }
 
-            // TODO
 
             var quiz = this.db.QuizzesDefinitions
-          .All()
-          .Where(q => q.Id == id)
-          .Project()
-          .To<QuizPlayViewModel>()
-          .FirstOrDefault();
+                .All()
+                .Where(q => q.Id == id)
+                .Project()
+                .To<QuizPlayViewModel>()
+                .FirstOrDefault();
 
             if (quiz == null)
             {
                 return this.Redirect("Error"); // TODO 
             }
-            TempData["results"] = selectedAnswers;
+            TempData["results"] = selectedAnswersInt;
             return this.View("DisplayAnswers", quiz);
 
+        }
+
+        private Dictionary<int, int> ConvertToIntValues(Dictionary<string, string> questions)
+        {
+            Dictionary<int, int> result = new Dictionary<int, int>();
+            foreach (var item in questions)
+            {
+                result.Add(int.Parse(item.Key), int.Parse(item.Value));
+            }
+
+            return result;
+        }
+
+        private void SaveResult(int quizId, Dictionary<int, int> selectedAnswers)
+        {
+            var user = User.Identity.GetUserId();
+            TakenQuiz takenQuiz = new TakenQuiz();
+            takenQuiz.UserId = user;
+            takenQuiz.QuizDefinitionId = quizId;
+
+            foreach (var item in selectedAnswers)
+            {
+                var answerId = item.Value;
+               // var answer = this.db.AnswerDefinitions.Find(answerId);
+                UsersAnswer givenAnswer = new UsersAnswer();
+                givenAnswer.AnswerDefinitionId = answerId;
+                givenAnswer.TakenQuiz = takenQuiz;
+                db.UsersAnswers.Add(givenAnswer);
+            }
+
+            this.db.TakenQuizzes.Add(takenQuiz);
+            this.db.SaveChanges();
         }
 
         //public ActionResult GetQuestion(int quizId, int currentQuestion)

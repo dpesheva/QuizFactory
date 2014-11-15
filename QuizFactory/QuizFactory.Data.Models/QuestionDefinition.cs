@@ -14,7 +14,7 @@ namespace QuizFactory.Data.Models
         public QuestionDefinition()
         {
             this.AnswersDefinitions = new HashSet<AnswerDefinition>();
-            this.UsersAnswers = new HashSet<UsersAnswer>();
+           // this.UsersAnswers = new HashSet<UsersAnswer>();
         }
 
         public int Id { get; set; }
@@ -29,6 +29,6 @@ namespace QuizFactory.Data.Models
 
         public virtual ICollection<AnswerDefinition> AnswersDefinitions { get; set; }
 
-        public virtual ICollection<UsersAnswer> UsersAnswers { get; set; }
+       // public virtual ICollection<UsersAnswer> UsersAnswers { get; set; }
     }
 }

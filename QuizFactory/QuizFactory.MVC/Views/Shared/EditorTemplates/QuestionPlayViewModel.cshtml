@@ -5,7 +5,7 @@
     @foreach (var a in Model.Answers)
     {
         <p>
-            @Html.RadioButton( "", a.Position)  @a.Text
+            @Html.RadioButton("", a.Id, new { @class = "answer-radio" })  @a.Text
         </p>
     }
 </div>
