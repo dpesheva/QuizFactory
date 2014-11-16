@@ -14,6 +14,7 @@
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
+    [HandleError]
     public class HomeController : BaseController
     {
         private const int PageSize = 6;
@@ -64,7 +65,7 @@
                 return this.PartialView("_RandomQuizBoxesPartial", ramdomQuizzes);
             }
 
-            return null; // TODO return DataErrorInfoModelValidatorProvider msg
+            return new  HttpStatusCodeResult(HttpStatusCode.NotFound, "No available quzzes"); 
         }
 
         public ActionResult Search(string search, int? page)
@@ -87,8 +88,7 @@
         {
             if (!this.Request.IsAjaxRequest())
             {
-                this.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return this.Redirect("Error"); // TODO return error
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
             var quizzes = GetData(catId, q => q.CreatedOn, false);
@@ -99,8 +99,7 @@
         {
             if (!this.Request.IsAjaxRequest())
             {
-                this.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return null; // TODO return error
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
             var quizzes = GetData(catId, q => q.TakenQuizzes.Count, false);
@@ -111,8 +110,7 @@
         {
             if (!this.Request.IsAjaxRequest())
             {
-                this.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return null; // TODO return error
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
             var quizzes = GetData(catId, q => q.Title, true);
@@ -123,12 +121,16 @@
         {
             if (!this.Request.IsAjaxRequest())
             {
-                this.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return null; // TODO return error
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
             var quizzes = GetData(catId, q => q.Rating, false);
             return FormatOutput(page, quizzes);
+        }
+
+        public ActionResult Error()
+        {
+            return this.View();
         }
 
         private IEnumerable<QuizMainInfoViewModel> GetData<TOrderBy>(int? catId, Expression<Func<QuizDefinition, TOrderBy>> predicate, bool asc)

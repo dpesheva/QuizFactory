@@ -10,6 +10,7 @@
     using QuizFactory.Data;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels.Play;
+    using System.Web;
 
     public class PlayController : BaseController
     {
@@ -22,20 +23,16 @@
         [HttpGet]
         public ActionResult PlayQuiz(int? id)
         {
-            var quiz = this.db.QuizzesDefinitions
-                           .All()
-                           .Where(q => q.Id == id)
-                           .Project()
-                           .To<QuizPlayViewModel>()
-                           .FirstOrDefault();
+            var quiz = GetQuizById(id);
 
             if (quiz == null)
             {
-                return this.Redirect("Error"); // TODO 
+                throw new HttpException("Quiz not found");
             }
 
             return this.View(quiz);
         }
+
 
         // POST: Play/Start
         [HttpPost]
@@ -45,20 +42,15 @@
             int correctCount;
             Dictionary<int, int> selectedAnswersInt = this.ProcessResults(id, questions, out correctCount);
 
-            var quiz = this.db.QuizzesDefinitions
-                           .All()
-                           .Where(q => q.Id == id)
-                           .Project()
-                           .To<QuizPlayViewModel>()
-                           .FirstOrDefault();
+            var quiz = GetQuizById(id);
 
             if (quiz == null)
             {
-                return this.Redirect("Error"); // TODO 
+                throw new HttpException("Quiz not found");
             }
             if (selectedAnswersInt.Count() != quiz.Questions.Count())
             {
-                return this.Redirect("Error"); // TODO			
+                throw new HttpException("Incorrect number of answers ");
             }
 
             this.TempData["results"] = selectedAnswersInt;
@@ -73,13 +65,14 @@
             return this.View("DisplayAnswers", quiz);
         }
 
+        [Authorize]
         public ActionResult Vote(int value)
         {
             if (value < 1 || 5 < value)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
+            // TODO set to taken quiz, calc rate
             return this.View();
         }
 
@@ -132,6 +125,17 @@
             takenQuiz.Score = scorePercentage;
             this.db.TakenQuizzes.Add(takenQuiz);
             this.db.SaveChanges();
+        }
+
+        private QuizPlayViewModel GetQuizById(int? id)
+        {
+            var quiz = this.db.QuizzesDefinitions
+                           .All()
+                           .Where(q => q.Id == id)
+                           .Project()
+                           .To<QuizPlayViewModel>()
+                           .FirstOrDefault();
+            return quiz;
         }
     }
 }

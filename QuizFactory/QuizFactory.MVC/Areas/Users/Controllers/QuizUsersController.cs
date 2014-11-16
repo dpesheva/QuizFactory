@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
+    using System.Web;
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
     using MvcPaging;
@@ -126,7 +127,7 @@
             var category = this.db.Categories.SearchFor(c => c.Id == quizViewModel.CategoryId).FirstOrDefault();
             if (category == null)
             {
-                return; // TODO
+                throw new HttpException("Category not found.");
             }
 
             dbQuiz.Title = quizViewModel.Title;
