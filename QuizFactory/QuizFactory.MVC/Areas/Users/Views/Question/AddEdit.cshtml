@@ -1,0 +1,138 @@
+﻿@model QuizFactory.Mvc.ViewModels.QuestionViewModel
+
+<h2 class="green text-shadow">@ViewBag.PageTitle Question</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal gray">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuestionText, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QuestionText, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Model != null)
+        {
+            for (int i = 0; i < Model.Answers.Count; i++)
+            {
+                <div id="radio-group-@i" class="form-group">
+                    <div class=" col-md-offset-1 col-md-1 text-right">
+                        @Html.RadioButton("correctAnswerId", i, Model.Answers[i].IsCorrect)
+                        <input type="hidden" name="answers[@i].isCorrect" value="false" />
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => Model.Answers[i].Text, new { htmlAttributes = new { @class = "form-control", data_answer_index = @i } })
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div id="radio-group-0" class="form-group">
+                <div class=" col-md-offset-1 col-md-1 text-right">
+                    @Html.RadioButton("correctAnswerId", 0, true)
+                    <input type="hidden" name="answers[0].isCorrect" value="false" />
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(m => Model.Answers[0].Text, new { htmlAttributes = new { @class = "form-control", data_answer_index = 0 } })
+                </div>
+            </div>
+        }
+
+        <div id="submit-div" class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" id="submit-answers" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@if (TempData["quizId"] != null)
+{
+    <p>
+        @Html.ActionLink("Back to List", "Index", new { quizId = TempData["quizId"] })
+    </p>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        (function () {
+            var maxId = 1;
+
+            function reinitializeValidator() {
+                // reinitialise validator to process new field
+                var form = $("#radio-group-0").closest("form");
+                form.removeData("validator");
+                form.removeData("unobtrusiveValidation");
+                $.validator.unobtrusive.parse(form);
+            }
+
+            function checkNewRequired() {
+                var inp = $("[data-answer-index='" + maxId + "']");
+                if (inp.val() || maxId === 0) {
+                    maxId++;
+
+                    a = $("#radio-group-0").clone();
+                    a.find("input").each(function () {
+                        $(this).attr("name", $(this).attr("name").replace(/\d+/, maxId));
+                    });
+                    a.find("input[type=radio]").val(maxId).removeAttr('checked');
+
+                    var textField = a.find("input[type=text]");
+
+                    textField.each(function () {
+                        $(this).attr("data-answer-index", $(this).attr("data-answer-index").replace(/\d+/, maxId));
+                    });
+
+                    a.attr("id", "radio-group-" + maxId);
+
+                    textField.on('keypress', checkSchedule);
+                    textField.on('paste', checkSchedule);
+
+                    textField.val('');
+
+                    a.insertBefore("#submit-div");
+
+                    reinitializeValidator();
+                }
+            }
+
+            function checkSchedule() {
+                window.setTimeout(checkNewRequired, 0);
+            }
+
+            function handleSubmit() {
+                var inp = $("[data-answer-index='" + maxId + "']");
+                while (!inp.val()) {
+                    if (maxId === 1) {
+                        break;
+                    }
+                    $("#radio-group-" + maxId).remove();
+                    maxId--;
+                    inp = $("[data-answer-index='" + maxId + "']");
+                }
+
+                return true;
+            }
+
+            var inputs = $("input[type='text'][data-answer-index]");
+
+            $("#submit-answers").closest("form").on("submit", handleSubmit)
+
+            maxId = inputs.length - 1;
+            checkNewRequired();
+
+            inputs.on('keypress', checkSchedule);
+            inputs.on('paste', checkSchedule);
+
+        }())
+
+    </script>
+}

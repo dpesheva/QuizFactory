@@ -3,13 +3,13 @@
     using System;
     using System.Linq;
     using System.Net;
+    using System.Web;
     using System.Web.Mvc;
     using QuizFactory.Data;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Controllers;
     using QuizFactory.Mvc.Filters;
     using QuizFactory.Mvc.ViewModels;
-    using QuizFactory.Mvc.Areas.Users.ViewModels;
 
     [OwnerOrAdminAttribute]
     public class QuestionController : BaseController
@@ -30,32 +30,22 @@
             this.TempData["quizTitle"] = this.db.QuizzesDefinitions.Find(quizId).Title;
 
             var allQuestions = this.db.QuestionsDefinitions
-                                     .All()
-                                     .Where(q => q.QuizDefinition.Id == quizId)
-                                     .Select(QuestionViewModel.FromQuestionDefinition)
-                                     .ToList();
+                                   .All()
+                                   .Where(q => q.QuizDefinition.Id == quizId)
+                                   .Select(QuestionViewModel.FromQuestionDefinition)
+                                   .ToList();
 
             return this.View(allQuestions);
         }
 
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            QuestionViewModel questionViewModel = this.db.QuestionsDefinitions
-                                                       .All()
-                                                       .Where(q => q.Id == id)
-                                                       .Select(QuestionViewModel.FromQuestionDefinition)
-                                                       .FirstOrDefault();
+            var questionViewModel = GetById(id);
 
             if (questionViewModel == null)
             {
                 return this.HttpNotFound();
             }
-
 
             return this.View(questionViewModel);
         }
@@ -63,100 +53,47 @@
         // GET: Users/Question/Add
         public ActionResult Add(int? quizId)
         {
-            return this.View();
+            ViewBag.PageTitle = "Add";
+            return this.View("AddEdit");
         }
 
-        // POST: Users/Question/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Users/Question/Add
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(QuestionUserViewModel questionViewModel, int? quizId)
+        public ActionResult Add(QuestionViewModel questionViewModel, int? quizId)
         {
-            var quiz = this.db.QuizzesDefinitions.Find(quizId);
-            if (quiz == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            if (this.ModelState.IsValid)
-            {
-                var newQuestion = new QuestionDefinition();
-
-                this.MapFromModel(questionViewModel, newQuestion);
-                newQuestion.QuizDefinition = quiz;
-
-                this.db.QuestionsDefinitions.Add(newQuestion);
-                this.db.SaveChanges();
-                return this.RedirectToAction("Index", new { quizId = quizId });
-            }
-
-            return this.View(questionViewModel);
+            ViewBag.PageTitle = "Add";
+            return this.AddOrEdit(questionViewModel, quizId, false);
         }
 
         // GET: Users/Question/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var questionViewModel = this.db.QuestionsDefinitions
-                                        .All()
-                                        .Where(q => q.Id == id)
-                                        .Select(QuestionViewModel.FromQuestionDefinition)
-                                        .FirstOrDefault();
+            var questionViewModel = GetById(id);
 
             if (questionViewModel == null)
             {
                 return this.HttpNotFound();
             }
-            return this.View(questionViewModel);
+
+            ViewBag.PageTitle = "Edit";
+            return this.View("AddEdit", questionViewModel);
         }
 
+
         // POST: Users/Question/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(QuestionUserViewModel questionViewModel, int? quizId)
+        public ActionResult Edit(QuestionViewModel questionViewModel, int? quizId)
         {
-            var quiz = this.db.QuizzesDefinitions.Find(quizId);
-            if (quiz == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            if (this.ModelState.IsValid)
-            {
-                this.db.QuestionsDefinitions.Delete(questionViewModel.Id);
-
-                var newQuestion = new QuestionDefinition();
-
-                this.MapFromModel(questionViewModel, newQuestion);
-                newQuestion.QuizDefinition = quiz;
-
-                this.db.QuestionsDefinitions.Add(newQuestion);
-
-                this.db.SaveChanges();
-                return this.RedirectToAction("Index", new { quizId = quizId });
-            }
-
-            return this.Edit(questionViewModel.Id);
+            ViewBag.PageTitle = "Edit";
+            return this.AddOrEdit(questionViewModel, quizId, true);
         }
 
         // GET: Users/Question/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var questionViewModel = this.db.QuestionsDefinitions
-                                        .All()
-                                        .Where(q => q.Id == id)
-                                        .Select(QuestionViewModel.FromQuestionDefinition)
-                                        .FirstOrDefault();
+            var questionViewModel = GetById(id);
 
             if (questionViewModel == null)
             {
@@ -178,26 +115,72 @@
             return this.RedirectToAction("Index", new { quizId = quizId });
         }
 
-        private void MapFromModel(QuestionUserViewModel questionViewModel, QuestionDefinition newQuestion)
+        private ActionResult AddOrEdit(QuestionViewModel questionViewModel, int? quizId, bool edit)
+        {
+            var quiz = this.db.QuizzesDefinitions.Find(quizId);
+            if (quiz == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (this.ModelState.IsValid)
+            {
+                for (var i = 0; i < questionViewModel.Answers.Count; i++)
+                {
+                    questionViewModel.Answers[i].IsCorrect = false;
+                }
+
+                questionViewModel.Answers[questionViewModel.CorrectAnswerId].IsCorrect = true;
+
+                if (edit)
+                {
+                    this.db.QuestionsDefinitions.Delete(questionViewModel.Id);
+                }
+                var newQuestion = new QuestionDefinition();
+
+                this.MapFromModel(questionViewModel, newQuestion);
+                newQuestion.QuizDefinition = quiz;
+
+                this.db.QuestionsDefinitions.Add(newQuestion);
+                this.db.SaveChanges();
+                return this.RedirectToAction("Index", new { quizId = quizId });
+            }
+
+            return this.View("AddEdit", questionViewModel);
+        }
+
+        private void MapFromModel(QuestionViewModel questionViewModel, QuestionDefinition newQuestion)
         {
             newQuestion.QuestionText = questionViewModel.QuestionText;
             for (var i = 0; i < questionViewModel.Answers.Count; i++)
             {
                 var item = questionViewModel.Answers[i];
 
-                if (item == string.Empty)
-                    continue;
-
                 var answ = new AnswerDefinition()
                 {
-                    Text = item,
+                    Text = item.Text,
                     Position = i,
                     QuestionDefinition = newQuestion,
-                    IsCorrect = i == int.Parse(questionViewModel.CorrectAnswer)
+                    IsCorrect = item.IsCorrect
                 };
 
-                db.AnswerDefinitions.Add(answ);
+                this.db.AnswerDefinitions.Add(answ);
             }
+        }
+
+        private QuestionViewModel GetById(int? id)
+        {
+            if (id == null)
+            {
+                throw new HttpException("Incorrect question identifier");
+            }
+
+            var questionViewModel = this.db.QuestionsDefinitions
+                                        .All()
+                                        .Where(q => q.Id == id)
+                                        .Select(QuestionViewModel.FromQuestionDefinition)
+                                        .FirstOrDefault();
+            return questionViewModel;
         }
     }
 }

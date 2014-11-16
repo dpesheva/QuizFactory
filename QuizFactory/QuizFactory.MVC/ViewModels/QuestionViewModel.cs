@@ -34,7 +34,6 @@
 
         [Required]
         [Display(Name = "Question")]
-
         [DataType(DataType.MultilineText)]
         public string QuestionText { get; set; }
 
@@ -45,5 +44,7 @@
         public int QuizId { get; set; }
 
         public IList<AnswerViewModel> Answers { get; set; }
+
+        public int CorrectAnswerId { get; set; }
     }
 }

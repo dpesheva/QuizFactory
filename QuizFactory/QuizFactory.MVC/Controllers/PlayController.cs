@@ -81,11 +81,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var takenQuiz = db.TakenQuizzes
-                .All()
-                .Where(t => t.QuizDefinitionId == id)
-                .FirstOrDefault();
-
+           
             // TODO set to taken quiz, calc rate
             return this.View();
         }

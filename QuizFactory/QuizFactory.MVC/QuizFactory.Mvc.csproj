@@ -263,10 +263,9 @@
     <Content Include="Areas\Users\Views\QuizUsers\Delete.cshtml" />
     <Content Include="Areas\Users\Views\QuizUsers\Edit.cshtml" />
     <Content Include="Areas\Users\Views\QuizUsers\Details.cshtml" />
-    <Content Include="Areas\Users\Views\Question\Add.cshtml" />
     <Content Include="Areas\Users\Views\Question\Delete.cshtml" />
     <Content Include="Areas\Users\Views\Question\Details.cshtml" />
-    <Content Include="Areas\Users\Views\Question\Edit.cshtml" />
+    <Content Include="Areas\Users\Views\Question\AddEdit.cshtml" />
     <Content Include="Areas\Users\Views\Question\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Currency.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Date.cshtml" />
