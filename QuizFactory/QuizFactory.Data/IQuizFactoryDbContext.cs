@@ -20,8 +20,10 @@
 
         IDbSet<UsersAnswer> UsersAnswers { get; set; }
 
+        IDbSet<Vote> Votes { get; set; }
+
         int SaveChanges();
-        
+
         void Dispose();
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

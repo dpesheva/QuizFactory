@@ -15,7 +15,7 @@
         {
             Database.SetInitializer<QuizFactoryDbContext>(new MigrateDatabaseToLatestVersion<QuizFactoryDbContext, Configuration>());
         }
-         
+
         public virtual IDbSet<AnswerDefinition> AnswerDefinitions { get; set; }
 
         public virtual IDbSet<Category> Categories { get; set; }
@@ -28,6 +28,8 @@
 
         public virtual IDbSet<UsersAnswer> UsersAnswers { get; set; }
 
+        public virtual IDbSet<Vote> Votes { get; set; }
+
         public static QuizFactoryDbContext Create()
         {
             return new QuizFactoryDbContext();
@@ -37,13 +39,13 @@
         {
             return base.Set<T>();
         }
-       
+
         public override int SaveChanges()
         {
             this.ApplyAuditInfoRules();
             return base.SaveChanges();
         }
-                 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -51,7 +53,7 @@
             modelBuilder.Entity<TakenQuiz>()
                         .HasMany(e => e.UsersAnswers)
                         .WithRequired(e => e.TakenQuiz)
-            // .HasForeignKey(e => e.TakenQuizId)
+                // .HasForeignKey(e => e.TakenQuizId)
                         .WillCascadeOnDelete(false);
         }
 

@@ -85,6 +85,14 @@
             }
         }
 
+        public IDeletableEntityRepository<Vote> Votes
+        {
+            get
+            {
+                return this.GetDeletableEntityRepository<Vote>();
+            }
+        }
+
         public void SaveChanges()
         {
             this.context.SaveChanges();

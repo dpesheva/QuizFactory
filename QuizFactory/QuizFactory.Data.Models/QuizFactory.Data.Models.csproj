@@ -60,6 +60,7 @@
     <Compile Include="QuizDefinition.cs" />
     <Compile Include="TakenQuiz.cs" />
     <Compile Include="UsersAnswer.cs" />
+    <Compile Include="Vote.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuizFactory.Data.Common\QuizFactory.Data.Common.csproj">
