@@ -205,7 +205,7 @@
     <Compile Include="Areas\Common\ViewModels\QuizViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\QuestionController.cs" />
     <Compile Include="Areas\Users\Controllers\QuizUsersController.cs" />
-    <Compile Include="Areas\Users\Controllers\ScoreController.cs" />
+    <Compile Include="Areas\Users\Controllers\HistoryController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuizAdminViewModel.cs" />
     <Compile Include="Areas\Users\ViewModels\QuestionUserViewModel.cs" />
@@ -280,7 +280,7 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\CategoryViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\QuizAdminViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdmin\Index.cshtml" />
-    <Content Include="Areas\Users\Views\Score\Index.cshtml" />
+    <Content Include="Areas\Users\Views\History\Index.cshtml" />
     <Content Include="Views\Shared\_VotingPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

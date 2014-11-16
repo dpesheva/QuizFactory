@@ -19,7 +19,6 @@
         {
         }
 
-        //GET : Play/PlayQuiz
         [HttpGet]
         public ActionResult PlayQuiz(int? id)
         {
@@ -33,8 +32,6 @@
             return this.View(quiz);
         }
 
-
-        // POST: Play/Start
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult PlayQuiz(int id, Dictionary<string, string> questions)
@@ -59,10 +56,21 @@
 
             if (this.User.Identity.IsAuthenticated)
             {
-                this.SaveResult(id, selectedAnswersInt, scorePercentage);
+                var takenQuizId = this.SaveResult(id, selectedAnswersInt, scorePercentage);
+                return this.RedirectToAction("Details", "History", new { id = takenQuizId });
             }
 
-            return this.View("DisplayAnswers", quiz);
+            return this.RedirectToAction("DisplayAnswers", new { id = id });
+        }
+
+        public ActionResult DisplayAnswers(int id)
+        {
+            if (this.TempData["results"] == null)
+            {
+                return this.RedirectToAction("Index", "Home");
+            }
+            var quiz = GetQuizById(id);
+            return this.View(quiz);
         }
 
         [Authorize]
@@ -90,8 +98,7 @@
 
                 if (question.QuizDefinition.Id != quizId)
                 {
-                    // TODO: frontend error or malicious user			
-                    throw new Exception();
+                    throw new HttpException("Incorrect question identifier");
                 }
 
                 if (answer.IsCorrect)
@@ -105,7 +112,7 @@
             return result;
         }
 
-        private void SaveResult(int quizId, Dictionary<int, int> selectedAnswers, int scorePercentage)
+        private int SaveResult(int quizId, Dictionary<int, int> selectedAnswers, int scorePercentage)
         {
             var user = this.User.Identity.GetUserId();
             TakenQuiz takenQuiz = new TakenQuiz();
@@ -125,10 +132,17 @@
             takenQuiz.Score = scorePercentage;
             this.db.TakenQuizzes.Add(takenQuiz);
             this.db.SaveChanges();
+
+            return takenQuiz.Id;
         }
 
         private QuizPlayViewModel GetQuizById(int? id)
         {
+            if (id == null)
+            {
+                throw new HttpException("Wrong identifier");
+            }
+
             var quiz = this.db.QuizzesDefinitions
                            .All()
                            .Where(q => q.Id == id)

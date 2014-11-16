@@ -15,16 +15,16 @@
     using QuizFactory.Mvc.ViewModels.Play;
 
     [Authorize]
-    public class ScoreController : BaseController
+    public class HistoryController : BaseController
     {
         private const int PageSize = 10;
 
-        public ScoreController(IQuizFactoryData data)
+        public HistoryController(IQuizFactoryData data)
             : base(data)
         {
         }
 
-        // GET: Users/Score
+        // GET: Users/History
         public ActionResult Index(int? page)
         {
             var userId = this.User.Identity.GetUserId();
