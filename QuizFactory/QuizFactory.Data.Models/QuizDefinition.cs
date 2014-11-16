@@ -25,6 +25,7 @@ namespace QuizFactory.Data.Models
 
         public ApplicationUser Author { get; set; }
 
+        [Range(0, 5)]
         public decimal Rating { get; set; }
 
         [Required]

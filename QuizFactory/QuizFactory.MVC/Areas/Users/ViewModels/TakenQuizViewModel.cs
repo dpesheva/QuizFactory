@@ -17,7 +17,9 @@
         [Display(Name = "Taken on")]
         public DateTime CreatedOn { get; set; }
 
-        public decimal? Score { get; set; }
+        [Range(0, 100)]
+        public int Score { get; set; }
+
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<TakenQuiz, TakenQuizViewModel>()

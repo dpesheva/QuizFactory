@@ -27,6 +27,7 @@
         //[HiddenInput(DisplayValue = false)]
         //public DateTime? ModifiedOn { get; set; }
 
+        [Range(0, 5)]
         public decimal Rating { get; set; }
 
         [Display(Name = "Public")]
@@ -42,7 +43,7 @@
         [HiddenInput(DisplayValue = false)]
         public string NumberQuestions { get; set; }
 
-       // public ICollection<QuestionViewModel> Questions { get; set; }
+        // public ICollection<QuestionViewModel> Questions { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

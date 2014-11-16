@@ -23,8 +23,8 @@ namespace QuizFactory.Data.Models
 
         public virtual ApplicationUser User { get; set; }
 
-        [Column(TypeName = "smallmoney")]
-        public decimal? Score { get; set; }
+        [Range(0, 100)]
+        public int Score { get; set; }
 
         public bool IsCompleted { get; set; }
 
