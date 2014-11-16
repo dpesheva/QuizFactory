@@ -74,12 +74,18 @@
         }
 
         [Authorize]
-        public ActionResult Vote(int value)
+        public ActionResult Vote(int value, int? id)
         {
-            if (value < 1 || 5 < value)
+            if (value < 1 || 5 < value || id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            var takenQuiz = db.TakenQuizzes
+                .All()
+                .Where(t => t.QuizDefinitionId == id)
+                .FirstOrDefault();
+
             // TODO set to taken quiz, calc rate
             return this.View();
         }
