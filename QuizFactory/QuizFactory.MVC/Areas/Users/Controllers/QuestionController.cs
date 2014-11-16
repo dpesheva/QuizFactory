@@ -27,6 +27,7 @@
             }
 
             this.TempData["quizId"] = quizId;
+            this.TempData["quizTitle"] = this.db.QuizzesDefinitions.Find(quizId).Title;
 
             var allQuestions = this.db.QuestionsDefinitions
                                      .All()
@@ -124,8 +125,8 @@
             if (quiz == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }    
-            
+            }
+
             if (this.ModelState.IsValid)
             {
                 this.db.QuestionsDefinitions.Delete(questionViewModel.Id);
@@ -136,7 +137,7 @@
                 newQuestion.QuizDefinition = quiz;
 
                 this.db.QuestionsDefinitions.Add(newQuestion);
-                
+
                 this.db.SaveChanges();
                 return this.RedirectToAction("Index", new { quizId = quizId });
             }
@@ -185,8 +186,8 @@
                 var item = questionViewModel.Answers[i];
 
                 if (item == string.Empty)
-                    break;
-                
+                    continue;
+
                 var answ = new AnswerDefinition()
                 {
                     Text = item,
