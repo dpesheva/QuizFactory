@@ -1,4 +1,4 @@
-﻿@model QuizFactory.Mvc.ViewModels.QuestionViewModel
+﻿@model QuizFactory.Mvc.Areas.Users.ViewModels.QuestionUserViewModel
 
 @{
     ViewBag.Title = "Add Question";
@@ -6,10 +6,10 @@
 
 <h2 class="green text-shadow">Add Question</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal gray">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -20,17 +20,28 @@
                 @Html.ValidationMessageFor(model => model.QuestionText, "", new { @class = "text-danger" })
             </div>
         </div>
+        @for (int i = 0; i < 10; i++)
+        {
+            string hidden = "hidden";
 
-        <div class="form-group">
-            @Html.RadioButton("correctAnswer",  "0" )
-           <input type="text" name="answers[0]" />
+            if (i < 2)
+            {
+                hidden = "";
+            }
+
+            <div id="radio-group-@i" class="form-group @hidden">
+                <div class=" col-md-offset-1 col-md-1 text-right">
+                    @Html.RadioButton("correctAnswer", i)
+                </div>
+                <div class="col-md-10">
+                    <input type="text" name="answers[@i]" data-answer-index="@i" class="form-control" @*value=@(Model.Answers.FirstOrDefault() ?? Model.Answers[i] )*@ />
+                </div>
+            </div>
+        }
+
+        <div id="radio-group-11" class="form-group hidden">
+            <span>Maximum number of answers.</span>
         </div>
-
-        <div class="form-group">
-            @Html.RadioButton("correctAnswer",  "1" )
-            <input type="text" name="answers[1]" />
-        </div>
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -49,4 +60,27 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        (function () {
+            var maxId = 0;
+
+            function checkNewRequired() {
+                var inp = $("[data-answer-index='" + maxId + "']");
+                if (inp.val()) {
+                    maxId++;
+                    a = $("#radio-group-" + maxId);
+                    a.removeClass("hidden");
+                }
+            }
+
+            function checkSchedule() {
+                window.setTimeout(checkNewRequired, 0)
+            }
+
+            var inputs = $("input[type='text']");
+            inputs.on('keypress', checkSchedule);
+            inputs.on('paste', checkSchedule);
+        }())
+
+    </script>
 }

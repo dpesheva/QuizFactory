@@ -1,5 +1,10 @@
 ﻿namespace QuizFactory.Mvc.Areas.Users.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
     using Microsoft.AspNet.Identity;
     using MvcPaging;
@@ -8,12 +13,6 @@
     using QuizFactory.Mvc.Areas.Users.ViewModels;
     using QuizFactory.Mvc.Controllers;
     using QuizFactory.Mvc.ViewModels.Play;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Web;
-    using System.Web.Mvc;
 
     [Authorize]
     public class ScoreController : BaseController
@@ -31,41 +30,40 @@
             var userId = this.User.Identity.GetUserId();
 
             var allTakenQuizzes = this.db.TakenQuizzes
-                .All()
-                .Where(q => q.UserId == userId)
-                .Project()
-                .To<TakenQuizViewModel>()
-                .ToList();
+                                      .All()
+                                      .Where(q => q.UserId == userId)
+                                      .Project()
+                                      .To<TakenQuizViewModel>()
+                                      .ToList();
 
-
-            ViewBag.Pages = Math.Ceiling((double)allTakenQuizzes.Count / PageSize);
+            this.ViewBag.Pages = Math.Ceiling((double)allTakenQuizzes.Count / PageSize);
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
 
-            return View(allTakenQuizzes.ToPagedList(currentPageIndex, PageSize));
+            return this.View(allTakenQuizzes.ToPagedList(currentPageIndex, PageSize));
         }
 
         public ActionResult Details(int? id)
         {
             var takenQuiz = this.db.TakenQuizzes
-                .All()
-                .Where(t => t.Id == id)
-                .FirstOrDefault();
+                                .All()
+                                .Where(t => t.Id == id)
+                                .FirstOrDefault();
 
             var quizDef = this.db.QuizzesDefinitions
-                .AllWithDeleted()
-                .Where(q => q.Id == takenQuiz.QuizDefinitionId)
-                .Project()
-                .To<QuizPlayViewModel>()
-                .FirstOrDefault();
+                              .AllWithDeleted()
+                              .Where(q => q.Id == takenQuiz.QuizDefinitionId)
+                              .Project()
+                              .To<QuizPlayViewModel>()
+                              .FirstOrDefault();
 
             if (takenQuiz == null || quizDef == null)
             {
-                return this.Redirect("Error"); // TODO 
+                throw new HttpException("Quiz not found");
             }
 
-            Dictionary<int, int> selectedAnswersInt = CollectAnswers(takenQuiz);
-            TempData["results"] = selectedAnswersInt;
-            TempData["scorePercentage"] = takenQuiz.Score;
+            Dictionary<int, int> selectedAnswersInt = this.CollectAnswers(takenQuiz);
+            this.TempData["results"] = selectedAnswersInt;
+            this.TempData["scorePercentage"] = takenQuiz.Score;
 
             return this.View("DisplayAnswers", quizDef);
         }
@@ -82,6 +80,5 @@
 
             return result;
         }
-
     }
 }

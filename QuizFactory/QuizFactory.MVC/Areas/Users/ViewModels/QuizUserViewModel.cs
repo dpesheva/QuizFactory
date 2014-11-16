@@ -1,15 +1,13 @@
 ﻿namespace QuizFactory.Mvc.Areas.Users.ViewModels
 {
-    using QuizFactory.Data.Models;
-    using QuizFactory.Mvc.Areas.Admin.ViewModels;
-    using QuizFactory.Mvc.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Web;
     using System.Web.Mvc;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.ViewModels;
 
     public class QuizUserViewModel 
     {
@@ -31,14 +29,7 @@
                     {
                         Id = q.Id,
                         QuestionText = q.QuestionText,
-                        Number = q.Number,
-                        //Answers = q.AnswersDefinitions.Select(a => new AnswerViewModel
-                        //{
-                        //    Id = a.Id,
-                        //    Text = a.Text,
-                        //    IsCorrect = a.IsCorrect,
-                        //    Position = a.Position
-                        //}).ToList()
+                        Number = q.Number
                     }).ToList()
                 };
             }

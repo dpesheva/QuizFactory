@@ -31,7 +31,7 @@
                     @Html.RadioButton("correctAnswer", i.ToString(), new { @checked = Model.Answers[i].IsCorrect })
                 </div>
                 <div class="col-md-10">
-                    <input type="text" value=@(Model.Answers[i].Text) name="answers[@i]" class="form-control" />
+                    <input type="text" value=@(Model.Answers[i].Text) name="answers[@i]" class="form-control"/>
                 </div>
             </div>
         }
@@ -60,4 +60,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+   
 }

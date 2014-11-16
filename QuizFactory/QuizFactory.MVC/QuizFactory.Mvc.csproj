@@ -199,7 +199,6 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuizAdminController.cs" />
-    <Compile Include="Areas\Admin\Controllers\QuizAdministrationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuestionAdminViewModel.cs" />
     <Compile Include="Areas\Common\Controllers\KendoGridAdministrationController.cs" />
@@ -266,7 +265,6 @@
     <Content Include="Areas\Users\Views\Question\Details.cshtml" />
     <Content Include="Areas\Users\Views\Question\Edit.cshtml" />
     <Content Include="Areas\Users\Views\Question\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\QuizAdministration\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Currency.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />

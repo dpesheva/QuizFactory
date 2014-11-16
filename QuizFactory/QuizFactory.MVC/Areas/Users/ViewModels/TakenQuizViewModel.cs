@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using System.Web.Mvc;
     using AutoMapper;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Mapping;
