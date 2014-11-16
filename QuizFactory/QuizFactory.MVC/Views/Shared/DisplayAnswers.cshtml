@@ -26,15 +26,15 @@
         }
         <p class=@answerColor>
             @answer.Text
-        @if (answer.IsCorrect)
-        {
-            <i class="glyphicon glyphicon-ok green"></i>
-        }
-        else if (isSelected) //Selected wrong answer
-        {
-            <i class="glyphicon glyphicon-remove red"></i>
-        }
-    </p>
+            @if (answer.IsCorrect)
+            {
+                <i class="glyphicon glyphicon-ok green"></i>
+            }
+            else if (isSelected) //Selected wrong answer
+            {
+                <i class="glyphicon glyphicon-remove red"></i>
+            }
+        </p>
     }
         }
 
@@ -48,5 +48,37 @@
 
 @if (Request.IsAuthenticated)
 {
-    @Html.Partial("_VotingPartial")
+    string classHidden = "";
+    if (ViewBag.Voted == null || !(bool)ViewBag.Voted)
+    {
+        classHidden = "hidden";
+        <span class="yellow lead">Vote: </span>
+        <span class="star-rating">
+            @for (int i = 0; i < 5; i++)
+            {
+                @Ajax.ActionLink(" ", "Vote", "Vote", new { value = i, id = Model.Id, area = "Users" },
+                    new AjaxOptions
+                        {
+                            HttpMethod = "POST",
+                            OnFailure = "hideStars()",
+                            OnSuccess = "hideStars()"
+                        })<i></i>
+            }
+        </span>
+    }
+
+    <span id="message" class="lead yellow @classHidden">Thank you for voting!</span>
+}
+else
+{
+    @Html.ActionLink("Register for voting", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+}
+
+@section scripts{
+    <script>
+    function hideStars(){
+        $(".star-rating").addClass("hidden");
+        $("#message").removeClass("hidden");
+    }
+    </script>
 }

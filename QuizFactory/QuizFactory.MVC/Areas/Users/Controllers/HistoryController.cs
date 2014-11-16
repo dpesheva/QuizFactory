@@ -65,14 +65,17 @@
             this.TempData["results"] = selectedAnswersInt;
             this.TempData["scorePercentage"] = takenQuiz.Score;
 
+            var userId = User.Identity.GetUserId();
+            ViewBag.Voted = this.db.Votes.All().Where(v => v.QuizId == quizDef.Id && v.UserId == userId).Any();
+
             return this.View("DisplayAnswers", quizDef);
         }
- 
+
         private Dictionary<int, int> CollectAnswers(TakenQuiz takenQuiz)
         {
             Dictionary<int, int> result = new Dictionary<int, int>();
             var userAnswers = takenQuiz.UsersAnswers;
-                       
+
             foreach (var item in userAnswers)
             {
                 result.Add(item.AnswerDefinition.QuestionDefinition.Id, item.AnswerDefinitionId);

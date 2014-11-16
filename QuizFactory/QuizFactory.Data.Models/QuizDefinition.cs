@@ -14,6 +14,7 @@ namespace QuizFactory.Data.Models
         {
             this.QuestionsDefinitions = new HashSet<QuestionDefinition>();
             this.TakenQuizzes = new HashSet<TakenQuiz>();
+            this.Votes = new HashSet<Vote>();
             this.Rating = 0m;
         }
 
@@ -38,5 +39,7 @@ namespace QuizFactory.Data.Models
         public virtual ICollection<QuestionDefinition> QuestionsDefinitions { get; set; }
 
         public virtual ICollection<TakenQuiz> TakenQuizzes { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

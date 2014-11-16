@@ -72,20 +72,7 @@
             var quiz = GetQuizById(id);
             return this.View(quiz);
         }
-
-        [Authorize]
-        public ActionResult Vote(int value, int? id)
-        {
-            if (value < 1 || 5 < value || id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-           
-            // TODO set to taken quiz, calc rate
-            return this.View();
-        }
-
+        
         private Dictionary<int, int> ProcessResults(int quizId, Dictionary<string, string> questions, out int correctCount)
         {
             correctCount = 0;
