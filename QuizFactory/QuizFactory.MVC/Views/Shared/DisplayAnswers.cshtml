@@ -56,7 +56,7 @@
         <span class="star-rating">
             @for (int i = 0; i < 5; i++)
             {
-                @Ajax.ActionLink(" ", "Vote", "Vote", new { value = i, id = Model.Id, area = "Users" },
+                @Ajax.ActionLink(" ", "Vote", "Vote", new { value = i+1, id = Model.Id, area = "Users" },
                     new AjaxOptions
                         {
                             HttpMethod = "POST",

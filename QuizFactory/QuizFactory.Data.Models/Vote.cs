@@ -13,7 +13,7 @@
         public string UserId { get; set; }
 
         [Key, Column(Order = 1)]
-        public int QuizId { get; set; }
+        public int QuizDefinitionId { get; set; }
      
         [Required]
         [Range(0, 5)]

@@ -66,7 +66,7 @@
             this.TempData["scorePercentage"] = takenQuiz.Score;
 
             var userId = User.Identity.GetUserId();
-            ViewBag.Voted = this.db.Votes.All().Where(v => v.QuizId == quizDef.Id && v.UserId == userId).Any();
+            ViewBag.Voted = this.db.Votes.All().Where(v => v.QuizDefinitionId == quizDef.Id && v.UserId == userId).Any();
 
             return this.View("DisplayAnswers", quizDef);
         }

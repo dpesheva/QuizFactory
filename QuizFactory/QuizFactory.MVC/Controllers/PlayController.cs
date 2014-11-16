@@ -72,7 +72,7 @@
             var quiz = GetQuizById(id);
             return this.View(quiz);
         }
-        
+
         private Dictionary<int, int> ProcessResults(int quizId, Dictionary<string, string> questions, out int correctCount)
         {
             correctCount = 0;
@@ -120,7 +120,12 @@
 
             takenQuiz.Score = scorePercentage;
             this.db.TakenQuizzes.Add(takenQuiz);
-            this.db.SaveChanges();
+            try
+            {
+                this.db.SaveChanges();
+            }
+            catch (Exception ex)
+            { }
 
             return takenQuiz.Id;
         }
