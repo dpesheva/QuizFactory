@@ -2,22 +2,18 @@
 {
     using System;
     using System.Collections;
-    using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Kendo.Mvc.UI;
-    using Kendo.Mvc.Extensions;
     using QuizFactory.Data;
-    using QuizFactory.Data.Common.Interfaces;
+    using QuizFactory.Data.Common;
     using QuizFactory.Mvc.Areas.Admin.ViewModels;
     using QuizFactory.Mvc.Areas.Common.Controllers;
-
     using Model = QuizFactory.Data.Models.QuizDefinition;
     using ViewModel = QuizFactory.Mvc.Areas.Admin.ViewModels.QuizAdminViewModel;
 
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = GlobalConstants.AdminRole)]
     public class QuizAdminController : KendoGridAdministrationController
     {
         public QuizAdminController(IQuizFactoryData data)
@@ -32,7 +28,8 @@
         }
 
         [HttpPost]
-        public ActionResult Create([DataSourceRequest] DataSourceRequest request, ViewModel model)
+        public ActionResult Create([DataSourceRequest]
+                                   DataSourceRequest request, ViewModel model)
         {
             var dbModel = base.Create<Model>(model);
             if (dbModel != null)
@@ -43,7 +40,8 @@
         }
 
         [HttpPost]
-        public ActionResult Update([DataSourceRequest] DataSourceRequest request, ViewModel model)
+        public ActionResult Update([DataSourceRequest]
+                                   DataSourceRequest request, ViewModel model)
         {
             base.Update<Model, ViewModel>(model, model.Id);
             return this.GridOperation(model, request);
@@ -67,10 +65,10 @@
             try
             {
                 return this.db.QuizzesDefinitions
-                    .All()
-                    .Project()
-                    .To<QuizAdminViewModel>()
-                    .ToList();
+                           .All()
+                           .Project()
+                           .To<QuizAdminViewModel>()
+                           .ToList();
             }
             catch (Exception ex)
             {

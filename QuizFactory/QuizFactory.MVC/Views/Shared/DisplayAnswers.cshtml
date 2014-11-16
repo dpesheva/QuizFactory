@@ -5,36 +5,37 @@
 }
 
 @{
-     Dictionary<int, int> results = (Dictionary<int, int>)TempData["results"];
+    Dictionary<int, int> results = (Dictionary<int, int>)TempData["results"];
     var percentage = (int)TempData["scorePercentage"];
- }
+}
 
 @foreach (var question in Model.Questions)
-{ 
+{
     <div class="question box-shadow gray">
         <h4>@question.QuestionText </h4>
         @{
 
-            foreach (var answer in question.Answers)
-            {
-                string answerColor = "";
-                bool isSelected = false;
-                if (results.ContainsKey((question.Id)) && results[(question.Id)] == answer.Id)
-                {
-                    answerColor = "blue";
-                    isSelected = true;
-                }
-                <p class=@answerColor>@answer.Text
-                    @if (answer.IsCorrect)
-                    {
-                        <i class="glyphicon glyphicon-ok green"></i>
-                    }
-                    else if (isSelected) //Selected wrong answer
-                    {
-                        <i class="glyphicon glyphicon-remove red"></i>
-                    }                   
-                </p>
-            }
+    foreach (var answer in question.Answers)
+    {
+        string answerColor = "";
+        bool isSelected = false;
+        if (results.ContainsKey((question.Id)) && results[(question.Id)] == answer.Id)
+        {
+            answerColor = "blue";
+            isSelected = true;
+        }
+        <p class=@answerColor>
+            @answer.Text
+        @if (answer.IsCorrect)
+        {
+            <i class="glyphicon glyphicon-ok green"></i>
+        }
+        else if (isSelected) //Selected wrong answer
+        {
+            <i class="glyphicon glyphicon-remove red"></i>
+        }
+    </p>
+    }
         }
 
     </div>
@@ -44,4 +45,8 @@
         @percentage%
     </div>
 </div>
-<h3>VOTING</h3>
+
+@if (Request.IsAuthenticated)
+{
+    @Html.Partial("_VotingPartial")
+}

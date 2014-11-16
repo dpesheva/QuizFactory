@@ -3,12 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
     using Microsoft.AspNet.Identity;
     using QuizFactory.Data;
     using QuizFactory.Data.Models;
-    using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Mvc.ViewModels.Play;
 
     public class PlayController : BaseController
@@ -23,11 +23,11 @@
         public ActionResult PlayQuiz(int? id)
         {
             var quiz = this.db.QuizzesDefinitions
-                .All()
-                .Where(q => q.Id == id)
-                .Project()
-                .To<QuizPlayViewModel>()
-                .FirstOrDefault();
+                           .All()
+                           .Where(q => q.Id == id)
+                           .Project()
+                           .To<QuizPlayViewModel>()
+                           .FirstOrDefault();
 
             if (quiz == null)
             {
@@ -43,15 +43,14 @@
         public ActionResult PlayQuiz(int id, Dictionary<string, string> questions)
         {
             int correctCount;
-            Dictionary<int, int> selectedAnswersInt = ProcessResults(id, questions, out correctCount);
-
+            Dictionary<int, int> selectedAnswersInt = this.ProcessResults(id, questions, out correctCount);
 
             var quiz = this.db.QuizzesDefinitions
-                .All()
-                .Where(q => q.Id == id)
-                .Project()
-                .To<QuizPlayViewModel>()
-                .FirstOrDefault();
+                           .All()
+                           .Where(q => q.Id == id)
+                           .Project()
+                           .To<QuizPlayViewModel>()
+                           .FirstOrDefault();
 
             if (quiz == null)
             {
@@ -62,16 +61,26 @@
                 return this.Redirect("Error"); // TODO			
             }
 
-            TempData["results"] = selectedAnswersInt;
+            this.TempData["results"] = selectedAnswersInt;
             var scorePercentage = 100 * correctCount / quiz.Questions.Count();
-            TempData["scorePercentage"] = scorePercentage;
+            this.TempData["scorePercentage"] = scorePercentage;
 
-            if (User.Identity.IsAuthenticated)
+            if (this.User.Identity.IsAuthenticated)
             {
-                SaveResult(id, selectedAnswersInt, scorePercentage);
+                this.SaveResult(id, selectedAnswersInt, scorePercentage);
             }
 
             return this.View("DisplayAnswers", quiz);
+        }
+
+        public ActionResult Vote(int value)
+        {
+            if (value < 1 || 5 < value)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return this.View();
         }
 
         private Dictionary<int, int> ProcessResults(int quizId, Dictionary<string, string> questions, out int correctCount)
@@ -97,7 +106,6 @@
                     correctCount++;
                 }
 
-
                 result.Add(question.Id, answerId);
             }
 
@@ -106,7 +114,7 @@
 
         private void SaveResult(int quizId, Dictionary<int, int> selectedAnswers, int scorePercentage)
         {
-            var user = User.Identity.GetUserId();
+            var user = this.User.Identity.GetUserId();
             TakenQuiz takenQuiz = new TakenQuiz();
             takenQuiz.UserId = user;
             takenQuiz.QuizDefinitionId = quizId;
@@ -114,32 +122,16 @@
             foreach (var item in selectedAnswers)
             {
                 var answerId = item.Value;
-                
+
                 UsersAnswer givenAnswer = new UsersAnswer();
                 givenAnswer.AnswerDefinitionId = answerId;
                 givenAnswer.TakenQuiz = takenQuiz;
-                db.UsersAnswers.Add(givenAnswer);
+                this.db.UsersAnswers.Add(givenAnswer);
             }
 
             takenQuiz.Score = scorePercentage;
             this.db.TakenQuizzes.Add(takenQuiz);
             this.db.SaveChanges();
         }
-
-        //public ActionResult GetQuestion(int quizId, int currentQuestion)
-        //{
-        //    var question = this.db.QuestionsDefinitions
-        //                       .All()
-        //                       .Where(q => q.QuizDefinition.Id == quizId)
-        //                       .Select(QuestionViewModel.FromQuestionDefinition)
-        //                       .FirstOrDefault(); // TODO get next question
-
-        //    if (question == null)
-        //    {
-        //        return this.Redirect("Error"); // TODO 
-        //    }
-
-        //    return this.PartialView("_OpenQuestionPartial", question);
-        //}
     }
 }

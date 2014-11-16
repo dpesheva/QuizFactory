@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using QuizFactory.Data.Models;
+using QuizFactory.Data.Common;
 
 namespace QuizFactory.Data.Migrations
 {
@@ -11,9 +12,8 @@ namespace QuizFactory.Data.Migrations
     {
         public void Generate(QuizFactoryDbContext context)
         {
-           CreateUserAndRole(context, "admin@abv.bg", "admin");
-           CreateUserAndRole(context, "gosho@abv.bg", "user");
-
+           CreateUserAndRole(context, "admin@abv.bg", GlobalConstants.AdminRole);
+           CreateUserAndRole(context, "gosho@abv.bg", GlobalConstants.UserRole);
         }
 
         private void CreateUserAndRole(QuizFactoryDbContext context, string username, string rolename)

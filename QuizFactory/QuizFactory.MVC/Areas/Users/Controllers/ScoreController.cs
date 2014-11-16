@@ -65,7 +65,7 @@
 
             Dictionary<int, int> selectedAnswersInt = CollectAnswers(takenQuiz);
             TempData["results"] = selectedAnswersInt;
-            TempData["scorePercentage"] = (int)(takenQuiz.Score ?? 0);
+            TempData["scorePercentage"] = takenQuiz.Score;
 
             return this.View("DisplayAnswers", quizDef);
         }
