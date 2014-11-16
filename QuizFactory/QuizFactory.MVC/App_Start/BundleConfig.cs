@@ -1,4 +1,4 @@
-﻿namespace QuizFactory.Mvc
+﻿namespace QuizFactory.App_Start.Mvc
 {
     using System.Web.Optimization;
 

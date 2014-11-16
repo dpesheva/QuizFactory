@@ -1,12 +1,10 @@
 namespace QuizFactory.Data.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
     using QuizFactory.Data;
-    using QuizFactory.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<QuizFactoryDbContext>
     {

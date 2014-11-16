@@ -1,14 +1,13 @@
 ﻿namespace QuizFactory.Mvc.Areas.Admin.ViewModels
 {
-    using QuizFactory.Data.Models;
-    using QuizFactory.Mvc.ViewModels;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Web;
     using System.Web.Mvc;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.ViewModels;
 
     public class QuestionAdminViewModel
     {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using QuizFactory.Data.Models;
-using QuizFactory.Data;
-
-namespace QuizFactory.Migrations
+﻿namespace QuizFactory.Data.Migrations
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Data;
+
     public class SeedData
     {
         public static Random Rand = new Random();
