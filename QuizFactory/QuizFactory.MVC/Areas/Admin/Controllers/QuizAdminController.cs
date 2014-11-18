@@ -23,7 +23,7 @@
 
         public ActionResult Index()
         {
-            this.TempData["categories"] = this.db.Categories.All().Project().To<CategoryViewModel>().ToList();
+            this.TempData["categories"] = this.Db.Categories.All().Project().To<CategoryViewModel>().ToList();
             return this.View();
         }
 
@@ -53,8 +53,8 @@
         {
             if (model != null && this.ModelState.IsValid)
             {
-                this.db.QuizzesDefinitions.Delete(model.Id);
-                this.db.SaveChanges();
+                this.Db.QuizzesDefinitions.Delete(model.Id);
+                this.Db.SaveChanges();
             }
 
             return this.GridOperation(model, request);
@@ -64,7 +64,7 @@
         {
             try
             {
-                return this.db.QuizzesDefinitions
+                return this.Db.QuizzesDefinitions
                            .All()
                            .Project()
                            .To<QuizAdminViewModel>()
@@ -78,7 +78,7 @@
 
         protected override T GetById<T>(object id)
         {
-            return this.db.QuizzesDefinitions.Find(id) as T;
+            return this.Db.QuizzesDefinitions.Find(id) as T;
         }
     }
 }

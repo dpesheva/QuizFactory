@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
-namespace QuizFactory.Mvc.Areas.Admin
+﻿namespace QuizFactory.Mvc.Areas.Admin
 {
+    using System.Web.Mvc;
+
     public class AdminAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
@@ -17,8 +17,7 @@ namespace QuizFactory.Mvc.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+                new { action = "Index", id = UrlParameter.Optional });
         }
     }
 }

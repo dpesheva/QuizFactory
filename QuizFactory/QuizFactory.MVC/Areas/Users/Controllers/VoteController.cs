@@ -38,9 +38,9 @@
 
             try
             {
-                this.db.Votes.Add(vote);
+                this.Db.Votes.Add(vote);
                 ViewBag.Voted = true;
-                this.db.SaveChanges();
+                this.Db.SaveChanges();
                 UpdateQuizRating(id, value);
             }
             catch
@@ -53,10 +53,10 @@
 
         private void UpdateQuizRating(int id, int value)
         {
-            var quiz = this.db.QuizzesDefinitions.Find(id);
+            var quiz = this.Db.QuizzesDefinitions.Find(id);
             var avrg = quiz.Votes.Average(v => v.Value);
             quiz.Rating = (decimal)avrg;
-            this.db.SaveChanges();
+            this.Db.SaveChanges();
         }
     }
 }

@@ -4,7 +4,6 @@
 
     public class BundleConfig
     {
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.IgnoreList.Clear();
@@ -12,8 +11,6 @@
             RegisterScriptBundles(bundles);
             RegisterStyleBundles(bundles);
 
-            // Set EnableOptimizations to false for debugging. For more information,
-            // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;
         }
 
@@ -22,7 +19,7 @@
             bundles.Add(new StyleBundle("~/Content/Kendo/kendoCss").Include(
                 "~/Content/Kendo/kendo.common.min.css",
                 "~/Content/Kendo/kendo.common.core.min.css",
-                 "~/Content/Kendo/kendo.common-bootstrap.min.css",
+                "~/Content/Kendo/kendo.common-bootstrap.min.css",
                 "~/Content/Kendo/kendo.metro.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -43,16 +40,10 @@
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 "~/Scripts/Kendo/jquery.min.js"));
-
-            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-            //    "~/Scripts/jquery-{version}.js",
-            //    "~/Scripts/jquery.unobtrusive-ajax.js"));
-
+           
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.validate*"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 

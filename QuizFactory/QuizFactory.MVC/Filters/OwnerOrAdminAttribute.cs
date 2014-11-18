@@ -27,7 +27,7 @@
             else
             {
                 var cntrl = (BaseController)filterContext.Controller;
-                var uow = cntrl.db;
+                var uow = cntrl.Db;
 
                 // first look at routedata then at request parameter:
                 var idString = (filterContext.HttpContext.Request.RequestContext.RouteData.Values[this.routeParameter] as string) ??

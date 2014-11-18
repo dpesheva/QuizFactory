@@ -22,7 +22,7 @@
         // GET: Admin/Categories
         public ActionResult Index()
         {
-            var allCategories = this.db.Categories.All().Project().To<CategoryViewModel>().ToList();
+            var allCategories = this.Db.Categories.All().Project().To<CategoryViewModel>().ToList();
 
             return this.View(allCategories);
         }
@@ -39,7 +39,7 @@
         public ActionResult Create([Bind(Include = "Name")]
                                    CategoryViewModel category)
         {
-            if (this.db.Categories.SearchFor(c => c.Name == category.Name && c.IsDeleted == false).FirstOrDefault() != null)
+            if (this.Db.Categories.SearchFor(c => c.Name == category.Name && c.IsDeleted == false).FirstOrDefault() != null)
             {
                 this.ModelState.AddModelError("Name", "There is a category with the same name!");
             }
@@ -48,8 +48,8 @@
             {
                 Category newCategory = Mapper.Map<Category>(category);
 
-                this.db.Categories.Add(newCategory);
-                this.db.SaveChanges();
+                this.Db.Categories.Add(newCategory);
+                this.Db.SaveChanges();
 
                 return this.RedirectToAction("Index");
             }
@@ -65,12 +65,13 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            CategoryViewModel category = this.db.Categories.SearchFor(c => c.Id == id).Project().To<CategoryViewModel>().FirstOrDefault();
+            CategoryViewModel category = this.Db.Categories.SearchFor(c => c.Id == id).Project().To<CategoryViewModel>().FirstOrDefault();
 
             if (category == null)
             {
                 return this.HttpNotFound();
             }
+
             return this.View(category);
         }
 
@@ -79,20 +80,21 @@
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CategoryViewModel category)
         {
-            if (this.db.Categories.SearchFor(c => c.Name == category.Name && c.Id != category.Id && c.IsDeleted == false).FirstOrDefault() != null)
+            if (this.Db.Categories.SearchFor(c => c.Name == category.Name && c.Id != category.Id && c.IsDeleted == false).FirstOrDefault() != null)
             {
                 this.ModelState.AddModelError("Name", "There is a category with the same name!");
             }
 
             if (this.ModelState.IsValid)
             {
-                Category categoryToUpdate = this.db.Categories.Find(category.Id);
+                Category categoryToUpdate = this.Db.Categories.Find(category.Id);
                 categoryToUpdate.Name = category.Name;
 
-                this.db.SaveChanges();
+                this.Db.SaveChanges();
 
                 return this.RedirectToAction("Index");
             }
+
             return this.View(category);
         }
 
@@ -104,12 +106,13 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            CategoryViewModel category = this.db.Categories.SearchFor(c => c.Id == id).Project().To<CategoryViewModel>().FirstOrDefault();
+            CategoryViewModel category = this.Db.Categories.SearchFor(c => c.Id == id).Project().To<CategoryViewModel>().FirstOrDefault();
 
             if (category == null)
             {
                 return this.HttpNotFound();
             }
+
             return this.View(category);
         }
 
@@ -118,16 +121,17 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (this.db.QuizzesDefinitions.All().Any(q => q.CategoryId == id))
+            if (this.Db.QuizzesDefinitions.All().Any(q => q.CategoryId == id))
             {
                 this.ModelState.AddModelError("Error", "Category can't be deleted. There are quzzes linked to it.");
-                CategoryViewModel categoryModel = this.db.Categories.SearchFor(c => c.Id == id).Project().To<CategoryViewModel>().FirstOrDefault();
+                CategoryViewModel categoryModel = this.Db.Categories.SearchFor(c => c.Id == id).Project().To<CategoryViewModel>().FirstOrDefault();
                 return this.View(categoryModel);
             }
-            Category category = this.db.Categories.Find(id);
 
-            this.db.Categories.Delete(category);
-            this.db.SaveChanges();
+            Category category = this.Db.Categories.Find(id);
+
+            this.Db.Categories.Delete(category);
+            this.Db.SaveChanges();
             return this.RedirectToAction("Index");
         }
     }

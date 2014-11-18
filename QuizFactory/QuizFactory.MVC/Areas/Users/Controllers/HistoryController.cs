@@ -29,7 +29,7 @@
         {
             var userId = this.User.Identity.GetUserId();
 
-            var allTakenQuizzes = this.db.TakenQuizzes
+            var allTakenQuizzes = this.Db.TakenQuizzes
                                       .All()
                                       .Where(q => q.UserId == userId)
                                       .Project()
@@ -44,12 +44,12 @@
 
         public ActionResult Details(int? id)
         {
-            var takenQuiz = this.db.TakenQuizzes
+            var takenQuiz = this.Db.TakenQuizzes
                                 .All()
                                 .Where(t => t.Id == id)
                                 .FirstOrDefault();
 
-            var quizDef = this.db.QuizzesDefinitions
+            var quizDef = this.Db.QuizzesDefinitions
                               .AllWithDeleted()
                               .Where(q => q.Id == takenQuiz.QuizDefinitionId)
                               .Project()
@@ -66,7 +66,7 @@
             this.TempData["scorePercentage"] = takenQuiz.Score;
 
             var userId = User.Identity.GetUserId();
-            ViewBag.Voted = this.db.Votes.All().Where(v => v.QuizDefinitionId == quizDef.Id && v.UserId == userId).Any();
+            ViewBag.Voted = this.Db.Votes.All().Where(v => v.QuizDefinitionId == quizDef.Id && v.UserId == userId).Any();
 
             return this.View("DisplayAnswers", quizDef);
         }

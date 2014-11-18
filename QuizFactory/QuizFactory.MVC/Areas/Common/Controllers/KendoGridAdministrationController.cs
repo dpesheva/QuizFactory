@@ -66,9 +66,9 @@
 
         private void ChangeEntityStateAndSave(object dbModel, EntityState state)
         {
-            var entry = this.db.Context.Entry(dbModel);
+            var entry = this.Db.Context.Entry(dbModel);
             entry.State = state;
-            this.db.SaveChanges();
+            this.Db.SaveChanges();
         }
     }
 }

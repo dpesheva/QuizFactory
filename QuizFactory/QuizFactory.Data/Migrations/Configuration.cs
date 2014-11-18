@@ -3,23 +3,22 @@ namespace QuizFactory.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     using System.Linq;
-
     using QuizFactory.Data;
 
     internal sealed class Configuration : DbMigrationsConfiguration<QuizFactoryDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            this.AutomaticMigrationsEnabled = true;
+            this.AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(QuizFactoryDbContext context)
         {
             if (!context.Roles.Any())
             {
-               var seedUsers = new SeedUsers();
-               seedUsers.Generate(context);
+                var seedUsers = new SeedUsers();
+                seedUsers.Generate(context);
             }
             
             var seedData = new SeedData(context);

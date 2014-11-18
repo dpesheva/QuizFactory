@@ -27,9 +27,9 @@
             }
 
             this.TempData["quizId"] = quizId;
-            this.TempData["quizTitle"] = this.db.QuizzesDefinitions.Find(quizId).Title;
+            this.TempData["quizTitle"] = this.Db.QuizzesDefinitions.Find(quizId).Title;
 
-            var allQuestions = this.db.QuestionsDefinitions
+            var allQuestions = this.Db.QuestionsDefinitions
                                    .All()
                                    .Where(q => q.QuizDefinition.Id == quizId)
                                    .Select(QuestionViewModel.FromQuestionDefinition)
@@ -107,17 +107,17 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var question = this.db.QuestionsDefinitions.Find(id);
+            var question = this.Db.QuestionsDefinitions.Find(id);
             var quizId = question.QuizDefinition.Id;
 
-            this.db.QuestionsDefinitions.Delete(question);
-            this.db.SaveChanges();
+            this.Db.QuestionsDefinitions.Delete(question);
+            this.Db.SaveChanges();
             return this.RedirectToAction("Index", new { quizId = quizId });
         }
 
         private ActionResult AddOrEdit(QuestionViewModel questionViewModel, int? quizId, bool edit)
         {
-            var quiz = this.db.QuizzesDefinitions.Find(quizId);
+            var quiz = this.Db.QuizzesDefinitions.Find(quizId);
             if (quiz == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -134,15 +134,15 @@
 
                 if (edit)
                 {
-                    this.db.QuestionsDefinitions.Delete(questionViewModel.Id);
+                    this.Db.QuestionsDefinitions.Delete(questionViewModel.Id);
                 }
                 var newQuestion = new QuestionDefinition();
 
                 this.MapFromModel(questionViewModel, newQuestion);
                 newQuestion.QuizDefinition = quiz;
 
-                this.db.QuestionsDefinitions.Add(newQuestion);
-                this.db.SaveChanges();
+                this.Db.QuestionsDefinitions.Add(newQuestion);
+                this.Db.SaveChanges();
                 return this.RedirectToAction("Index", new { quizId = quizId });
             }
 
@@ -164,7 +164,7 @@
                     IsCorrect = item.IsCorrect
                 };
 
-                this.db.AnswerDefinitions.Add(answ);
+                this.Db.AnswerDefinitions.Add(answ);
             }
         }
 
@@ -175,7 +175,7 @@
                 throw new HttpException("Incorrect question identifier");
             }
 
-            var questionViewModel = this.db.QuestionsDefinitions
+            var questionViewModel = this.Db.QuestionsDefinitions
                                         .All()
                                         .Where(q => q.Id == id)
                                         .Select(QuestionViewModel.FromQuestionDefinition)

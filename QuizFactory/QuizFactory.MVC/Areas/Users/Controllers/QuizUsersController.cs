@@ -52,7 +52,7 @@
             }
 
             QuizUserViewModel quizViewModel = this.GetViewModelById(id);
-            this.ViewBag.CategoryId = new SelectList(this.db.Categories.All().ToList(), "Id", "Name", quizViewModel.CategoryId);
+            this.ViewBag.CategoryId = new SelectList(this.Db.Categories.All().ToList(), "Id", "Name", quizViewModel.CategoryId);
 
             return this.View(quizViewModel);
         }
@@ -66,9 +66,9 @@
                 // create new and disable the old //TODO Manage questions
                 QuizDefinition newQuiz = this.CreateQuiz(quizViewModel, false);
 
-                this.db.QuizzesDefinitions.Delete(quizViewModel.Id);
+                this.Db.QuizzesDefinitions.Delete(quizViewModel.Id);
 
-                this.db.SaveChanges();
+                this.Db.SaveChanges();
                 return this.RedirectToAction("Index");
             }
 
@@ -93,19 +93,19 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var quiz = this.db.QuizzesDefinitions
+            var quiz = this.Db.QuizzesDefinitions
                            .SearchFor(q => q.Id == id)
                            .FirstOrDefault();
 
-            this.db.QuizzesDefinitions.Delete(quiz);
-            this.db.SaveChanges();
+            this.Db.QuizzesDefinitions.Delete(quiz);
+            this.Db.SaveChanges();
             return this.RedirectToAction("Index");
         }
 
         // GET: User/QuizAdministration/Create
         public ActionResult Create()
         {
-            this.ViewBag.CategoryId = new SelectList(this.db.Categories.All().ToList(), "Id", "Name");
+            this.ViewBag.CategoryId = new SelectList(this.Db.Categories.All().ToList(), "Id", "Name");
             return this.View();
         }
 
@@ -117,7 +117,7 @@
             if (this.ModelState.IsValid)
             {
                 QuizDefinition newQuiz = this.CreateQuiz(quizViewModel, false);
-                this.db.SaveChanges();
+                this.Db.SaveChanges();
 
                 quizViewModel.Id = newQuiz.Id;
 
@@ -129,7 +129,7 @@
 
         private void MapViewModelToModel(QuizUserViewModel quizViewModel, QuizDefinition dbQuiz, bool replace)
         {
-            var category = this.db.Categories.SearchFor(c => c.Id == quizViewModel.CategoryId).FirstOrDefault();
+            var category = this.Db.Categories.SearchFor(c => c.Id == quizViewModel.CategoryId).FirstOrDefault();
             if (category == null)
             {
                 throw new HttpException("Category not found.");
@@ -139,7 +139,7 @@
             dbQuiz.CategoryId = quizViewModel.CategoryId;
             dbQuiz.IsPublic = quizViewModel.IsPublic;
 
-            var user = this.db.Users.Find(this.User.Identity.GetUserId());
+            var user = this.Db.Users.Find(this.User.Identity.GetUserId());
 
             dbQuiz.Author = user;
             dbQuiz.QuestionsDefinitions = new List<QuestionDefinition>();
@@ -150,7 +150,7 @@
         {
             var userId = this.User.Identity.GetUserId();
 
-            var allQuizzes = this.db.QuizzesDefinitions
+            var allQuizzes = this.Db.QuizzesDefinitions
                                  .All()
                                  .Where(q => q.Author.Id == userId)
                                  .Select(QuizUserViewModel.FromQuizDefinition)
@@ -163,7 +163,7 @@
         {
             QuizDefinition newQuiz = new QuizDefinition();
             this.MapViewModelToModel(quizViewModel, newQuiz, replace);
-            this.db.QuizzesDefinitions.Add(newQuiz);
+            this.Db.QuizzesDefinitions.Add(newQuiz);
             return newQuiz;
         }
 
@@ -171,7 +171,7 @@
         {
             var userId = this.User.Identity.GetUserId();
 
-            var quizViewModel = this.db.QuizzesDefinitions
+            var quizViewModel = this.Db.QuizzesDefinitions
                                     .All()
                                     .Where(q => q.Id == id && q.Author.Id == userId)
                                     .Select(QuizUserViewModel.FromQuizDefinition)

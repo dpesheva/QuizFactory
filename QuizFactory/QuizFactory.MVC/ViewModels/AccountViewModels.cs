@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace QuizFactory.Mvc.ViewModels
+﻿namespace QuizFactory.Mvc.ViewModels
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -13,6 +13,7 @@ namespace QuizFactory.Mvc.ViewModels
     public class ExternalLoginListViewModel
     {
         public string Action { get; set; }
+
         public string ReturnUrl { get; set; }
     }
 

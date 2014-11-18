@@ -1,23 +1,23 @@
 ﻿namespace QuizFactory.Mvc.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Net;
     using System.Web.Mvc;
-
     using AutoMapper.QueryableExtensions;
     using MvcPaging;
+    using QuizFactory.Data;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels;
-    using QuizFactory.Data;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
 
     [HandleError]
     public class HomeController : BaseController
     {
-        private const int PageSize = 6;
         private static readonly Random random = new Random();
+
+        private const int PageSize = 6;
 
         public HomeController(IQuizFactoryData data)
             : base(data)
@@ -27,14 +27,14 @@
         public ActionResult Index(int? catId)
         {
             this.ViewBag.CategoryId = catId;
-            var category = this.db.Categories.Find(catId);
+            var category = this.Db.Categories.Find(catId);
 
             if (category != null)
             {
                 this.ViewBag.Category = category.Name;
             }
 
-            ViewBag.Pages = Math.Ceiling((double)db.QuizzesDefinitions.All().Count() / PageSize);
+            this.ViewBag.Pages = Math.Ceiling((double)this.Db.QuizzesDefinitions.All().Count() / PageSize);
 
             return this.View();
         }
@@ -42,17 +42,17 @@
         [OutputCache(Duration = 10 * 60)]
         public ActionResult Categories()
         {
-            var categories = this.db.Categories.All().ToList();
+            var categories = this.Db.Categories.All().ToList();
             return this.PartialView("_CategoriesPartial", categories);
         }
 
         public ActionResult GetRandomQuizzes()
         {
-            if (this.db.QuizzesDefinitions.All().Any())
+            if (this.Db.QuizzesDefinitions.All().Any())
             {
-                int rnd = random.Next(this.db.QuizzesDefinitions.All().Count());
+                int rnd = random.Next(this.Db.QuizzesDefinitions.All().Count());
 
-                var ramdomQuizzes = this.db.QuizzesDefinitions
+                var ramdomQuizzes = this.Db.QuizzesDefinitions
                                         .All()
                                         .Where(q => q.IsPublic == true)
                                         .OrderBy(e => rnd)
@@ -69,15 +69,15 @@
 
         public ActionResult Search(string search, int? page)
         {
-            search = search ?? "";
-            var quizzes = this.db.QuizzesDefinitions
-                .All()
-                .Where(q => q.Title.ToLower().Contains(search.ToLower()))
-                .Project()
-                .To<QuizMainInfoViewModel>()
-                .ToList();
-            ViewBag.SearchString = search;
-            ViewBag.Pages = Math.Ceiling((double)quizzes.Count() / PageSize);
+            search = search ?? string.Empty;
+            var quizzes = this.Db.QuizzesDefinitions
+                              .All()
+                              .Where(q => q.Title.ToLower().Contains(search.ToLower()))
+                              .Project()
+                              .To<QuizMainInfoViewModel>()
+                              .ToList();
+            this.ViewBag.SearchString = search;
+            this.ViewBag.Pages = Math.Ceiling((double)quizzes.Count() / PageSize);
 
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
             return this.View(quizzes.ToPagedList(currentPageIndex, PageSize));
@@ -90,8 +90,8 @@
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
-            var quizzes = GetData(catId, q => q.CreatedOn, false);
-            return FormatOutput(page, quizzes);
+            var quizzes = this.GetData(catId, q => q.CreatedOn, false);
+            return this.FormatOutput(page, quizzes);
         }
 
         public ActionResult PopularContent(int? catId, int? page)
@@ -101,8 +101,8 @@
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
-            var quizzes = GetData(catId, q => q.TakenQuizzes.Count, false);
-            return FormatOutput(page, quizzes);
+            var quizzes = this.GetData(catId, q => q.TakenQuizzes.Count, false);
+            return this.FormatOutput(page, quizzes);
         }
 
         public ActionResult ByNameContent(int? catId, int? page)
@@ -112,8 +112,8 @@
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
-            var quizzes = GetData(catId, q => q.Title, true);
-            return FormatOutput(page, quizzes);
+            var quizzes = this.GetData(catId, q => q.Title, true);
+            return this.FormatOutput(page, quizzes);
         }
 
         public ActionResult ByRatingContent(int? catId, int? page)
@@ -123,8 +123,8 @@
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
-            var quizzes = GetData(catId, q => q.Rating, false);
-            return FormatOutput(page, quizzes);
+            var quizzes = this.GetData(catId, q => q.Rating, false);
+            return this.FormatOutput(page, quizzes);
         }
 
         public ActionResult Error()
@@ -138,11 +138,11 @@
 
             if (asc)
             {
-                quizzesQuery = this.db.QuizzesDefinitions.All().OrderBy(predicate);
+                quizzesQuery = this.Db.QuizzesDefinitions.All().OrderBy(predicate);
             }
             else
             {
-                quizzesQuery = this.db.QuizzesDefinitions.All().OrderByDescending(predicate);
+                quizzesQuery = this.Db.QuizzesDefinitions.All().OrderByDescending(predicate);
             }
 
             Expression<Func<QuizDefinition, bool>> filter = (q => q.IsPublic == true);
@@ -156,12 +156,11 @@
                                .Project()
                                .To<QuizMainInfoViewModel>()
                                .ToList();
-
         }
 
         private ActionResult FormatOutput(int? page, IEnumerable<QuizMainInfoViewModel> quizzes)
         {
-            ViewBag.Pages = Math.Ceiling((double)quizzes.Count() / PageSize);
+            this.ViewBag.Pages = Math.Ceiling((double)quizzes.Count() / PageSize);
 
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
             return this.PartialView("_ListQuizBoxesPartial", quizzes.ToPagedList(currentPageIndex, PageSize));

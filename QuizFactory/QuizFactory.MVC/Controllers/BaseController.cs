@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-namespace QuizFactory.Mvc.Controllers
+﻿namespace QuizFactory.Mvc.Controllers
 {
-    using System.Web;
+    using System;
+    using System.Linq;  
     using System.Web.Mvc;
-    using Microsoft.AspNet.Identity;
     using QuizFactory.Data;
-    using QuizFactory.Data.Models;
 
     public abstract class BaseController : Controller
     {
-        public IQuizFactoryData db;
+        internal IQuizFactoryData Db;
 
         public BaseController(IQuizFactoryData data)
         {
-            this.db = data;
+            this.Db = data;
         }
-
-        //public BaseController()
-        //    : this(new QuizFactoryData())
-        //{
-        //}
     }
 }

@@ -3,14 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
+    using System.Web;
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
     using Microsoft.AspNet.Identity;
     using QuizFactory.Data;
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels.Play;
-    using System.Web;
 
     public class PlayController : BaseController
     {
@@ -22,7 +21,7 @@
         [HttpGet]
         public ActionResult PlayQuiz(int? id)
         {
-            var quiz = GetQuizById(id);
+            var quiz = this.GetQuizById(id);
 
             if (quiz == null)
             {
@@ -39,7 +38,7 @@
             int correctCount;
             Dictionary<int, int> selectedAnswersInt = this.ProcessResults(id, questions, out correctCount);
 
-            var quiz = GetQuizById(id);
+            var quiz = this.GetQuizById(id);
 
             if (quiz == null)
             {
@@ -69,7 +68,7 @@
             {
                 return this.RedirectToAction("Index", "Home");
             }
-            var quiz = GetQuizById(id);
+            var quiz = this.GetQuizById(id);
             return this.View(quiz);
         }
 
@@ -82,7 +81,7 @@
             {
                 var answerId = int.Parse(item.Value);
 
-                var answer = this.db.AnswerDefinitions.Find(answerId);
+                var answer = this.Db.AnswerDefinitions.Find(answerId);
                 var question = answer.QuestionDefinition;
 
                 if (question.QuizDefinition.Id != quizId)
@@ -115,18 +114,13 @@
                 UsersAnswer givenAnswer = new UsersAnswer();
                 givenAnswer.AnswerDefinitionId = answerId;
                 givenAnswer.TakenQuiz = takenQuiz;
-                this.db.UsersAnswers.Add(givenAnswer);
+                this.Db.UsersAnswers.Add(givenAnswer);
             }
 
             takenQuiz.Score = scorePercentage;
-            this.db.TakenQuizzes.Add(takenQuiz);
-            try
-            {
-                this.db.SaveChanges();
-            }
-            catch (Exception ex)
-            { }
-
+            this.Db.TakenQuizzes.Add(takenQuiz);
+            this.Db.SaveChanges();
+          
             return takenQuiz.Id;
         }
 
@@ -137,7 +131,7 @@
                 throw new HttpException("Wrong identifier");
             }
 
-            var quiz = this.db.QuizzesDefinitions
+            var quiz = this.Db.QuizzesDefinitions
                            .All()
                            .Where(q => q.Id == id)
                            .Project()

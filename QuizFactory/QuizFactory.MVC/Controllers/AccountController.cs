@@ -17,7 +17,7 @@
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private ApplicationUserManager _userManager;
+        private ApplicationUserManager userManager;
 
         public AccountController()
         {
@@ -40,11 +40,12 @@
         {
             get
             {
-                return this._userManager ?? this.HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return this.userManager ?? this.HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
+
             private set
             {
-                this._userManager = value;
+                this.userManager = value;
             }
         }
 
@@ -56,7 +57,6 @@
             }
         }
 
-        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -65,7 +65,6 @@
             return this.View();
         }
 
-        //
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -82,7 +81,7 @@
                 }
                 else
                 {
-                    this.ModelState.AddModelError("", "Invalid username or password.");
+                    this.ModelState.AddModelError(string.Empty, "Invalid username or password.");
                 }
             }
 
@@ -90,7 +89,6 @@
             return this.View(model);
         }
 
-        //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -98,7 +96,6 @@
             return this.View();
         }
 
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -113,12 +110,6 @@
                 {
                     await this.SignInAsync(user, isPersistent: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                     return this.RedirectToAction("Index", "Home");
                 }
                 else
@@ -131,7 +122,6 @@
             return this.View(model);
         }
 
-        //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
@@ -153,7 +143,6 @@
             }
         }
 
-        //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
         public ActionResult ForgotPassword()
@@ -161,7 +150,6 @@
             return this.View();
         }
 
-        //
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
@@ -173,22 +161,15 @@
                 var user = await this.UserManager.FindByNameAsync(model.Email);
                 if (user == null || !(await this.UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
-                    this.ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
+                    this.ModelState.AddModelError(string.Empty, "The user either does not exist or is not confirmed.");
                     return this.View();
                 }
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
             return this.View(model);
         }
 
-        //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
@@ -196,7 +177,6 @@
             return this.View();
         }
 
-        //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
@@ -205,10 +185,10 @@
             {
                 return this.View("Error");
             }
+
             return this.View();
         }
 
-        //
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -220,9 +200,10 @@
                 var user = await this.UserManager.FindByNameAsync(model.Email);
                 if (user == null)
                 {
-                    this.ModelState.AddModelError("", "No user found.");
+                    this.ModelState.AddModelError(string.Empty, "No user found.");
                     return this.View();
                 }
+
                 IdentityResult result = await this.UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
                 if (result.Succeeded)
                 {
@@ -239,7 +220,6 @@
             return this.View(model);
         }
 
-        //
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
@@ -247,7 +227,6 @@
             return this.View();
         }
 
-        //
         // POST: /Account/Disassociate
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -265,10 +244,10 @@
             {
                 message = ManageMessageId.Error;
             }
+
             return this.RedirectToAction("Manage", new { Message = message });
         }
 
-        //
         // GET: /Account/Manage
         public ActionResult Manage(ManageMessageId? message)
         {
@@ -277,13 +256,12 @@
                                         : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                                           : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                                             : message == ManageMessageId.Error ? "An error has occurred."
-                                              : "";
+                                              : string.Empty;
             this.ViewBag.HasLocalPassword = this.HasPassword();
             this.ViewBag.ReturnUrl = this.Url.Action("Manage");
             return this.View();
         }
 
-        //
         // POST: /Account/Manage
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -336,7 +314,6 @@
             return this.View(model);
         }
 
-        //
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -347,7 +324,6 @@
             return new ChallengeResult(provider, this.Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
-        //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
@@ -374,7 +350,6 @@
             }
         }
 
-        //
         // POST: /Account/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -384,7 +359,6 @@
             return new ChallengeResult(provider, this.Url.Action("LinkLoginCallback", "Account"), this.User.Identity.GetUserId());
         }
 
-        //
         // GET: /Account/LinkLoginCallback
         public async Task<ActionResult> LinkLoginCallback()
         {
@@ -393,15 +367,16 @@
             {
                 return this.RedirectToAction("Manage", new { Message = ManageMessageId.Error });
             }
+
             IdentityResult result = await this.UserManager.AddLoginAsync(this.User.Identity.GetUserId(), loginInfo.Login);
             if (result.Succeeded)
             {
                 return this.RedirectToAction("Manage");
             }
+
             return this.RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
 
-        //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
@@ -421,6 +396,7 @@
                 {
                     return this.View("ExternalLoginFailure");
                 }
+
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
                 IdentityResult result = await this.UserManager.CreateAsync(user);
                 if (result.Succeeded)
@@ -430,15 +406,10 @@
                     {
                         await this.SignInAsync(user, isPersistent: false);
 
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-
                         return this.RedirectToLocal(returnUrl);
                     }
                 }
+
                 this.AddErrors(result);
             }
 
@@ -446,7 +417,6 @@
             return this.View(model);
         }
 
-        //
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -456,7 +426,6 @@
             return this.RedirectToAction("Index", "Home");
         }
 
-        //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
@@ -479,6 +448,7 @@
                 this.UserManager.Dispose();
                 this.UserManager = null;
             }
+
             base.Dispose(disposing);
         }
 
@@ -492,7 +462,7 @@
         {
             foreach (var error in result.Errors)
             {
-                this.ModelState.AddModelError("", error);
+                this.ModelState.AddModelError(string.Empty, error);
             }
         }
 
@@ -503,6 +473,7 @@
             {
                 return user.PasswordHash != null;
             }
+
             return false;
         }
 
@@ -545,6 +516,7 @@
                 {
                     properties.Dictionary[XsrfKey] = this.UserId;
                 }
+
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, this.LoginProvider);
             }
         }
