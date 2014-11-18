@@ -31,6 +31,15 @@
 
             this.Quizzes = new List<QuizDefinition>();
 
+            this.AddQuizzes(user);
+        }
+
+        public List<Category> Categories { get; set; }
+
+        public List<QuizDefinition> Quizzes { get; set; }
+
+        private void AddQuizzes(ApplicationUser user)
+        {
             this.Quizzes.Add(new QuizDefinition()
             {
                 Category = this.Categories[2],
@@ -61,6 +70,15 @@
             this.Quizzes.Add(new QuizDefinition()
             {
                 Category = this.Categories[0],
+                Title = "Numbers - part 1.1",
+                QuestionsDefinitions = this.GetQuestions3(),
+                Author = user,
+                IsPublic = true
+            });
+
+            this.Quizzes.Add(new QuizDefinition()
+            {
+                Category = this.Categories[0],
                 Title = "Numbers - part 2",
                 QuestionsDefinitions = this.GetQuestions4(),
                 Author = user,
@@ -70,7 +88,43 @@
             this.Quizzes.Add(new QuizDefinition()
             {
                 Category = this.Categories[0],
+                Title = "Numbers - part 2.2",
+                QuestionsDefinitions = this.GetQuestions4(),
+                Author = user,
+                IsPublic = true
+            });
+
+            this.Quizzes.Add(new QuizDefinition()
+            {
+                Category = this.Categories[0],
                 Title = "Numbers - part 3",
+                QuestionsDefinitions = this.GetQuestions5(),
+                Author = user,
+                IsPublic = true
+            });
+
+            this.Quizzes.Add(new QuizDefinition()
+            {
+                Category = this.Categories[0],
+                Title = "Numbers - part 3.3",
+                QuestionsDefinitions = this.GetQuestions5(),
+                Author = user,
+                IsPublic = true
+            });
+
+            this.Quizzes.Add(new QuizDefinition()
+            {
+                Category = this.Categories[0],
+                Title = "Numbers - part 3.4",
+                QuestionsDefinitions = this.GetQuestions5(),
+                Author = user,
+                IsPublic = true
+            });
+
+            this.Quizzes.Add(new QuizDefinition()
+            {
+                Category = this.Categories[0],
+                Title = "Numbers - part 3.5",
                 QuestionsDefinitions = this.GetQuestions5(),
                 Author = user,
                 IsPublic = true
@@ -94,10 +148,6 @@
                 IsPublic = true
             });
         }
-
-        public List<Category> Categories { get; set; }
-
-        public List<QuizDefinition> Quizzes { get; set; }
 
         private List<QuestionDefinition> GetQuestions1()
         {
