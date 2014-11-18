@@ -8,9 +8,9 @@
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
     using QuizFactory.Data;
-    using QuizFactory.Mvc.Controllers;
     using QuizFactory.Data.Common;
     using QuizFactory.Mvc.Areas.Admin.ViewModels;
+    using QuizFactory.Mvc.Controllers;
 
     public abstract class KendoGridAdministrationController : BaseController
     {
@@ -59,8 +59,7 @@
             }
         }
 
-        protected JsonResult GridOperation<T>(T model, [DataSourceRequest]
-                                              DataSourceRequest request)
+        protected JsonResult GridOperation<T>(T model, [DataSourceRequest] DataSourceRequest request)
         {
             return this.Json(new[] { model }.ToDataSourceResult(request, this.ModelState));
         }

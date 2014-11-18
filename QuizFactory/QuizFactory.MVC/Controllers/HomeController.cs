@@ -17,7 +17,7 @@
     {
         private const int PageSize = 6;
 
-        private static readonly Random random = new Random();
+        private static readonly Random Random = new Random();
 
         public HomeController(IQuizFactoryData data)
             : base(data)
@@ -50,7 +50,7 @@
         {
             if (this.Db.QuizzesDefinitions.All().Any())
             {
-                int rnd = random.Next(this.Db.QuizzesDefinitions.All().Count());
+                int rnd = Random.Next(this.Db.QuizzesDefinitions.All().Count());
 
                 var ramdomQuizzes = this.Db.QuizzesDefinitions
                                         .All()

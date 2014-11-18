@@ -7,7 +7,6 @@
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Mapping;
     using QuizFactory.Mvc.ViewModels;
-    using System.Collections;
 
     public class QuizPlayViewModel : QuizMainInfoViewModel, IMapFrom<QuizDefinition>, IHaveCustomMappings
     {
@@ -16,11 +15,11 @@
         public override void CreateMappings(IConfiguration configuration)
         {
             Mapper.CreateMap<QuizDefinition, QuizPlayViewModel>()
-                .ForMember(q => q.Questions, options => options.MapFrom(q => q.QuestionsDefinitions.Where(o => !o.IsDeleted)))
-                .ReverseMap();
+                  .ForMember(q => q.Questions, options => options.MapFrom(q => q.QuestionsDefinitions.Where(o => !o.IsDeleted)))
+                  .ReverseMap();
 
             configuration.CreateMap<QuizDefinition, QuizPlayViewModel>()
-                        .ForMember(dest => dest.NumberQuestions, opts => opts.MapFrom(src => src.QuestionsDefinitions.Where(o => !o.IsDeleted).Count()));
+                         .ForMember(dest => dest.NumberQuestions, opts => opts.MapFrom(src => src.QuestionsDefinitions.Where(o => !o.IsDeleted).Count()));
 
             configuration.CreateMap<QuizDefinition, QuizPlayViewModel>()
                          .ForMember(dest => dest.Author, opts => opts.MapFrom(src => src.Author.UserName))

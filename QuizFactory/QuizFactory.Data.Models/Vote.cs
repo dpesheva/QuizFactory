@@ -20,6 +20,5 @@
         public int Value { get; set; }
         
         public virtual QuizDefinition QuizDefinition { get; set; }
-
     }
 }

@@ -53,7 +53,6 @@
             modelBuilder.Entity<TakenQuiz>()
                         .HasMany(e => e.UsersAnswers)
                         .WithRequired(e => e.TakenQuiz)
-                // .HasForeignKey(e => e.TakenQuizId)
                         .WillCascadeOnDelete(false);
         }
 

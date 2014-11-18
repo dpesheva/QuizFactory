@@ -12,7 +12,7 @@ namespace QuizFactory.Data.Models
     {
         public TakenQuiz()
         {
-            UsersAnswers = new HashSet<UsersAnswer>();
+            this.UsersAnswers = new HashSet<UsersAnswer>();
         }
 
         public int Id { get; set; }

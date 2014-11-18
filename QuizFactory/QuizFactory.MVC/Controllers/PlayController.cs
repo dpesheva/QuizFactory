@@ -44,6 +44,7 @@
             {
                 throw new HttpException("Quiz not found");
             }
+
             if (selectedAnswersInt.Count() != quiz.Questions.Count())
             {
                 throw new HttpException("Incorrect number of answers ");
@@ -68,6 +69,7 @@
             {
                 return this.RedirectToAction("Index", "Home");
             }
+
             var quiz = this.GetQuizById(id);
             return this.View(quiz);
         }

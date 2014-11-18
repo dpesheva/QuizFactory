@@ -1,15 +1,14 @@
 ﻿namespace QuizFactory.Mvc.Areas.Users.Controllers
 {
-    using QuizFactory.Data.Models;
-    using QuizFactory.Mvc.Controllers;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using Microsoft.AspNet.Identity;
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
     using QuizFactory.Data;
+    using QuizFactory.Data.Models;
+    using QuizFactory.Mvc.Controllers;
 
     [Authorize]
     public class VoteController : BaseController
@@ -27,7 +26,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var userId = User.Identity.GetUserId();
+            var userId = this.User.Identity.GetUserId();
 
             Vote vote = new Vote
             {
@@ -39,9 +38,9 @@
             try
             {
                 this.Db.Votes.Add(vote);
-                ViewBag.Voted = true;
+                this.ViewBag.Voted = true;
                 this.Db.SaveChanges();
-                UpdateQuizRating(id, value);
+                this.UpdateQuizRating(id, value);
             }
             catch
             {

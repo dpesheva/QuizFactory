@@ -17,10 +17,6 @@
             this.context = context;
         }
 
-        //public QuizFactoryData()
-        //    : this(new QuizFactoryDbContext())
-        //{
-        //}
         public IQuizFactoryDbContext Context
         {
             get

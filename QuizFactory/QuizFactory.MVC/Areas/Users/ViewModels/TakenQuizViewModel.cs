@@ -22,8 +22,7 @@
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<TakenQuiz, TakenQuizViewModel>()
-                        .ForMember(dest => dest.Title, opts => opts.MapFrom(src => src.QuizDefinition.Title));
-
+                         .ForMember(dest => dest.Title, opts => opts.MapFrom(src => src.QuizDefinition.Title));
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
-namespace QuizFactory.Mvc.Areas.Users
+﻿namespace QuizFactory.Mvc.Areas.Users
 {
+    using System.Web.Mvc;
+
     public class UsersAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
@@ -17,8 +17,7 @@ namespace QuizFactory.Mvc.Areas.Users
             context.MapRoute(
                 "Users_default",
                 "Users/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+                new { action = "Index", id = UrlParameter.Optional });
         }
     }
 }

@@ -50,7 +50,6 @@
             if (!isAuthorized)
             {
                 throw new HttpException("The quiz is available for its owner or an administrator.");
-                // filterContext.Result = new HttpUnauthorizedResult();
             }
         }
     }

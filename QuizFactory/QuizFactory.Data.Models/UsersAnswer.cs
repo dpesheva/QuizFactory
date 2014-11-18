@@ -16,8 +16,6 @@ namespace QuizFactory.Data.Models
 
         public virtual AnswerDefinition AnswerDefinition { get; set; }
 
-        //public virtual QuestionDefinition QuestionDefinition { get; set; }
-
         public virtual TakenQuiz TakenQuiz { get; set; }
     }
 }

@@ -1,11 +1,11 @@
 namespace QuizFactory.Data.Models
 {
-    using QuizFactory.Data.Common;
-    using QuizFactory.Data.Common.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using QuizFactory.Data.Common;
+    using QuizFactory.Data.Common.Interfaces;
 
     [Table("QuizzesDefinition")]
     public partial class QuizDefinition : DeletableEntity, IDeletableEntity

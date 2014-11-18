@@ -18,6 +18,7 @@
     public class QuizUsersController : BaseController
     {
         private const int PageSize = 10;
+
         public QuizUsersController(IQuizFactoryData data)
             : base(data)
         {
@@ -26,7 +27,7 @@
         public ActionResult Index(int? page)
         {
             var allQuizzes = this.GetAllQuizzes();
-            ViewBag.Pages = Math.Ceiling((double)allQuizzes.Count() / PageSize);
+            this.ViewBag.Pages = Math.Ceiling((double)allQuizzes.Count() / PageSize);
 
             int currentPageIndex = page.HasValue ? page.Value - 1 : 0;
             return this.View(allQuizzes.ToPagedList(currentPageIndex, PageSize));
@@ -145,7 +146,7 @@
             dbQuiz.QuestionsDefinitions = new List<QuestionDefinition>();
         }
 
-        //return all quizzes by user
+        // return all quizzes by user
         private List<QuizUserViewModel> GetAllQuizzes()
         {
             var userId = this.User.Identity.GetUserId();

@@ -4,15 +4,15 @@
     using System.Linq;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using QuizFactory.Data.Models;
     using QuizFactory.Data.Common;
-  
+    using QuizFactory.Data.Models;
+
     public class SeedUsers
     {
         public void Generate(QuizFactoryDbContext context)
         {
-            CreateUserAndRole(context, "admin@abv.bg", GlobalConstants.AdminRole);
-            CreateUserAndRole(context, "gosho@abv.bg", GlobalConstants.UserRole);
+            this.CreateUserAndRole(context, "admin@abv.bg", GlobalConstants.AdminRole);
+            this.CreateUserAndRole(context, "gosho@abv.bg", GlobalConstants.UserRole);
         }
 
         private void CreateUserAndRole(QuizFactoryDbContext context, string username, string rolename)

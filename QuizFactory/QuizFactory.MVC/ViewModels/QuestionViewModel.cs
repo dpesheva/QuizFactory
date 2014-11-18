@@ -1,12 +1,11 @@
 ﻿namespace QuizFactory.Mvc.ViewModels
 {
-    using QuizFactory.Data.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Web;
+    using QuizFactory.Data.Models;
 
     public class QuestionViewModel
     {
@@ -21,11 +20,11 @@
                     Number = question.Number,
                     QuizId = question.QuizDefinition.Id,
                     Answers = question.AnswersDefinitions.Select(a => new AnswerViewModel
-                        {
-                            Id = a.Id,
-                            Text = a.Text,
-                            IsCorrect = a.IsCorrect
-                        }).ToList()
+                    {
+                        Id = a.Id,
+                        Text = a.Text,
+                        IsCorrect = a.IsCorrect
+                    }).ToList()
                 };
             }
         }

@@ -3,16 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using QuizFactory.Data.Models;
     using QuizFactory.Data;
+    using QuizFactory.Data.Models;
 
     public class SeedData
     {
-        public static Random Rand = new Random();
-
-        public List<Category> Categories;
-
-        public List<QuizDefinition> Quizzes;
+        public static readonly Random Rand = new Random();
 
         public SeedData(QuizFactoryDbContext context)
         {
@@ -31,7 +27,6 @@
             if (user == null)
             {
                 user = new ApplicationUser() { UserName = "pesho@abv.bg" };
-
             }
 
             this.Quizzes = new List<QuizDefinition>();
@@ -99,6 +94,10 @@
                 IsPublic = true
             });
         }
+
+        public List<Category> Categories { get; set; }
+
+        public List<QuizDefinition> Quizzes { get; set; }
 
         private List<QuestionDefinition> GetQuestions1()
         {
