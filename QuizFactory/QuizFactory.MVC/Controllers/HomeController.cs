@@ -10,7 +10,6 @@
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.ViewModels;
     using QuizFactory.Data;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
@@ -65,7 +64,7 @@
                 return this.PartialView("_RandomQuizBoxesPartial", ramdomQuizzes);
             }
 
-            return new  HttpStatusCodeResult(HttpStatusCode.NotFound, "No available quzzes"); 
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound, "No available quzzes");
         }
 
         public ActionResult Search(string search, int? page)

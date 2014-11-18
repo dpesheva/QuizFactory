@@ -11,7 +11,7 @@
     using QuizFactory.Mvc.Filters;
     using QuizFactory.Mvc.ViewModels;
 
-    [OwnerOrAdminAttribute]
+    [OwnerOrAdminAttribute("quizId")]
     public class QuestionController : BaseController
     {
         public QuestionController(IQuizFactoryData data)

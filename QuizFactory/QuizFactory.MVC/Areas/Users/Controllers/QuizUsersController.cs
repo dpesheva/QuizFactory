@@ -12,6 +12,7 @@
     using QuizFactory.Data.Models;
     using QuizFactory.Mvc.Areas.Users.ViewModels;
     using QuizFactory.Mvc.Controllers;
+    using QuizFactory.Mvc.Filters;
 
     [Authorize]
     public class QuizUsersController : BaseController
@@ -31,6 +32,7 @@
             return this.View(allQuizzes.ToPagedList(currentPageIndex, PageSize));
         }
 
+        [OwnerOrAdminAttribute("id")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,6 +43,7 @@
             return this.View(this.GetViewModelById(id));
         }
 
+        [OwnerOrAdminAttribute("id")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,6 +76,7 @@
         }
 
         // GET: User/QuizAdministration/Delete/5
+        [OwnerOrAdminAttribute("id")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -84,6 +88,7 @@
         }
 
         // POST: ***/QuizAdministration/Delete/5
+        [OwnerOrAdminAttribute("id")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -116,7 +121,7 @@
 
                 quizViewModel.Id = newQuiz.Id;
 
-                return this.RedirectToAction("Edit", new { id = quizViewModel.Id });
+                return this.RedirectToAction("Index");
             }
 
             return this.View(quizViewModel);

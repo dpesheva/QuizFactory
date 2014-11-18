@@ -5,13 +5,22 @@
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
     using QuizFactory.Mvc.Controllers;
+    using System.Web;
+    using QuizFactory.Data.Common;
 
     public class OwnerOrAdminAttribute : AuthorizeAttribute
     {
+        private readonly string routeParameter;
+
+        public OwnerOrAdminAttribute(string parameter)
+        {
+            this.routeParameter = parameter;
+        }
+
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             bool isAuthorized = false;
-            if (filterContext.HttpContext.User.IsInRole("admin"))
+            if (filterContext.HttpContext.User.IsInRole(GlobalConstants.AdminRole))
             {
                 isAuthorized = true;
             }
@@ -21,13 +30,13 @@
                 var uow = cntrl.db;
 
                 // first look at routedata then at request parameter:
-                var idString = (filterContext.HttpContext.Request.RequestContext.RouteData.Values["quizId"] as string) ??
-                               filterContext.HttpContext.Request["quizId"];
+                var idString = (filterContext.HttpContext.Request.RequestContext.RouteData.Values[this.routeParameter] as string) ??
+                               filterContext.HttpContext.Request[this.routeParameter];
 
                 int id;
                 if (!int.TryParse(idString, out id))
                 {
-                    throw new ArgumentException("Incorrect quiz identifier");
+                    throw new HttpException("Incorrect quiz identifier");
                 }
 
                 var currentUser = filterContext.HttpContext.User.Identity.GetUserId();
@@ -40,7 +49,8 @@
 
             if (!isAuthorized)
             {
-                filterContext.Result = new HttpUnauthorizedResult();
+                throw new HttpException("The quiz is available for its owner or an administrator.");
+                // filterContext.Result = new HttpUnauthorizedResult();
             }
         }
     }
