@@ -28,6 +28,7 @@
                     </div>
                     <div class="col-md-10">
                         @Html.EditorFor(m => Model.Answers[i].Text, new { htmlAttributes = new { @class = "form-control", data_answer_index = @i } })
+                        @Html.ValidationMessageFor(m => Model.Answers[i].Text, "", new { @class = "text-danger" })
                     </div>
                 </div>
             }

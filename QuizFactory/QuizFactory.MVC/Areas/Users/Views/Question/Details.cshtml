@@ -16,7 +16,7 @@
 
 <div>
     <div class="questions-button">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary box-shadow" })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id, quizId = Model.QuizId }, new { @class = "btn btn-primary box-shadow" })
     </div>
     @Html.ActionLink("Back to Questions", "Index", new { quizId = Model.QuizId })
 

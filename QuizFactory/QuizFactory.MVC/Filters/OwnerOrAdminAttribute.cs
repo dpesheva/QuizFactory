@@ -49,7 +49,7 @@
 
             if (!isAuthorized)
             {
-                throw new HttpException("The quiz is available for its owner or an administrator.");
+                throw new HttpException("The content is available for its owner or an administrator.");
             }
         }
     }
