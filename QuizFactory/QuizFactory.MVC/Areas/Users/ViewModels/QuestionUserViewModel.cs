@@ -1,11 +1,11 @@
 ﻿namespace QuizFactory.Mvc.Areas.Users.ViewModels
 {
-    using QuizFactory.Data.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Linq.Expressions;
+    using QuizFactory.Data.Models;
 
     public class QuestionUserViewModel
     {
@@ -41,5 +41,4 @@
 
         public IList<string> Answers { get; set; }
     }
-
 }

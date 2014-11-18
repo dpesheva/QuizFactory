@@ -192,7 +192,9 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -202,7 +204,6 @@
     <Compile Include="Areas\Admin\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\QuestionAdminViewModel.cs" />
     <Compile Include="Areas\Common\Controllers\KendoGridAdministrationController.cs" />
-    <Compile Include="Areas\Common\ViewModels\QuizViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\QuestionController.cs" />
     <Compile Include="Areas\Users\Controllers\QuizUsersController.cs" />
     <Compile Include="Areas\Users\Controllers\HistoryController.cs" />
@@ -213,7 +214,9 @@
     <Compile Include="Areas\Users\ViewModels\TakenQuizViewModel.cs" />
     <Compile Include="Caching\ICacheService.cs" />
     <Compile Include="Caching\InMemoryCache.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountController.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayController.cs" />

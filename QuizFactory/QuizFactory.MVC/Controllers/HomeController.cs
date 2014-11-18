@@ -15,9 +15,9 @@
     [HandleError]
     public class HomeController : BaseController
     {
-        private static readonly Random random = new Random();
-
         private const int PageSize = 6;
+
+        private static readonly Random random = new Random();
 
         public HomeController(IQuizFactoryData data)
             : base(data)
@@ -145,7 +145,7 @@
                 quizzesQuery = this.Db.QuizzesDefinitions.All().OrderByDescending(predicate);
             }
 
-            Expression<Func<QuizDefinition, bool>> filter = (q => q.IsPublic == true);
+            Expression<Func<QuizDefinition, bool>> filter = q => q.IsPublic == true;
 
             if (catId != null)
             {

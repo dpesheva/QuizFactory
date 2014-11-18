@@ -1,9 +1,9 @@
 ﻿namespace QuizFactory.Data.Common
 {
-    using QuizFactory.Data.Common.Interfaces;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using QuizFactory.Data.Common.Interfaces;
 
     public abstract class DeletableEntity : AuditInfo, IDeletableEntity
     {

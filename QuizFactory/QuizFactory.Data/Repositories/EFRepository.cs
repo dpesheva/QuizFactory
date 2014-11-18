@@ -165,6 +165,7 @@
             {
                 this.set.Attach(entity);
             }
+
             entry.State = state;
         }
 

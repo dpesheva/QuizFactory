@@ -13,7 +13,7 @@
     {
         public IList<QuestionPlayViewModel> Questions { get; set; }
 
-        public void CreateMappings(IConfiguration configuration)
+        public override void CreateMappings(IConfiguration configuration)
         {
             Mapper.CreateMap<QuizDefinition, QuizPlayViewModel>()
                 .ForMember(q => q.Questions, options => options.MapFrom(q => q.QuestionsDefinitions.Where(o => !o.IsDeleted)))

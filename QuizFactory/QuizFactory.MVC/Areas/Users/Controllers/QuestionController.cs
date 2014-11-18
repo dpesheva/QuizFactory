@@ -40,7 +40,7 @@
 
         public ActionResult Details(int? id)
         {
-            var questionViewModel = GetById(id);
+            var questionViewModel = this.GetById(id);
 
             if (questionViewModel == null)
             {
@@ -53,7 +53,7 @@
         // GET: Users/Question/Add
         public ActionResult Add(int? quizId)
         {
-            ViewBag.PageTitle = "Add";
+            this.ViewBag.PageTitle = "Add";
             return this.View("AddEdit");
         }
 
@@ -62,38 +62,37 @@
         [ValidateAntiForgeryToken]
         public ActionResult Add(QuestionViewModel questionViewModel, int? quizId)
         {
-            ViewBag.PageTitle = "Add";
+            this.ViewBag.PageTitle = "Add";
             return this.AddOrEdit(questionViewModel, quizId, false);
         }
 
         // GET: Users/Question/Edit/5
         public ActionResult Edit(int? id)
         {
-            var questionViewModel = GetById(id);
+            var questionViewModel = this.GetById(id);
 
             if (questionViewModel == null)
             {
                 return this.HttpNotFound();
             }
 
-            ViewBag.PageTitle = "Edit";
+            this.ViewBag.PageTitle = "Edit";
             return this.View("AddEdit", questionViewModel);
         }
-
 
         // POST: Users/Question/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(QuestionViewModel questionViewModel, int? quizId)
         {
-            ViewBag.PageTitle = "Edit";
+            this.ViewBag.PageTitle = "Edit";
             return this.AddOrEdit(questionViewModel, quizId, true);
         }
 
         // GET: Users/Question/Delete/5
         public ActionResult Delete(int? id)
         {
-            var questionViewModel = GetById(id);
+            var questionViewModel = this.GetById(id);
 
             if (questionViewModel == null)
             {
@@ -136,6 +135,7 @@
                 {
                     this.Db.QuestionsDefinitions.Delete(questionViewModel.Id);
                 }
+
                 var newQuestion = new QuestionDefinition();
 
                 this.MapFromModel(questionViewModel, newQuestion);

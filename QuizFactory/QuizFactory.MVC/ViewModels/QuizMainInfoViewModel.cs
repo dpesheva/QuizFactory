@@ -30,7 +30,7 @@
         [Display(Name = "Number of questions")]
         public int NumberQuestions { get; set; }
 
-        public void CreateMappings(IConfiguration configuration)
+        public virtual void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<QuizDefinition, QuizMainInfoViewModel>()
                          .ForMember(dest => dest.NumberQuestions, opts => opts.MapFrom(src => src.QuestionsDefinitions.Where(o => !o.IsDeleted).Count()));
