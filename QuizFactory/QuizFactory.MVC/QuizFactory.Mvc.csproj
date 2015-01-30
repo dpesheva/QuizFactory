@@ -277,20 +277,6 @@
     <Content Include="Areas\Users\Views\Question\Details.cshtml" />
     <Content Include="Areas\Users\Views\Question\AddEdit.cshtml" />
     <Content Include="Areas\Users\Views\Question\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Currency.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Date.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Email.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\EmailAddress.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Integer.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Number.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Password.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\String.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Time.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Url.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\CategoryViewModel.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\QuizAdminViewModel.cshtml" />
     <Content Include="Areas\Admin\Views\QuizAdmin\Index.cshtml" />
     <Content Include="Areas\Users\Views\History\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -303,6 +289,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Kendo\jquery.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -341,6 +328,7 @@
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
     <Content Include="Views\Play\PlayQuizLayout.cshtml" />
     <Content Include="Views\Shared\_AnswerPartial.cshtml" />
+    <Content Include="Scripts\Kendo\jquery.min.map" />
     <Content Include="Views\Shared\DisplayTemplates\AnswerViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\QuestionPlayViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayAnswers.cshtml" />
@@ -350,6 +338,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\DisplayTemplates\" />
+    <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Content\Kendo\" />
   </ItemGroup>
   <ItemGroup>
