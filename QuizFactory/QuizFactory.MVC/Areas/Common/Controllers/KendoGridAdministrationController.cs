@@ -5,8 +5,8 @@
     using System.Data.Entity;
     using System.Web.Mvc;
     using AutoMapper;
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI;
+    //using Kendo.Mvc.Extensions;
+    // using Kendo.Mvc.UI;
     using QuizFactory.Data;
     using QuizFactory.Data.Common;
     using QuizFactory.Mvc.Areas.Admin.ViewModels;
@@ -19,14 +19,14 @@
         {
         }
 
-        [HttpPost]
-        public ActionResult Read([DataSourceRequest]
-                                 DataSourceRequest request)
-        {
-            var ads = this.GetData().ToDataSourceResult(request);
+        //[HttpPost]
+        //public ActionResult Read([DataSourceRequest]
+        //                         DataSourceRequest request)
+        //{
+        //    var ads = this.GetData().ToDataSourceResult(request);
 
-            return this.Json(ads);
-        }
+        //    return this.Json(ads);
+        //}
 
         protected abstract IEnumerable GetData();
 
@@ -59,10 +59,10 @@
             }
         }
 
-        protected JsonResult GridOperation<T>(T model, [DataSourceRequest] DataSourceRequest request)
-        {
-            return this.Json(new[] { model }.ToDataSourceResult(request, this.ModelState));
-        }
+        //protected JsonResult GridOperation<T>(T model, [DataSourceRequest] DataSourceRequest request)
+        //{
+        //    return this.Json(new[] { model }.ToDataSourceResult(request, this.ModelState));
+        //}
 
         private void ChangeEntityStateAndSave(object dbModel, EntityState state)
         {
