@@ -286,7 +286,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\Kendo\jquery.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -325,7 +324,6 @@
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
     <Content Include="Views\Play\PlayQuizLayout.cshtml" />
     <Content Include="Views\Shared\_AnswerPartial.cshtml" />
-    <Content Include="Scripts\Kendo\jquery.min.map" />
     <Content Include="Views\Shared\DisplayTemplates\AnswerViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\QuestionPlayViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayAnswers.cshtml" />
@@ -336,7 +334,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\DisplayTemplates\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
-    <Folder Include="Content\Kendo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
