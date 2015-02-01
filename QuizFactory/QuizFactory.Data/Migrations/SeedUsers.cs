@@ -11,7 +11,7 @@
     {
         public void Generate(QuizFactoryDbContext context)
         {
-            //this.CreateUserAndRole(context, "pesho@abv.bg", GlobalConstants.AdminRole);
+            this.CreateUserAndRole(context, "admin@abv.bg", GlobalConstants.AdminRole);
             this.CreateUserAndRole(context, "gosho@abv.bg", GlobalConstants.UserRole);
         }
 
