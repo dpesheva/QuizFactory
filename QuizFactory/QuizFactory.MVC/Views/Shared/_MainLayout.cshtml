@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="clearfix">
-        <a href='@Url.Action("Index", "Home", new { @class = "navbar-brand" })' class="left">
+        <a href='@Url.Action("Index", "Home", new { area = "" })' class="navbar-brand">
             <img src='@Url.Content("~/Content/Images/logo.png")' />
         </a>
         @Html.Partial("_LoginPartial")
