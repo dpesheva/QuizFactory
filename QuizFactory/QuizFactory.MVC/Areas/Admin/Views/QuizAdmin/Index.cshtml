@@ -5,7 +5,7 @@
     const string ControllerName = "QuizAdmin";
 }
 
-@*@(Html.Kendo()
+@(Html.Kendo()
 .Grid<QuizAdminViewModel>
     ()
     .Name("Grid")
@@ -42,4 +42,4 @@
     .Update(update => update.Action("Update", ControllerName))
     .Destroy(update => update.Action("Destroy", ControllerName))
     )
-    )*@
+    )
